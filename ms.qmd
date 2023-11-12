@@ -19,7 +19,7 @@ editor_options:
 ```{r}
 #| label: setup
 
-pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest)
+pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest, MASS)
 
 source(here("R", "func.R"))
 ```
@@ -69,40 +69,85 @@ The day before starting the experiment, lizards were measured again, and then mo
 #| warning: false
  
 # Load data
-	data  <-  read.csv("./data/.csv")
+	data  <-  read.csv("./data/Stressor.csv")
 ```
 
-```{r, dataclean}
-#| label: dataclean
+```{r, dataexplore}
+#| label: dataexplore
 #| echo: false
 #| warning: false
 
-# Remove individuals who did not participate (more than 15 NAs), remove trials [36-40] (Only in associative) and split treatment into Temp and Cort
-data_associative <- data %>%
-  group_by(lizard_id) %>%
-    filter(sum(is.na(FC_associative)) <= 15) %>%
-    filter(trial_associative <= 35) %>%
-  ungroup()  %>% 
-    mutate(temp = gsub("[AB]_", "", trt),
+# Divide Treatment in CORT and Temperature
+data <- data %>%
+      mutate(temp = gsub("[AB]_", "", trt),
           cort = gsub("_[2][38]", "", trt))  %>% 
-    mutate(group = factor(group, levels = c("R_B", "B_R"))) %>%
   data.frame()
 
-# Standarize data by trial (i.e. make the first trial where each individual participated their trial 1)
-
-data_associative <- data_associative %>%
-  group_by(lizard_id) %>%
-  mutate(
-    first_non_na = min(which(!is.na(FC_associative))),
-    Associative_Trial = ifelse(!is.na(first_non_na),trial_associative - first_non_na + 1, trial_associative))%>%
-    filter(Associative_Trial >= 1) %>%
-   ungroup() %>% data.frame()
-  
-write.csv(data_associative, file= "./output/Checking/data_associative.csv")
+# Transform mass into mg
+data$mass <- data$mass*1000
 
 # Split data by species
-deli_associative <- data_associative %>% filter (species == "delicata")
-guich_associative <- data_associative %>% filter (species == "guichenoti")
+deli_stressor <- data %>% filter (species == "delicata")
+guich_stressor <- data %>% filter (species == "guichenoti")
+
+# Explore distributions of variables
+
+# A) L. deli
+    #a.1) Mass 
+plot_mass <- ggplot(deli_stressor, aes(x = mass, fill = interaction(as.factor(temp),as.factor(cort), sep="_"))) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30, color = "black") +
+  scale_fill_manual(values = c("28_A" = "red", "23_A" = "blue", "28_B" = "salmon", "23_B" = "lightblue")) +
+  labs(x = "Mass", y = "Density", fill = "Temperature ~ CORT") +
+  theme_minimal() +
+  facet_grid(cort*temp~Day, scales = "free_y")
+print(plot_mass)
+
+    #a.2) Latency to move
+plot_freeze <- ggplot(deli_stressor, aes(x = log(lat_to_move+1), fill = interaction(as.factor(temp),as.factor(cort), sep="_"))) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30, color = "black") +
+  scale_fill_manual(values = c("28_A" = "red", "23_A" = "blue", "28_B" = "salmon", "23_B" = "lightblue")) +
+  labs(x = "Mass", y = "Density", fill = "Temperature ~ CORT") +
+  theme_minimal() +
+  facet_grid(cort*temp~Day, scales = "free_y")
+print(plot_freeze)
+
+# I will both distributions with saphiro.test and lat_to_move with a qqplot
+mass_normal_test<-by(deli_stressor$mass, interaction (deli_stressor$cort, deli_stressor$temp, deli_stressor$Day), function(x) shapiro.test((x)))
+print(mass_normal_test)
+
+freeze_normal_test<-by(deli_stressor$lat_to_move, interaction (deli_stressor$cort, deli_stressor$temp, deli_stressor$Day), function(x) shapiro.test(log(x+1)))
+print(freeze_normal_test)
+# Once checked the distributions, I will transform lat_to_move with log(x+1) to make it normal
+
+
+# B) L. guich
+    #b.1) Mass 
+plot_mass <- ggplot(guich_stressor, aes(x = mass, fill = interaction(as.factor(temp),as.factor(cort), sep="_"))) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30, color = "black") +
+  scale_fill_manual(values = c("28_A" = "red", "23_A" = "blue", "28_B" = "salmon", "23_B" = "lightblue")) +
+  labs(x = "Mass", y = "Density", fill = "Temperature ~ CORT") +
+  theme_minimal() +
+  facet_grid(cort*temp~Day, scales = "free_y")
+print(plot_mass)
+
+    #a.2) Latency to move
+plot_freeze <- ggplot(guich_stressor, aes(x = log(lat_to_move+1), fill = interaction(as.factor(temp),as.factor(cort), sep="_"))) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30, color = "black") +
+  scale_fill_manual(values = c("28_A" = "red", "23_A" = "blue", "28_B" = "salmon", "23_B" = "lightblue")) +
+  labs(x = "Mass", y = "Density", fill = "Temperature ~ CORT") +
+  theme_minimal() +
+  facet_grid(cort*temp~Day, scales = "free_y")
+print(plot_freeze)
+
+# I will both distributions with saphiro.test
+mass_normal_test<-by(guich_stressor$mass, interaction (guich_stressor$cort, guich_stressor$temp, guich_stressor$Day), function(x) shapiro.test((x)))
+print(mass_normal_test)
+
+freeze_normal_test<-by(guich_stressor$lat_to_move, interaction (guich_stressor$cort, guich_stressor$temp, guich_stressor$Day), function(x) shapiro.test(log(x+1)))
+print(freeze_normal_test)
+# Once checked the distributions, I will transform lat_to_move with log(x+1) to make it normal
+
+
 
 ```
 
