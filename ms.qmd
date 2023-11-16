@@ -85,7 +85,9 @@ data <- data %>%
 
 # MASS
 # Create new database to analyse increases in mass (i.e. having mass after and before in different columns)
-data_2 <- pivot_wider(data, id_cols=lizard_id, names_from = Day, values_from = mass)
+data_2 <- pivot_wider(data, id_cols=c(lizard,temp,cort,species,food_ingested), names_from = Day, values_from = mass)
+data_2 <- data_2 %>% mutate(delta_mass=After-Before) 
+data_2 <- data_2 %>% mutate(rescaled_delta_mass = delta_mass - min(delta_mass) + 1)
 write.csv(data_2, "./data/Stressor_2.csv")
 # Transform mass into mg in new database
 data_2$mass <- data$mass*1000
