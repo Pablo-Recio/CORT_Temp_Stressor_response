@@ -1,4 +1,4 @@
-﻿lizard_id,lizard_id,position,species,trt,clutch,hatch_date,mass,SVL,TL,Day,Sex,food_ingested,lat_to_move,lat_to_shelter,lat_move_to_shelter,Emerged_after,emerged_40min,notes
+﻿lizard_id,lizard,position,species,trt,clutch,hatch_date,mass,SVL,TL,Day,Sex,food_ingested,lat_to_move,lat_to_shelter,lat_move_to_shelter,Emerged_after,emerged_40min,notes
 LD1255_22,1255,A1,delicata,A_23,CL334_22,23/12/2022,0.655,34,49,Before,Male,22,12,2434,2422,0,NA,
 LD1382_22,1382,A1,delicata,B_28,CL373_22,16/12/2022,0.606,34,41,Before,Female,18,108,110,2,0,0,
 LD1410_22,1410,A1,delicata,A_28,CL379_22,14/12/2022,0.726,35,57,Before,Female,33,242,394,152,1,1,
