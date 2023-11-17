@@ -19,7 +19,7 @@ editor_options:
 ```{r}
 #| label: setup
 
-pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest, MASS, dplyr)
+pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest, MASS, dplyr, broom)
 
 source(here("R", "func.R"))
 ```
@@ -82,20 +82,22 @@ data <- data %>%
       mutate(temp = gsub("[AB]_", "", trt),
           cort = gsub("_[2][38]", "", trt))  %>% 
       mutate(mass=mass*1000) %>%
-      mutate(cort = fct_recode(data$cort,
-        levels = c("A" ,"B")
-        labels = c("Control", "CORT"))) %>%
-      mutate (temp = factor(data$temp,
+data.frame()
+data$cort <- factor(data$cort, 
+        levels = c("A" ,"B"),
+        labels = c("Control", "CORT"))
+data$temp <- factor(data$temp,
         levels = c("23", "28"),
-        labels = c("Cold", "Hot"))) %>%
-  data.frame()
+        labels = c("Cold", "Hot"))
+data$Day <- factor(data$Day,
+        levels = c("Before", "After"))  
      
 # MASS
 # Create new database to analyse increases in mass (i.e. having mass after and before in different columns).
 data_2 <- pivot_wider(data, id_cols=c(lizard,temp,cort,species,food_ingested),
  names_from = Day, values_from = mass)
 
-# Stimate mass increase and rescale it to avoid negative values
+# Estimate mass increase and rescale it to avoid negative values
 data_2 <- data_2 %>% 
  mutate(delta_mass=After-Before) %>%
  mutate(rescaled_delta_mass = ifelse(is.na(delta_mass),
@@ -173,10 +175,8 @@ print(freeze_normal_test)
 
 # Delta mass L. delicata
   deli_mod <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = deli_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
-  summary(deli_mod)
   plot(deli_mod)
-bayes_R2(deli_mod)
- 
+  summary(deli_mod)
 # Delta mass L. guichenoti
   guich_mod <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = guich_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
   summary(guich_mod)
@@ -211,25 +211,86 @@ dharma(GMM_deli2)
 
 ```
 
-```{r, plots}
-#| label: plots
+```{r, plotsMass}
+#| label: plotsMass
 #| echo: false
 #| warning: false
  
 # Plot delta Mass L. delicata
-plot_deli <- ggplot(deli_associative, aes(x = Associative_Trial, y = FC_associative, color=interaction(cort,temp))) +  
-  geom_smooth(method = "glm", formula = y ~ x, method.args = list(family = "binomial"),na.action = na.exclude) +
-  facet_grid(as.factor(deli_associative$group)) + 
-  labs(y = "Colour Association Task", x = "Trial")  
+plot_deli <- ggplot(deli_stressor_2, aes(x = food_ingested, y = rescaled_delta_mass, color=interaction(cort,temp))) +  
+  stat_smooth(method = "glm", formula = y ~ x, se = TRUE, linewidth=2, alpha = 0.1) +
+  scale_color_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
+    labels=c("CORT-Cold (n=12)", "Control-Cold (n=12)", "CORT-Hot (n=11)", "Control-Hot (n=12)")
+  ) +
+  labs(y = "Increase in mass (mg)", x = "Ingestion rate (n items)", color="Treatment") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 18, family = "sans"),  
+    axis.text = element_text(size = 10, family = "sans"),  
+    legend.title = element_text(size = 14, family = "sans"), 
+    legend.text = element_text(size = 12, family = "sans")  
+  )
 print(plot_deli)
+ggsave("./output/figures/fig_deli_Mass.png", plot=plot_deli, width = 18, height = 9, units = "cm", dpi = 3000)
 # Plot delta Mass L. guichenoti
-
- 
-# Plot time frozen L. guichenoti
-# Plot time frozen L. guichenoti
-plot_guich <- ggplot(guich_stressor, aes(x = as.factor(Day, levels=c("Before", "After")), y = lat_to_move, color=interaction(as.factor(cort),as.factor(temp)))) +  
-  labs(y = "Time frozen (s)", x = "Day") 
+plot_guich <- ggplot(guich_stressor_2, aes(x = food_ingested, y = rescaled_delta_mass, color=interaction(cort,temp))) +  
+  stat_smooth(method = "glm", formula = y ~ x, se = TRUE, linewidth=2, alpha = 0.1) +
+  scale_color_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
+    labels=c("CORT-Cold (n=10)", "Control-Cold (n=7)", "CORT-Hot (n=11)", "Control-Hot (n=10)")
+  ) +
+  labs(y = "Increase in mass (mg)", x = "Ingestion rate (n items)", color="Treatment") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 18, family = "sans"),  
+    axis.text = element_text(size = 10, family = "sans"),  
+    legend.title = element_text(size = 14, family = "sans"), 
+    legend.text = element_text(size = 12, family = "sans")  
+  )
 print(plot_guich)
+ggsave("./output/figures/fig_guich_Mass.png", plot=plot_guich, width = 18, height = 9, units = "cm", dpi = 3000)
+```
+
+ ```{r, plotsFrozenbehaviour}
+#| label: plotsFrozenbehaviour
+#| echo: false
+#| warning: false
+
+# Plot time frozen L. delicata
+plot_deli_BEH <- ggplot(deli_stressor, aes(x = Day, y = lat_to_move, fill=interaction(cort,temp))) +  
+  geom_boxplot(outlier.shape = NA) +
+  ylim(0, 450) +
+  scale_fill_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
+    labels=c("CORT-Cold (n=12)", "Control-Cold (n=12)", "CORT-Hot (n=11)", "Control-Hot (n=12)")
+  ) +
+  labs(y = "Time frozen (s)", x = "Day", fill="Treatment") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 18, family = "sans"),  
+    axis.text = element_text(size = 12, family = "sans"),  
+    legend.title = element_text(size = 14, family = "sans"), 
+    legend.text = element_text(size = 12, family = "sans")  
+  )
+print(plot_deli_BEH)
+ggsave("./output/figures/fig_deli_BEH.png", plot=plot_deli_BEH, width = 15, height = 12, units = "cm", dpi = 3000)
+
+# Plot time frozen L. guichenoti
+plot_guich_BEH <- ggplot(guich_stressor, aes(x = Day, y = lat_to_move, fill=interaction(cort,temp))) +  
+  geom_boxplot(outlier.shape = NA) +
+  ylim(0, 450) +
+  scale_fill_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
+    labels=c("CORT-Cold (n=10)", "Control-Cold (n=7)", "CORT-Hot (n=11)", "Control-Hot (n=10)")
+  ) +
+  labs(y = "Time frozen (s)", x = "Day", fill="Treatment") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 18, family = "sans"),  
+    axis.text = element_text(size = 12, family = "sans"),  
+    legend.title = element_text(size = 14, family = "sans"), 
+    legend.text = element_text(size = 12, family = "sans")  
+  )
+print(plot_guich_BEH)
+ggsave("./output/figures/fig_guich_BEH.png", plot=plot_guich_BEH, width = 15, height = 12, units = "cm", dpi = 3000)
+
 ```
 
 
