@@ -1,78 +1,78 @@
----
-docx: 
-reference-doc: "./bib/tmpl.docx"
-bibliography: "./bib/refs.bib"
-execute:
-  echo: false
-  error: false
-  cache: false
-  warning: false
-crossref:  
-  fig-title: Figure    # (default is "Figure")
-  title-delim: —     # (default is ":")
-  fig-prefix: Fig.   # (default is "Figure")
-  tbl-prefix: Tab.   # (default is "Table")
-editor_options: 
-  chunk_output_type: console
----
-
-```{r}
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #| label: setup
 
 pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest, MASS, dplyr, broom)
 
 source(here("R", "func.R"))
-```
-
-## Introduction
-
-Hypothesis PRESENTATION:
-
-Both temperature and CORT influence the development of proactive-reactive personality types, associated at the same time with different HPA axis reactivity. In this sense, both increases in prenatal CORT and lower temperatures are related to more reactive individuals, which are more sensitive to stressors. As such, I predict individuals incubated at low temperature and/or treated with CORT to be more reactive, and thus to spent more time frozen after chasing them and not coming out from the shelter. At the same time I expect these individuals to have increased phisiological costs (mass lost) when submitted to a 'chronic' stressor.
-
-
-## Methods
-
-### Subjects
-
-We used two species of skinks, the common garden skink (*Lampropholis guichenoti*) and the rainbow skink or delicate skink (*L. delicata*). These are oviparous, generalist, small (∼35--55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia ([@chapple_know_2011]). Both species have similar breeding periods, but reproductive output in *L. delicata* is one clutch of 1 to 6 eggs per season, while *L. guichenoti* lays 1-5 eggs per clutch, and usually two clutches per season ([@chapple_know_2011]; [@chapple_biology_2014]). This difference in reproductive output through the breeding season may involve different degree of sensitivity to maternal effects and its interaction with other aspects of early environment.
-
-### Subjects treatments, collection, and housing
-
-The skinks used in our experiments came from a breeding colony established in the lab since 2019. The colony is compound by a total total of 270 adults of *L. delicata* and 180 adults of *L.* guichenoti that are housed in big containers (41.5 L x 30.5 W x 21 H cm) with six lizards (2 males and 4 females) per enclosure. These enclosures are provided with non-stick matting, shelter, and several small water dishes. Lizards are given water daily, and fed approx. 40 mid-size crickets (*Acheta domestica*) per enclosure three days a week. Crickets are dusted with calcium weekly and multivitamin and calcium biweekly. Room temperatures are set to 22-24 Celsius, and warm side of enclosures is usually at 32 Celsius; but to ensure a temperature gradient, we employ a heat chord and a heat lamp following a 12 h light:12 h dark cycle.
-
-Eggs were collected between mid-October 2022 to the end of February 2023. We placed in the commonal enclosure small boxes (12.5 L x 8.3 W x 5 H cm) with moist vermiculite inside so females had a place to lay the eggs. Three times a week, we checked these boxes for the presence of eggs. Once a clutch was found, we measured eggs' length and width with a digital caliper to the nearest 0.1 mm and mass with a (OHAUS, Model spx123) digital scale ± 0.001g error. To test the effect of prenatal CORT and temperature, we manipulated CORT levels in eggs and then incubated them at one of two temperature regimes (‘Cold’ – 23ºC ± 3ºC or ‘Hot’ – 30ºC ± 3ºC) in a 2x2 factorial design. CORT was increased by topical aplication of a solution of CORT dissolved in 70% Ethanol and 30% DMSO (vehicle) at concentrations 2 standard deviations above the mean natural hormone concentration (non-published data); while a 'Control' group received an equal volume of the vehicle. Then, eggs were placed in individual cups (80 mL) with moist vermiculite (12 parts water to 4 parts vermiculite) covered with cling wrap to retain moisture, and were left in LATWIT 2X5D-R1160 incubators at two different temperatures ('Cold' or 'Hot') until hatchling.
-
-INSERT Fig 1
-
-The incubators were checked three times a week for hatchlings. When hatchligns were found, we recorded Snout-vent length (SVL) and tail length (TL) with a rule to the nearest mm while mass was measured with a (OHAUS, Model spx123) digital scale ± 0.001g error. Then, hatchlings were enclosed in individual tubs (18.7L x 13.2W x 6.3H cm) provided with non-stick matting and a small water dish. During this period, they were sprayed water every day and received 3-6 small *A. domestica* crickets three times a week. All care otherwise follows similar protocols to adults (see above). 
-
-
-### Experimental arena and design
-The experiments were done:
-The sample size was:
-The experimental arena was:
-The experimental design was:
-The lizards used in this experiment were subjected before to a personality test and two types of learning tasks. These experiments are not considered stresful, and, as such, we do not expect them to affect the results of the present study. However, we left three weeks between those experiments and the present one to control for possible effects of the previous tests.
-After 3 months, we measured again SVL, TL, and mass of the juveniles and then they were moved to the experimental arena (see below).
-The day before starting the experiment, lizards were measured again, and then moved to a new enclosure the same size and conditions before, but in the room where the CCTV system is held () experimental arena (Fig. 1c) for acclimatation. The arenas were individual medium size (41 L x 29.7 W x 22 H cm) plastic containers with a shelter (9 L x 6 W x 1.5 H cm) on one of the extremes and a water dish on the other. These new enclosures were placed in two rooms in 7 different racks associated to 7 different CCTV systems (device model DVR-HP210475) that allowed us to record their behaviour during the experiment (see details below). The number of lizards per species and treatment in each rack was counterbalanced to control for any effect of the room or the position of the lizard in the rack. During acclimatation and all the experiment, lizards were fed with only one cricket per day dusted with calcium and multivitamin (see protocol below), and water was supplied *ad libitum.* We provided a temperature gradient by means of a heat cord and heat lamps in a 12 h light: 12 h dark cycle. The rooms temperature was set to between 22-24 Celsius. 
-
-### CORT measurement and validation
-
-### Statistical analyses
-
-## Results
-
-```{r, dataload}
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #| label: dataload
 #| echo: false
 #| warning: false
  
 # Load data
 	data  <-  read.csv("./data/Stressor.csv")
-```
-
-```{r, dataexplore}
+#
+#
+#
 #| label: dataexplore
 #| echo: false
 #| warning: false
@@ -165,10 +165,10 @@ print(plot_freeze)
 freeze_normal_test<-by(guich_stressor$lat_to_move, interaction (guich_stressor$cort, guich_stressor$temp, guich_stressor$Day), function(x) shapiro.test(log(x+1)))
 print(freeze_normal_test)
 
-```
-
-
-```{r, models}
+#
+#
+#
+#
 #| label: models
 #| echo: false
 #| warning: false
@@ -209,9 +209,9 @@ pmcmc(temp23 - temp28)
 dharma(GMM_deli2)
 
 
-```
-
-```{r, plotsMass}
+#
+#
+#
 #| label: plotsMass
 #| echo: false
 #| warning: false
@@ -248,9 +248,9 @@ plot_guich <- ggplot(guich_stressor_2, aes(x = food_ingested, y = rescaled_delta
   )
 print(plot_guich)
 ggsave("./output/figures/fig_guich_Mass.png", plot=plot_guich, width = 18, height = 9, units = "cm", dpi = 3000)
-```
-
- ```{r, plotsFrozenbehaviour}
+#
+#
+#
 #| label: plotsFrozenbehaviour
 #| echo: false
 #| warning: false
@@ -291,31 +291,31 @@ plot_guich_BEH <- ggplot(guich_stressor, aes(x = Day, y = log(lat_to_move+1), fi
 print(plot_guich_BEH)
 ggsave("./output/figures/fig_guich_BEH.png", plot=plot_guich_BEH, width = 15, height = 12, units = "cm", dpi = 3000)
 
-```
-
-
-
-
-We calculated $R^2$ as follows
-
-$$
-R^2 = \frac{SS_{reg}}{SS_{tot}}
-$$ {#eq-r2}
-
-@eq-r2
-
-```{r, fig1}
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #| label: fig-fig1
 #| fig-cap: "Activity budget of the focal group of chacma baboons (Papio ursinus) at the Cape Peninsula, South Africa, during the study period. The data are presented as the mean percentage of time spent in each activity category per hour (± SE)."
 
 data %>% ggplot(aes(x = Lizard_id))  + geom_histogram()
 
 
-```
-
-We have a total of `r length(unique(data$Lizard_id))`
-
-```{r,tb1}
+#
+#
+#
+#
+#
 #| label: tbl-tb1
 #| tbl-cap: "Summary of the data"
 
@@ -325,6 +325,8 @@ tab <- data %>%
     n = n()
   ) 
 flextable(tab[2:3,])
-```
-
-# References
+#
+#
+#
+#
+#
