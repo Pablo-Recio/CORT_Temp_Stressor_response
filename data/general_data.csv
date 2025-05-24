@@ -1,0 +1,86 @@
+﻿lizard_id,position,species,trt,clutch,hatch_date,date_start,age_start,sex,notes
+1255,A1,delicata,A_23,CL334_22,23/12/2022,20/7/2023,209,Male,
+1382,A1,delicata,B_28,CL373_22,16/12/2022,20/7/2023,216,Female,
+1410,A1,delicata,A_28,CL379_22,14/12/2022,20/7/2023,218,Female,
+2073,A1,delicata,B_23,CL560_22,15/2/2023,20/7/2023,155,Male,Autotomized
+1373,A2,guichenoti,A_28,CL370_22,14/12/2022,20/7/2023,218,Female,Autotomized; empty
+1478,A2,guichenoti,B_23,CL400_22,18/1/2023,20/7/2023,183,Male,
+2298,A2,guichenoti,B_28,CL619_23,10/2/2023,20/7/2023,160,Female,Thanatosis
+1207,A3,delicata,B_23,CL320_22,16/12/2022,21/7/2023,217,Female,Empty
+1381,A3,delicata,A_28,CL373_22,12/12/2022,21/7/2023,221,Male,Autotomized
+1401,A3,delicata,B_28,CL377_22,19/12/2022,21/7/2023,214,Female,
+1283,A4,guichenoti,A_23,CL344_22,28/12/2022,21/7/2023,205,Female,Empty
+1562,A4,guichenoti,B_28,CL423_22,2/1/2023,21/7/2023,200,Female,Autotomized; empty
+1609,A4,guichenoti,A_28,CL437_22,2/1/2023,21/7/2023,200,Female,Empty
+1276,B1,guichenoti,A_28,CL341_22,5/12/2022,21/7/2023,228,Female,Empty
+1438,B1,guichenoti,B_28,CL386_22,21/12/2022,21/7/2023,212,Male,Male; empty
+1198,B2,delicata,A_23,CL318_22,14/12/2022,21/7/2023,219,Male,Male; empty; autotomized
+1233,B2,delicata,B_23,CL327_22,19/12/2022,21/7/2023,214,Female,Empty
+1240,B2,delicata,A_28,CL330_22,2/12/2022,21/7/2023,231,Female,Empty
+1284,B2,guichenoti,B_28,CL345_22,5/12/2022,21/7/2023,228,Male,
+1432,B3,guichenoti,B_23,CL385_22,9/1/2023,20/7/2023,192,Male,Empty
+2047,B3,guichenoti,A_23,CL552_22,17/2/2023,20/7/2023,153,Male,Autotomized
+1205,B4,delicata,A_28,CL320_22,28/11/2022,20/7/2023,234,Male,Autotomized; empty
+1296,B4,delicata,B_23,CL348_22,26/12/2022,20/7/2023,206,Female,
+1399,B4,delicata,A_23,CL377_22,6/1/2023,20/7/2023,195,Male,
+1366,C1,guichenoti,A_28,CL368_22,7/12/2022,20/7/2023,225,Female,Autotomized
+1374,C1,guichenoti,B_23,CL371_22,6/1/2023,20/7/2023,195,Male,Empty
+1463,C1,guichenoti,B_28,CL396_22,23/12/2022,20/7/2023,209,Female,Autotomized
+1202,C2,delicata,B_28,CL319_22,30/11/2022,20/7/2023,232,Male,Empty
+1322,C2,delicata,B_23,CL356_22,26/12/2022,20/7/2023,206,Male,Empty
+2205,C2,delicata,A_28,CL595_22,3/2/2023,20/7/2023,167,Male,
+1611,C3,guichenoti,B_28,CL438_22,4/1/2023,21/7/2023,198,Female,Empty
+1222,C4,delicata,A_28,CL325_22,30/11/2022,21/7/2023,233,Female,Empty
+1390,C4,delicata,A_23,CL374_22,2/1/2023,21/7/2023,200,Male,Empty
+1454,C4,delicata,B_28,CL392_22,19/12/2022,21/7/2023,214,Female,Empty
+2105,C4,delicata,B_23,CL569_22,13/2/2023,21/7/2023,158,Female,
+1177,D1,guichenoti,A_23,CL314_22,9/12/2022,21/7/2023,224,Male,Empty
+1358,D1,guichenoti,B_28,CL365_22,5/12/2022,21/7/2023,228,Female,Hormone Dripped; Twin Lizards?
+1479,D1,guichenoti,A_28,CL400_22,26/12/2022,21/7/2023,207,Female,Empty
+1303,D2,delicata,B_23,CL350_22,21/12/2022,21/7/2023,212,Female,Empty
+1531,D2,delicata,A_23,CL414_22,18/1/2023,21/7/2023,184,Male,Autotomized; empty
+1371,D3,guichenoti,A_23,CL370_22,9/1/2023,20/7/2023,192,Male,Empty
+1459,D3,guichenoti,B_23,CL394_22,11/1/2023,20/7/2023,190,Male,
+1166,D4,delicata,A_28,CL312_22,21/11/2022,20/7/2023,241,Female,
+1192,D4,delicata,A_23,CL317_22,14/12/2022,20/7/2023,218,Male,Empty
+1229,D4,delicata,B_28,CL326_22,5/12/2022,20/7/2023,227,Male,
+1257,D4,delicata,B_23,CL334_22,23/12/2022,20/7/2023,209,Male,Empty
+1442,E1,guichenoti,B_23,CL388_22,9/1/2023,20/7/2023,192,Male,Lost the tail while measuring
+1565,E1,guichenoti,B_28,CL424_22,2/1/2023,20/7/2023,199,Female,
+1174,E2,delicata,A_23,CL313_22,2/12/2022,20/7/2023,230,Male,
+1185,E2,delicata,B_23,CL316_22,14/12/2022,20/7/2023,218,Male,
+1402,E2,delicata,A_28,CL377_22,16/12/2022,20/7/2023,216,Male,
+2255,E2,delicata,B_28,CL607_22,6/2/2023,20/7/2023,164,Female,Empty
+1218,E3,guichenoti,A_28,CL324_22,2/12/2022,21/7/2023,231,Female,Empty
+1443,E3,guichenoti,A_23,CL388_22,9/1/2023,21/7/2023,193,Male,
+2164,E3,guichenoti,B_23,CL584_22,24/2/2023,21/7/2023,147,Female,Empty
+1172,E4,delicata,B_28,CL313_22,16/11/2022,21/7/2023,247,Male,Empty
+1239,E4,delicata,A_23,CL329_22,21/12/2022,21/7/2023,212,Female,Autotomized
+2346,E4,delicata,B_23,CL633_23,3/3/2023,21/7/2023,140,Female,Possible tumor on throat
+1230,F1,delicata,B_28,CL327_22,2/12/2022,21/7/2023,231,Female,Empty
+1487,F1,delicata,A_23,CL402_22,18/1/2023,21/7/2023,184,Male,Autotomized; empty
+2351,F1,delicata,A_28,CL634_23,13/2/2023,21/7/2023,158,Male,
+1419,F2,guichenoti,A_28,CL382_22,16/12/2022,21/7/2023,217,Female,
+1534,F2,guichenoti,A_23,CL415_22,18/1/2023,21/7/2023,184,Female,Autotomized; empty
+1580,F2,guichenoti,B_28,CL428_22,4/1/2023,21/7/2023,198,Female,
+1613,F2,guichenoti,B_23,CL439_22,23/1/2023,21/7/2023,179,Male,
+1182,F3,delicata,B_23,CL315_22,12/12/2022,20/7/2023,220,Male,
+1424,F3,delicata,A_23,CL383_22,6/1/2023,20/7/2023,195,Female,
+2106,F3,delicata,A_28,CL569_22,25/1/2023,20/7/2023,176,Female,Autotomized
+2486,F3,delicata,B_28,CL677_23,27/2/2023,20/7/2023,143,Female,
+1340,F4,guichenoti,B_28,CL360_22,12/12/2022,20/7/2023,220,Female,Autotomized
+1417,F4,guichenoti,B_28,CL381_22,6/1/2023,20/7/2023,195,Female,Autotomized; empty
+1467,F4,guichenoti,A_28,CL397_22,23/12/2022,20/7/2023,209,Female,
+1421,G1,guichenoti,B_23,CL382_22,6/1/2023,20/7/2023,195,Male,
+1674,G1,guichenoti,B_23,CL455_22,9/1/2023,20/7/2023,192,Female,
+2009,G1,guichenoti,A_28,CL542_22,25/1/2023,20/7/2023,176,Male,
+1258,G2,delicata,A_28,CL334_22,5/12/2022,20/7/2023,227,Female,
+1328,G2,delicata,A_23,CL357_22,26/12/2022,20/7/2023,206,Male,
+1408,G2,delicata,B_28,CL379_22,14/12/2022,20/7/2023,218,Female,
+1360,G3,guichenoti,A_28,CL366_22,14/12/2022,21/7/2023,219,Female,Empty
+1795,G3,guichenoti,A_23,CL489_22,6/2/2023,21/7/2023,165,Female,
+2081,G3,guichenoti,B_23,CL562_22,20/2/2023,21/7/2023,151,Male,
+1223,G4,delicata,A_23,CL325_22,19/12/2022,21/7/2023,214,Female,
+1334,G4,delicata,A_28,CL358_22,7/12/2022,21/7/2023,226,Female,Autotomized
+1619,G4,delicata,B_23,CL440_22,23/1/2023,21/7/2023,179,Female,Empty
+2242,G4,delicata,B_28,CL604_22,6/2/2023,21/7/2023,165,Male,
