@@ -94,46 +94,16 @@ The day before starting the experiment, lizards were measured again, and then mo
 
 ## Results
 ```{r, models_mass}
-#| label: models
-#| echo: false
-#| warning: false
-
-# Delta mass L. delicata
-  deli_mod <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = deli_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
+#| label: models_mass
+#
+# A) L. delicata
+deli_mod_mass <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = deli_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
   plot(deli_mod)
   summary(deli_mod)
 # Delta mass L. guichenoti
   guich_mod <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = guich_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
   summary(guich_mod)
 bayes_R2(guich_mod)
-
-      # Seems that only food ingestion is significant in both species
-
-
-# Frozen behaviour L. delicata
-  deli_mod <- brm(log(lat_to_move+1) ~ Day*cort*temp + (1|lizard), data = deli_stressor, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
-  summary(deli_mod)
-  plot(deli_mod)
-bayes_R2(deli_mod)
-
-# Frozen behaviour L. delicata
- guich_mod <- brm(log(lat_to_move+1) ~ Day*cort*temp + (1|lizard), data = guich_stressor, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
-  summary(guich_mod)
-  plot(guich_mod)
-bayes_R2(guich_mod)
-
-
-# Extract posteriors
-posterior <- posterior_samples(mod, pars = "^b")
-plyr::ldply(lapply(posterior, mean))
-plyr::ldply(lapply(posterior, function(x) quantile(x, c(0.025, 0.975))))
-temp23 <- c(posterior[,"b_Intercept"], (posterior[,"b_Intercept"]+ posterior[,"b_trtB_23"]))
-temp28 <- c((posterior[,"b_Intercept"] + posterior[,"b_trtB_28"]), posterior[,"b_trtB_23"])
-
-pmcmc(temp23 - temp28)
-dharma(GMM_deli2)
-
-
 ```
 
 ```{r, plotsMass}
