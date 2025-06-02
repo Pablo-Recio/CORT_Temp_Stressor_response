@@ -106,6 +106,27 @@ deli_mod_mass <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = deli_
 bayes_R2(guich_mod)
 ```
 
+```{r, models_behaviour}
+#| label: models_behaviour
+#
+refit <- FALSE
+# A) L. delicata
+deli_beh <- behav_clean %>% 
+  filter(species == "delicata")
+if(refit){
+  deli_m_emergence <- brm(emergence ~ cort*temp*day + sex + (1 + day|lizard_id) + (1| clutch),
+                        data = deli_beh,
+                        family = bernoulli(link = "logit"),
+                        chains = 4, cores = 4, iter = 4000, warmup = 1000,
+                        control = list(adapt_delta = 0.99, max_treedepth =12))
+  saveRDS(deli_m_emergence, file = here(#ADD FOLDER))
+} else {
+  deli_m_emergence <- readRDS(here(#ADD FOLDER))
+}
+summary(deli_m_emergence)
+plot(deli_m_emergence)
+```
+
 ```{r, plotsMass}
 #| label: plotsMass
 #| echo: false
