@@ -48,6 +48,9 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
+# VSCode files
+.vdoc.*.r
+
 #Others
 models/
 figures/

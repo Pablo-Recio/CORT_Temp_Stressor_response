@@ -1,17 +1,21 @@
 ---
-docx: 
-reference-doc: "./bib/tmpl.docx"
-bibliography: "./bib/refs.bib"
+title: "Effects of prenatal CORT and temperature on the response to a stressor"
+format:
+  docx: 
+    bibliography: "./bib/refs.bib"
+    csl: "./bib/animal-behaviour.csl"
+    reference-doc: "./bib/tmpl.docx"
 execute:
   echo: false
   error: false
   cache: false
   warning: false
+link-citations: true
 crossref:  
-  fig-title: Figure    # (default is "Figure")
+  fig-title: Fig    # (default is "Figure")
   title-delim: —     # (default is ":")
   fig-prefix: Fig.   # (default is "Figure")
-  tbl-prefix: Tab.   # (default is "Table")
+  tbl-prefix: Table  # (default is "Table")
 editor_options: 
   chunk_output_type: console
 ---
@@ -67,7 +71,7 @@ Both temperature and CORT influence the development of proactive-reactive person
 
 ### Subjects
 
-We used two species of skinks, the common garden skink (*Lampropholis guichenoti*) and the rainbow skink or delicate skink (*L. delicata*). These are oviparous, generalist, small (∼35--55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia ([@chapple_know_2011]). Both species have similar breeding periods, but reproductive output in *L. delicata* is one clutch of 1 to 6 eggs per season, while *L. guichenoti* lays 1-5 eggs per clutch, and usually two clutches per season ([@chapple_know_2011]; [@chapple_biology_2014]). This difference in reproductive output through the breeding season may involve different degree of sensitivity to maternal effects and its interaction with other aspects of early environment.
+We used two species of skinks, the common garden skink (*Lampropholis guichenoti*) and the rainbow skink or delicate skink (*L. delicata*). These are oviparous, generalist, small (∼35--55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia ([@chapple_know_2011]). Both species have similar breeding periods, but reproductive output in *L. delicata* is one clutch of 1 to 6 eggs per season, while *L. guichenoti* lays 1-5 eggs per clutch, and usually two clutches per season ([@chapple_know_2011]; [@chapple_biology_2014]). **This difference in reproductive output through the breeding season may involve different degree of sensitivity to maternal effects and its interaction with other aspects of early environment.**
 
 ### Subjects treatments, collection, and housing
 
@@ -93,39 +97,80 @@ The day before starting the experiment, lizards were measured again, and then mo
 ### Statistical analyses
 
 ## Results
-```{r, models_mass}
-#| label: models_mass
-#
-# A) L. delicata
-deli_mod_mass <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = deli_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
-  plot(deli_mod)
-  summary(deli_mod)
-# Delta mass L. guichenoti
-  guich_mod <- brm(rescaled_delta_mass ~ food_ingested+cort*temp, data = guich_stressor_2, family = gaussian(link = "identity"), chains = 4, cores = 4, iter = 2000, warmup = 1000, control = list(adapt_delta = 0.99))
-  summary(guich_mod)
-bayes_R2(guich_mod)
-```
 
 ```{r, models_behaviour}
 #| label: models_behaviour
+source(here("R", "func.R"))
 #
 refit <- FALSE
+#
 # A) L. delicata
 deli_beh <- behav_clean %>% 
-  filter(species == "delicata")
-if(refit){
-  deli_m_emergence <- brm(emergence ~ cort*temp*day + sex + (1 + day|lizard_id) + (1| clutch),
-                        data = deli_beh,
-                        family = bernoulli(link = "logit"),
-                        chains = 4, cores = 4, iter = 4000, warmup = 1000,
-                        control = list(adapt_delta = 0.99, max_treedepth =12))
-  saveRDS(deli_m_emergence, file = here(#ADD FOLDER))
-} else {
-  deli_m_emergence <- readRDS(here(#ADD FOLDER))
-}
-summary(deli_m_emergence)
-plot(deli_m_emergence)
+  filter(species == "delicata") %>%
+  mutate(lat_move = lat_move + 1, 
+         lat_shelter = lat_shelter + 1)
+#
+deli_move <- fit_m(df = deli_beh, fam = lognormal(), type = "beh", sp = "deli", var = "lat_move")
+deli_shelter <- fit_m(df = deli_beh, fam = lognormal(), type = "beh", sp = "deli", var = "lat_shelter")
+deli_emergence <- fit_m(df = deli_beh, fam = bernoulli(link = "logit"), type = "beh", sp = "deli", var = "emergence")
+#
+#
+# B) L. guichenoti
+guich_beh <- behav_clean %>%
+  filter(species == "guichenoti") %>%
+  mutate(lat_move = lat_move + 1, 
+         lat_shelter = lat_shelter + 1)
+#
+guich_move <- fit_m(df = guich_beh, fam = lognormal(), type = "beh", sp = "guich", var = "lat_move")
+guich_shelter <- fit_m(df = guich_beh, fam = lognormal(), type = "beh", sp = "guich", var = "lat_shelter")
+guich_emergence <- fit_m(df = guich_beh, fam = bernoulli(link = "logit"), type = "beh", sp = "guich", var = "emergence")
 ```
+
+```{r, models_mass}
+#| label: models_mass
+source(here("R", "func.R"))
+#
+refit <- FALSE
+#
+# A) L. delicata
+deli_mass <- mass_clean %>%
+  filter(species == "delicata")
+#
+deli_mass <- fit_m(df = deli_mass, fam = lognormal(), type = "mass", sp = "deli", var = "delta_mass_rescaled")
+# 
+#
+# B) L. guichenoti
+guich_mass <- mass_clean %>%
+  filter(species == "guichenoti")
+#
+guich_mass <- fit_m(df = guich_mass, fam = lognormal(), type = "mass", sp = "guich", var = "delta_mass_rescaled")
+```
+
+```{r, clean_posteriors}
+#| label: clean_posteriors
+source(here("R", "func.R"))
+#
+variables <- c("move", "shelter", "emergence", "mass")
+species <- c("deli", "guich")
+# Initialize empty lists
+posterior_list <- list(deli = list(), guich = list())
+# Loop over species and variables
+for(i in species){
+  for(j in variables){
+    model_object <- get(paste0(i, "_", j))
+    result <- tidy_post(df = model_object)
+    posterior_list[[i]][[j]] <- result
+  }
+}
+#
+deli_post <- dplyr::bind_rows(posterior_list$deli, .id = "variable")
+guich_post <- dplyr::bind_rows(posterior_list$guich, .id = "variable")
+```
+
+
+
+
+
 
 ```{r, plotsMass}
 #| label: plotsMass
@@ -211,36 +256,62 @@ ggsave("./output/figures/fig_guich_BEH.png", plot=plot_guich_BEH, width = 15, he
 
 
 
-
-We calculated $R^2$ as follows
-
-$$
-R^2 = \frac{SS_{reg}}{SS_{tot}}
-$$ {#eq-r2}
-
-@eq-r2
-
-```{r, fig1}
-#| label: fig-fig1
-#| fig-cap: "Activity budget of the focal group of chacma baboons (Papio ursinus) at the Cape Peninsula, South Africa, during the study period. The data are presented as the mean percentage of time spent in each activity category per hour (± SE)."
-
-data %>% ggplot(aes(x = Lizard_id))  + geom_histogram()
+## Discussion
 
 
+## References
+
+## Supplementary material
+
+_Table **S1**. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
+
+```{r, tablesummary_deli}
+#| label: tablesummary_deli
+#
+# Table defaults
+set_flextable_defaults(
+ font.family = "Times New Roman",
+ font.size = 10)
+# Make Table
+table_summ_deli <- flextable(deli_post) %>%
+  flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
+  align(align = "center", j = c(3:6), part = "body") %>%
+  align(align = "center", j = c(1:6), part = "header") %>%
+  bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor"),
+       bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
+  bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
+  flextable::compose(i = c(2:10,12:20,22:30,32:40), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::hline(i = c(10,20,30), part = "body") %>% # Add horizontal lines
+  autofit()
+#
+table_summ_deli
 ```
 
-We have a total of `r length(unique(data$Lizard_id))`
-
-```{r,tb1}
-#| label: tbl-tb1
-#| tbl-cap: "Summary of the data"
-
-tab <- data %>% 
-  group_by(Lizard_id) %>% 
-  summarise(
-    n = n()
-  ) 
-flextable(tab[2:3,])
+```{r, results='asis', echo=FALSE}
+cat("\\newpage")
 ```
 
-# References
+_Table **S1**. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
+
+```{r, tablesummary_guich}
+#| label: tablesummary_guich
+#
+# Table defaults
+set_flextable_defaults(
+ font.family = "Times New Roman",
+ font.size = 10)
+# Make Table
+table_summ_guich <- flextable(guich_post) %>%
+  flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
+  align(align = "center", j = c(3:6), part = "body") %>%
+  align(align = "center", j = c(1:6), part = "header") %>% 
+  bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor"),
+       bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
+  bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
+  flextable::compose(i = c(2:10,12:20,22:30,32:40), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::hline(i = c(10,20,30), part = "body") %>% # Add horizontal lines
+  autofit()
+#
+table_summ_guich
+```
+

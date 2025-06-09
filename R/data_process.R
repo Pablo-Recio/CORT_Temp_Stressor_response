@@ -25,7 +25,7 @@ mass <- read.csv(here("data", "mass.csv")) %>%
   mutate(lizard_id = as.character(lizard_id))%>%
 data.frame() #Read in mass data and transform lizard_id to character
 mass_clean <- merge(clean_ind, mass, by = "lizard_id", all = TRUE) %>%
-  mutate(delta_mass_rescaled = (delta_mass - min(delta_mass, na.rm = TRUE))) %>%
+  mutate(delta_mass_rescaled = (delta_mass - min(delta_mass, na.rm = TRUE) + 1)) %>%
 data.frame() #Merge mass data with clean_ind data and rescale delta_mass
 
 write.csv(mass_clean, here("./output/data_clean/mass_clean.csv")) 

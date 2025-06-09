@@ -56,7 +56,7 @@ for (i in var) {
           axis.text = element_text(size = 10, family = "Times"))
   hist_list[[i]] <- hist_plot
 }
-hist_behav <- plot_grid(plotlist = hist_list, ncol = 3)
+hist_behav <- plot_grid(plotlist = hist_list, ncol = 2)
 ggsave(here("./output/figures/exploratory/hist_behav.png"), hist_behav, width = 20, height = 20, dpi = 300)
 
 # Distribution
@@ -71,7 +71,7 @@ qq_plots_list <- lapply(var, function(v) {
   qq_plots_single(data_expl, v, label)
 })
 #
-behav_qq_plot <- plot_grid(plotlist = qq_plots_list, ncol = 1)
+behav_qq_plot <- plot_grid(plotlist = qq_plots_list, ncol = 2)
 ggsave(here("./output/figures/exploratory/behav_qq_plot.png"), behav_qq_plot, width = 20, height = 20, dpi = 300)
 #
-#
+#### Latency to move and latency to go to shelter considered as log-normal distribution
