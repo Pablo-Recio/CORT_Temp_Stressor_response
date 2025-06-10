@@ -74,10 +74,10 @@ fit_m <- function(df, fam, sp, type, var) {
   if(refit){
     if(type == "beh"){
       formula <- as.formula(paste(var, 
-                            "~ cort*temp*day + age_start + sex + (1 + day|lizard_id) + (1|clutch)"))
+                            "~ cort*day + temp + (1|lizard_id) + (1|clutch)"))
     } else if(type == "mass"){
       formula <- as.formula(paste(var, 
-                            "~ cort*temp*food_ingested + age_start + sex + (1|clutch)"))
+                            "~ cort*food_ingested + temp + (1|clutch)"))
     }
     # Fit the model
     model <- brm(formula = formula,

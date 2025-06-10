@@ -75,13 +75,11 @@ We used two species of skinks, the common garden skink (*Lampropholis guichenoti
 
 ### Subjects treatments, collection, and housing
 
-The skinks used in our experiments came from a breeding colony established in the lab since 2019. The colony is compound by a total total of 270 adults of *L. delicata* and 180 adults of *L.* guichenoti that are housed in big containers (41.5 L x 30.5 W x 21 H cm) with six lizards (2 males and 4 females) per enclosure. These enclosures are provided with non-stick matting, shelter, and several small water dishes. Lizards are given water daily, and fed approx. 40 mid-size crickets (*Acheta domestica*) per enclosure three days a week. Crickets are dusted with calcium weekly and multivitamin and calcium biweekly. Room temperatures are set to 22-24 Celsius, and warm side of enclosures is usually at 32 Celsius; but to ensure a temperature gradient, we employ a heat chord and a heat lamp following a 12 h light:12 h dark cycle.
+_Breeding colony_: The skinks used in our experiments came from a breeding colony established in the lab since 2019. The colony is compound by a total total of 270 adults of _L. delicata_ and 180 adults of _L. guichenoti_ that are housed in big containers (41.5 L x 30.5 W x 21 H cm) with six lizards (2 males and 4 females) per enclosure. These enclosures are provided with non-stick matting, shelter, and several small water dishes. Lizards are given water daily, and fed approx. 40 mid-size crickets (_Acheta domestica_) per enclosure three days a week. Crickets are dusted with calcium weekly and multivitamin and calcium biweekly. Room temperatures are set to 22-24 ºC, but to ensure a temperature gradient we employ a heat chord and a heat lamp following a 12 h light:12 h dark cycle. Heat lamp and heat cord keep the warm side of enclosures at 32 ºC.
 
-Eggs were collected between mid-October 2022 to the end of February 2023. We placed in the commonal enclosure small boxes (12.5 L x 8.3 W x 5 H cm) with moist vermiculite inside so females had a place to lay the eggs. Three times a week, we checked these boxes for the presence of eggs. Once a clutch was found, we measured eggs' length and width with a digital caliper to the nearest 0.1 mm and mass with a (OHAUS, Model spx123) digital scale ± 0.001g error. To test the effect of prenatal CORT and temperature, we manipulated CORT levels in eggs and then incubated them at one of two temperature regimes (‘Cold’ – 23ºC ± 3ºC or ‘Hot’ – 30ºC ± 3ºC) in a 2x2 factorial design. CORT was increased by topical aplication of a solution of CORT dissolved in 70% Ethanol and 30% DMSO (vehicle) at concentrations 2 standard deviations above the mean natural hormone concentration (non-published data); while a 'Control' group received an equal volume of the vehicle. Then, eggs were placed in individual cups (80 mL) with moist vermiculite (12 parts water to 4 parts vermiculite) covered with cling wrap to retain moisture, and were left in LATWIT 2X5D-R1160 incubators at two different temperatures ('Cold' or 'Hot') until hatchling.
+_Egg collection_: Eggs were collected between mid-October 2022 to the end of February 2023. We placed in the commonal enclosure small boxes (12.5 L x 8.3 W x 5 H cm) with moist vermiculite inside so females had a place to lay the eggs. Three times a week, we checked these boxes for the presence of eggs. Once a clutch was found, we measured eggs' length and width with a digital caliper to the nearest 0.1 mm and mass with a (OHAUS, Model spx123) digital scale ± 0.001g error. To test the effect of prenatal CORT and temperature, we manipulated CORT levels in eggs and then incubated them at one of two temperature regimes (see .... below).Then, eggs were placed in individual cups (80 mL) with moist vermiculite (12 parts water to 4 parts vermiculite) covered with cling wrap to retain moisture, and were left in LATWIT 2X5D-R1160 incubators at two different temperatures ('Cold' or 'Hot') until hatchling.
 
-INSERT Fig 1
-
-The incubators were checked three times a week for hatchlings. When hatchligns were found, we recorded Snout-vent length (SVL) and tail length (TL) with a rule to the nearest mm while mass was measured with a (OHAUS, Model spx123) digital scale ± 0.001g error. Then, hatchlings were enclosed in individual tubs (18.7L x 13.2W x 6.3H cm) provided with non-stick matting and a small water dish. During this period, they were sprayed water every day and received 3-6 small *A. domestica* crickets three times a week. All care otherwise follows similar protocols to adults (see above). 
+_Hatchlings_: The incubators were checked three times a week for hatchlings. When hatchligns were found, we recorded Snout-vent length (SVL) and tail length (TL) with a rule to the nearest mm while mass was measured with a (OHAUS, Model spx123) digital scale ± 0.001g error. Then, hatchlings were enclosed in individual tubs (18.7L x 13.2W x 6.3H cm) provided with non-stick matting and a small water dish. During this period, they were sprayed water every day and received 3-6 small *A. domestica* crickets three times a week. All care otherwise follows similar protocols to adults (see above). 
 
 
 ### Experimental arena and design
@@ -93,6 +91,7 @@ The lizards used in this experiment were subjected before to a personality test 
 After 3 months, we measured again SVL, TL, and mass of the juveniles and then they were moved to the experimental arena (see below).
 The day before starting the experiment, lizards were measured again, and then moved to a new enclosure the same size and conditions before, but in the room where the CCTV system is held () experimental arena (Fig. 1c) for acclimatation. The arenas were individual medium size (41 L x 29.7 W x 22 H cm) plastic containers with a shelter (9 L x 6 W x 1.5 H cm) on one of the extremes and a water dish on the other. These new enclosures were placed in two rooms in 7 different racks associated to 7 different CCTV systems (device model DVR-HP210475) that allowed us to record their behaviour during the experiment (see details below). The number of lizards per species and treatment in each rack was counterbalanced to control for any effect of the room or the position of the lizard in the rack. During acclimatation and all the experiment, lizards were fed with only one cricket per day dusted with calcium and multivitamin (see protocol below), and water was supplied *ad libitum.* We provided a temperature gradient by means of a heat cord and heat lamps in a 12 h light: 12 h dark cycle. The rooms temperature was set to between 22-24 Celsius. 
 
+FIG METHODS
 
 ### Statistical analyses
 
@@ -277,9 +276,9 @@ table_summ_deli <- flextable(deli_post) %>%
   flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
   align(align = "center", j = c(3:6), part = "body") %>%
   align(align = "center", j = c(1:6), part = "header") %>%
-  bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor"),
+  bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
-  bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
+  bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
   flextable::compose(i = c(2:10,12:20,22:30,32:40), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
   flextable::hline(i = c(10,20,30), part = "body") %>% # Add horizontal lines
   autofit()
@@ -305,9 +304,9 @@ table_summ_guich <- flextable(guich_post) %>%
   flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
   align(align = "center", j = c(3:6), part = "body") %>%
   align(align = "center", j = c(1:6), part = "header") %>% 
-  bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor"),
+  bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
-  bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
+  bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
   flextable::compose(i = c(2:10,12:20,22:30,32:40), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
   flextable::hline(i = c(10,20,30), part = "body") %>% # Add horizontal lines
   autofit()
