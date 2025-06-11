@@ -1,10 +1,10 @@
 ---
 title: "Effects of prenatal CORT and temperature on the response to a stressor"
 format:
-  docx: 
-    bibliography: "./bib/refs.bib"
-    csl: "./bib/animal-behaviour.csl"
-    reference-doc: "./bib/tmpl.docx"
+docx: 
+bibliography: "./bib/refs.bib"
+csl: "./bib/animal-behaviour.csl"
+reference-doc: "./bib/tmpl.docx"
 execute:
   echo: false
   error: false
@@ -59,7 +59,13 @@ for (s in species) {
 #| label: countclutches
 # Count the number of clutches per species
 #
-clutches <- mass_clean %>% 
+clutches_deli <- mass_clean %>% 
+  filter(species == "delicata") %>%
+  distinct(clutch) %>% 
+  nrow()
+#
+clutches_guich <- mass_clean %>% 
+  filter(species == "guichenoti") %>%
   distinct(clutch) %>% 
   nrow()
 ```
@@ -76,7 +82,7 @@ Both temperature and CORT influence the development of proactive-reactive person
 
 ### Subjects
 
-We used two species of skinks, the delicate skink (_Lampropholis delicata_) and the common garden skink (_L. guichenoti_). These are oviparous, generalist, small (∼35--55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia ([@chapple_know_2011]). Both species have similar breeding periods, but reproductive output in *L. delicata* is one clutch of 1 to 6 eggs per season, while *L. guichenoti* lays 1-5 eggs per clutch, and usually two clutches per season ([@chapple_know_2011]; [@chapple_biology_2014]). **This difference in reproductive output through the breeding season may involve different degree of sensitivity to maternal effects and its interaction with other aspects of early environment.**
+We used two species of skinks, the delicate skink (_Lampropholis delicata_) and the common garden skink (_L. guichenoti_). These are oviparous, generalist, small (∼35-55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia [@chapple_know_2011; @chapple_biology_2014]. However, _L. delicata_ has been reported as a successful invader in New Zealand and Hawaii, while there are not such reports for _L. guichenoti_ [@chapple_know_2011; @chapple_biology_2014]. Invassivenes does not seem to be related to differences in cognitive abilities [@bezzina2014does; @recio2025early; @recio2025early], but seems to be associated with differences in personality [**REFpers**], which may be linked to differences in their stress response [@koolhaas1999coping].      
 
 ### Subjects treatments, collection, and housing
 
@@ -94,13 +100,13 @@ To test the interactive effects of CORT and incubation temperature, we manipulat
 
 Three weeks before the start of the behavioural tests, we adapted the lizard enclosures to the experimental setup. The enclosures used for the stress response trials were the same as those where the lizards had previously been housed, but modified to include only a single shelter (9 × 6 × 1.5 cm) placed at one end and a water dish in the centre. All other shelter materials and the matting substrate were removed to allow continuous monitoring. The enclosures were then relocated to the experimental rooms, each containing six racks equipped with their own CCTV system (model DVR-HP210475). The number of lizards per treatment was counterbalanced across racks to control for potential effects of room or rack position. In these three weeks, lizards were fed one calcium- and multivitamin-dusted cricket per day, and water was provided _ad libitum_. A temperature gradient was maintained using heat cords and heat lamps on a 12:12 h light–dark cycle, with room temperatures kept between 22–24 °C.          
 
-To test the effects of prenatal conditions on the response to a stressor, we simulated a predatory attack once daily over multiple days [**insert relevant reference here**]. _The simulated attack involved chasing the lizard for 60 seconds using a soft paintbrush, after which its behaviour was recorded for one hour._ **DETAILS OF EACH TRIAL**. All videos were later analysed by **MATHEO**, who was blinded to the lizards’ treatment groups. From each video, we recorded three behavioural variables: i) latency to move — the time spent immobile (frozen) immediately after the simulated attack; ii) latency to shelter — the time it took the lizard to hide under the shelter after resuming movement; and iii) emergence — whether the lizard emerged from the shelter during the 40 minutes following hiding (1 = emerged, 0 = did not emerge). A lizard was considered to have resumed movement if it moved continuously for at least five seconds, and to be under shelter if no limbs were visible. This procedure was repeated daily for eight consecutive days to assess the effects of mid-term exposure to a stressor. All trials were conducted between 1000–1400 h, when lizards are most active.
+To test the effects of prenatal conditions on the response to a stressor, we simulated a predatory attack once daily over multiple days [**insert relevant reference here**]. Each trial began with one of the researchers (PR) removing the water dish from the enclosure, followed by the shelter. The lizard was then chased for 60 seconds using a soft paintbrush, simulating a predatory attack. Immediately after the chase, the shelter — but not the water dish — was returned to its original position, marking the start of the behavioural observation period. The lizard’s behaviour was then recorded for one hour. All videos were later analysed by **MATHEO**, who was blinded to the lizards’ treatment. From each video, we recorded three behavioural variables: i) latency to move — the time spent immobile (frozen) immediately after the simulated attack; ii) latency to shelter — the time it took the lizard to hide under the shelter after resuming movement; and iii) emergence — whether the lizard emerged from the shelter during the 40 minutes following hiding (1 = emerged, 0 = did not emerge). A lizard was considered to have resumed movement if it moved continuously for at least five seconds, and to be under shelter if no limbs were visible. This procedure was repeated daily for eight consecutive days to assess the effects of mid-term exposure to a stressor. All trials were conducted between 1000–1400 h, when lizards are most active.       
 
-Lizard mass was measured to the nearest 0.001 g using a digital scale (OHAUS, model SPX123) both before and after the completion of the behavioural tests. Change in mass was calculated as the difference between final and initial mass and then rescaled by subtracting the smallest mass change observed in the dataset, to avoid negative values. This rescaled change in mass was used as a proxy for the physiological cost of repeated stress exposure. To control for hunger levels and potential effects of food ingestion on mass change, we also recorded the number of crickets ingested by each lizard during the acclimation period. To do so, we placed a known number of crickets in each enclosure after each of the trials, and counted the number of crickets remaining after 24 hours. The total number of crickets ingested during the eight days of tests was then used as a covariate in the analyses of mass change. The experimental design is summarised in @fig-Methods B.          
+Both before and after the completion of the behavioural tests, lizard mass was measured to the nearest 0.001 g using a digital scale. Change in mass was calculated as the difference between final minus the initial mass and then rescaled by adding the smallest mass change observed in the dataset, to avoid negative values. This rescaled change in mass was used as a proxy for the physiological cost of repeated stress exposure. To control for hunger levels and potential effects of food ingestion on mass change, we also recorded the number of crickets ingested by each lizard during the acclimation period. To do so, we placed a known number of crickets in each enclosure after each of the trials, and counted the number of crickets remaining after 24 hours. The total number of crickets ingested during the eight days of tests was then used as a covariate in the analyses of mass change. The experimental design is summarised in @fig-Methods B.          
   
 ```{r, fig-Methods}
 #| label: fig-Methods
-#| fig.cap: ""
+#| fig.cap: "Scheme of our experimental design. In panel A, the early environment manipulations resulting in four experimental conditions. In panel B, the timeline of the postnatal stress-response assay. On Day 0, lizard mass was recorded. From Days 1–8, lizards were subjected daily to a simulated predator attack (chased with a soft paintbrush for 1 minute), followed by a 1-hour behavioural recording. Variables measured included freezing duration (latency to move), latency to shelter, and emergence from shelter. Final mass was measured on Day 9."
 
 knitr::include_graphics("./Others/Methods.png")
 
@@ -108,13 +114,24 @@ knitr::include_graphics("./Others/Methods.png")
 
 ### Statistical analyses
 
+We performed the analyses for each species separately. We fitted all models using the _brm_ package [@burkner2017brms], which fits Bayesian multilevel models with _Stan_ [@stan] with R version 4.4.0 [@R]. We ran four parallel MCMC chains of 10000 iterations for each model, with a warmup period of 4000 iterations. 
+
+We used as the response variables the latency to move, latency to shelter, and emergence from the shelter after the simulated attack, as well as the change in mass after the eight days of stress exposure. We fitted separate models for each response variable. For the three behavioural variables, we included the prenatal condition (Control-Cold, CORT-Cold, Control-Hot, CORT-Hot), the day of the trial, and their interaction as fixed effects. To facilitate interpretation of the model intercepts, trial day was transformed so that day 1 in the experiment corresponds to day 0 in the model (i.e. the intercept reflects lizard behaviour in response to the first exposure to the stressor). For the variable mass, we included the prenatal condition, the total number of crickets ingested during the eight days of stress exposure, and their interaction as predictors.
+
+Lizard identity was included as a random factor in the behavioural models, but it was not included when mass was the response. For all models, we included the clutch as a random factor. _L. delicata_ lays one clutch per year, while _L. guichenoti_ lays two [@chapple_know_2011; @chapple2015deliinvLHI]. Since eggs were collected during half of the breeding season, clutches likely come from different mothers. Additionally, previous research has shown that clutches are generally sired by a single male, but sperm storage can occur [@kar2023heritability]. Given our partial split-clutch design, and the fact that maternal effects are expected to be stronger than paternal effects in these species, including the clutch as a random factor should account for the effects of parental identity.   
+ 
+We used the posterior distributions of model parameters to test for differences between prenatal conditions. For behavioural variables, differences in the model intercepts between conditions were interpreted as differences in the acute response to a stressor (i.e. the first day of exposure), while differences in the slopes were interpreted as differences in behavioural adjustment across repeated exposures (i.e. chronic stress response). Similarly, for mass change, we interpreted differences in the condition-by-ingestion interaction (i.e. variation in the slopes of mass change across treatment groups) as reflecting differences in energy assimilation efficiency with increased food intake. _pMCMC_ was used to test the hypothesis that posterior distributions of slopes and slope contrasts differed from zero. We considered an effect statistically significant when _pMCMC_ <0.05.       
+
+
 ## Results
+
+We started with 96 lizards, 48 per species and 12 per treatment per species. However, our final sample size was 84 due to natural mortality (n = 10). The final sample sizes per treatment and species are listed in @fig-results_beh_deli, @fig-results_beh_guich and @fig-results_mass. These animals came from a total of `r clutches_deli` clutches in _L. delicata_ and `r clutches_guich` in _L. guichenoti_.      
 
 ```{r, models_behaviour}
 #| label: models_behaviour
 source(here("R", "func.R"))
 #
-refit <- TRUE
+refit <- FALSE
 #
 # A) L. delicata
 deli_beh <- behav_clean %>% 
@@ -142,7 +159,7 @@ guich_emergence <- fit_m(df = guich_beh, fam = bernoulli(link = "logit"), type =
 #| label: models_mass
 source(here("R", "func.R"))
 #
-refit <- TRUE
+refit <- FALSE
 #
 # A) L. delicata
 deli_mass <- mass_clean %>%
@@ -158,7 +175,221 @@ guich_mass <- mass_clean %>%
 guich_mass <- fit_m(df = guich_mass, fam = lognormal(), type = "mass", sp = "guich", var = "delta_mass_rescaled")
 ```
 
-```{r, clean_posteriors}
+```{r, post_contrasts}
+#| label: post_contrasts
+#  
+source(here("R", "func.R"))
+#
+# Getting the values for each treatments' intercept and slope for the contrasts later
+## A) L. delicata
+deli_move_posteriors <- post_values(deli_move, var = "beh")
+deli_shelter_posteriors <- post_values(deli_shelter, var = "beh")
+deli_emergence_posteriors <- post_values(deli_emergence, var = "beh")
+deli_mass_posteriors <- post_values(deli_mass, var = "mass")
+#
+## B) L. guichenoti
+guich_move_posteriors <- post_values(guich_move, var = "beh")
+guich_shelter_posteriors <- post_values(guich_shelter, var = "beh")
+guich_emergence_posteriors <- post_values(guich_emergence, var = "beh")
+guich_mass_posteriors <- post_values(guich_mass, var = "mass")
+#
+#
+# Getting the contrasts for the posterior distributions
+## A) L. delicata
+deli_move_contrasts <- contrasts_func(sp = "deli", res = "move")
+deli_shelter_contrasts <- contrasts_func(sp = "deli", res = "shelter")
+deli_emergence_contrasts <- contrasts_func(sp = "deli", res = "emergence")
+deli_mass_contrasts <- contrasts_func(sp = "deli", res = "mass")
+#
+## B) L. guichenoti
+guich_move_contrasts <- contrasts_func(sp = "guich", res = "move")
+guich_shelter_contrasts <- contrasts_func(sp = "guich", res = "shelter")
+guich_emergence_contrasts <- contrasts_func(sp = "guich", res = "emergence")
+guich_mass_contrasts <- contrasts_func(sp = "guich", res = "mass")
+```
+
+
+#### Do prenatal conditions affect the behavioural response to an acute stressor?
+
+_Lampropholis delicata_: Incubation at cold temperatures decreased the latency to move after a simulated attack on the first day (Intercept (denoted hereafter as I)~Hot~ - I ~Cold~ = `r deli_move_contrasts$mean_Temperature_int`; pMCMC `r deli_move_contrasts$pMCMC_Temperature_int`), while neither CORT or the interaction have any effect on latency to move (see Table S1 in _Supplementary Material_). We did not find any effects of prenatal temperature, CORT or their interaction on latency to shelter or emergence probability after an acute stressor (see Table S1 in _Supplementary Material_).
+
+
+_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had any effect on the behavioural response to an acute stressor on _L. guichenoti_ (see Table S2 in _Supplementary Material_).
+
+
+```{r, fig-results_beh_deli}
+
+```
+
+
+#### Do prenatal conditions affect the behavioural response to a chronic stressor?
+
+_Lampropholis delicata_: **HOW WERE THE SLOPES OVER TIME??**. We did not find any effects of prenatal conditions in _L. delicata_ response to a chronic stressor, as there were no significant differences in the slopes of the different treatments for any of the behavioural variables (see Table S1 in _Supplementary Material_).
+
+
+_Lampropholis guichenoti_: **HOW WERE THE SLOPES OVER TIME??**. There were no significant differences in the behavioural response of _L. guichenoti_ to the repeated exposure to an stressor (see Table S2 in _Supplementary Material_).
+
+
+```{r, fig-results_beh_guich}
+```
+
+#### Do prenatal conditions influence the costs of repeated stress exposure?
+
+_Lampropholis delicata_:
+
+
+_Lampropholis guichenoti_:
+
+
+
+```{r, fig-results_mass}
+```
+
+## Discussion
+
+
+## References
+
+## Supplementary material
+
+_Table S1. Contrasts of the posterior distributions of the predictors for each behavioural variable modelled for L. delicata. The contrasts are between the intercepts and slopes of the different treatments. Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._     
+
+```{r, table_contrasts_deli}
+#| label: table_contrasts_deli
+#
+source(here("R", "func.R"))
+# 
+# Get the posterior contrasts for L. delicata and merge them into a single df
+contrast_deli_beh <- bind_rows(move = deli_move_contrasts,
+                              shelter = deli_shelter_contrasts,
+                              emergence = deli_emergence_contrasts,
+                              .id = "variable") %>%
+                    mutate(across(everything(), as.character)) %>%
+ 
+                    pivot_longer(cols = -variable,
+                                names_to = c("type", "factor", "stat"),
+                                names_pattern = "(mean|pMCMC)_(.*)_(int|slope)") %>%
+ 
+                    pivot_wider(names_from = c(type, stat),
+                                values_from = value) %>%
+data.frame()
+write.csv(contrast_deli_beh, here("./output/checking/contrasts_deli_beh.csv"))
+#
+#
+# Set defaults for the table
+set_flextable_defaults(
+  font.family = "Times New Roman",
+  font.size = 10)
+#
+# Make Table
+table_deli_behaviour <- flextable(contrast_deli_beh) %>%
+  flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
+  flextable::compose(i = 1, j = 2, value = as_paragraph("Predictor"), part = "header") %>% # Change the second column header
+  flextable::compose(i = 1, j = c(3,5), value = as_paragraph("Contrast"), part = "header") %>% # Change the third column header
+  flextable::compose(i = 1, j = c(4,6), value = as_paragraph("pMCMC"), part = "header") %>% # Change the fourth column header
+  flextable::add_header_row(values = c("", "Acute (Intercept)", "Chronic (Slope)"), colwidths = c(2, 2, 2)) %>% # Add a header row
+  flextable::compose(i = c(2,3,5,6,8,9), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::compose(i = 1, j = 1, value = as_paragraph("Latency to move"), part = "body") %>% # Change the first row of the first column
+  flextable::compose(i = 4, j = 1, value = as_paragraph("Latency to shelter"), part = "body") %>% # Change the fourth row of the first column
+  flextable::compose(i = 7, j = 1, value = as_paragraph("Emergence"), part = "body") %>% # Change the seventh row of the first column
+  flextable::hline(i = c(3,6), part = "body") %>% # Add horizontal lines
+  flextable::vline(j = c(2,4), part = "all") %>% # Add vertical lines
+  align(align = "center", j = c(3:6), part = "body") %>%
+  align(align = "center", i = c(1,2), j = c(1:6), part = "header") %>%
+  flextable::bold(i = 1, j = c(3,4), bold = TRUE, part = "body") %>% 
+autofit()
+#
+table_deli_behaviour
+```
+
+Contrasts were done by:  
+    - _Temperature_: β~Hot~ - β~Cold~  
+    - _CORT_: β~CORT~ - β~Control~  
+    - _Interaction_: (β~Control-Hot~ - β~CORT-Hot~) - (β~Control-Cold~ - β~CORT-Cold~)  
+
+
+```{r, results='asis', echo=FALSE}
+cat("\\newpage")
+```
+
+_Table S2. Contrasts of the posterior distributions of the predictors for each behavioural variable modelled for L. guichenoti. The contrasts are between the intercepts and slopes of the different treatments. Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._    
+
+```{r, table_contrasts_guich}
+#| label: table_contrasts_guich
+#
+source(here("R", "func.R"))
+# Get the posterior contrasts for L. guichenoti and merge them into a single df
+contrast_guich_beh <- bind_rows(move = guich_move_contrasts,
+                              shelter = guich_shelter_contrasts,
+                              emergence = guich_emergence_contrasts,
+                              .id = "variable") %>%
+                    mutate(across(-variable, as.character)) %>%
+ 
+                    pivot_longer(cols = -variable,
+                                names_to = c("type", "factor", "stat"),
+                                names_pattern = "(mean|pMCMC)_(.*)_(int|slope)") %>%
+ 
+                    pivot_wider(names_from = c(type, stat),
+                                values_from = value) %>%
+data.frame()
+write.csv(contrast_guich_beh, here("./output/checking/contrasts_guich_beh.csv"))
+#
+#
+# Set defaults for the table
+set_flextable_defaults(
+  font.family = "Times New Roman",
+  font.size = 10)
+#
+# Make Table
+table_guich_behaviour <- flextable(contrast_guich_beh) %>%
+  flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
+  flextable::compose(i = 1, j = 2, value = as_paragraph("Predictor"), part = "header") %>% # Change the second column header
+  flextable::compose(i = 1, j = c(3,5), value = as_paragraph("Contrast"), part = "header") %>% # Change the third column header
+  flextable::compose(i = 1, j = c(4,6), value = as_paragraph("pMCMC"), part = "header") %>% # Change the fourth column header
+  flextable::add_header_row(values = c("", "Acute (Intercept)", "Chronic (Slope)"), colwidths = c(2, 2, 2)) %>% # Add a header row
+  flextable::compose(i = c(2,3,5,6,8,9), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::compose(i = 1, j = 1, value = as_paragraph("Latency to move"), part = "body") %>% # Change the first row of the first column
+  flextable::compose(i = 4, j = 1, value = as_paragraph("Latency to shelter"), part = "body") %>% # Change the fourth row of the first column
+  flextable::compose(i = 7, j = 1, value = as_paragraph("Emergence"), part = "body") %>% # Change the seventh row of the first column
+  flextable::hline(i = c(3,6), part = "body") %>% # Add horizontal lines
+  flextable::vline(j = c(2,4), part = "all") %>% # Add vertical lines
+  align(align = "center", j = c(3:6), part = "body") %>%
+  align(align = "center", i = c(1,2), j = c(1:6), part = "header") %>% 
+autofit()
+#
+table_guich_behaviour
+```
+
+Contrasts were done by:  
+    - _Temperature_: β~Hot~ - β~Cold~  
+    - _CORT_: β~CORT~ - β~Control~  
+    - _Interaction_: (β~Control-Hot~ - β~CORT-Hot~) - (β~Control-Cold~ - β~CORT-Cold~)  
+
+
+
+```{r, results='asis', echo=FALSE}
+cat("\\newpage") 
+```
+
+_Table S3. Values of the slopes for the different treatments for each behavioural variable modelled for both species. The values are the posterior means and 95% credible intervals (CI). In bold, the values that are different from 0, tested by pMCMC < 0.05._
+
+**INSERT TABLE FOR SLOPES**
+
+
+```{r, results='asis', echo=FALSE}
+cat("\\newpage") 
+```
+
+_Table S4. Contrasts for mass modelled for both species. The contrasts are between the slopes of the different treatments. Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
+
+**INSERT TABLE FOR MASS**
+
+
+```{r, results='asis', echo=FALSE}
+cat("\\newpage")
+```
+
+```{r, clean_posteriors_tables}
 #| label: clean_posteriors
 source(here("R", "func.R"))
 #
@@ -179,102 +410,6 @@ deli_post <- dplyr::bind_rows(posterior_list$deli, .id = "variable")
 guich_post <- dplyr::bind_rows(posterior_list$guich, .id = "variable")
 ```
 
-
-
-
-
-
-```{r, plotsMass}
-#| label: plotsMass
-#| echo: false
-#| warning: false
- 
-# Plot delta Mass L. delicata
-plot_deli <- ggplot(deli_stressor_2, aes(x = food_ingested, y = rescaled_delta_mass, color=interaction(cort,temp))) +  
-  stat_smooth(method = "glm", formula = y ~ x, se = TRUE, linewidth=2, alpha = 0.1) +
-  scale_color_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
-    labels=c("CORT-Cold (n=12)", "Control-Cold (n=12)", "CORT-Hot (n=11)", "Control-Hot (n=12)")
-  ) +
-  labs(y = "Increase in mass (mg)", x = "Ingestion rate (n items)", color="Treatment") +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 18, family = "sans"),  
-    axis.text = element_text(size = 10, family = "sans"),  
-    legend.title = element_text(size = 14, family = "sans"), 
-    legend.text = element_text(size = 12, family = "sans")  
-  )
-print(plot_deli)
-ggsave("./output/figures/fig_deli_Mass.png", plot=plot_deli, width = 18, height = 9, units = "cm", dpi = 3000)
-# Plot delta Mass L. guichenoti
-plot_guich <- ggplot(guich_stressor_2, aes(x = food_ingested, y = rescaled_delta_mass, color=interaction(cort,temp))) +  
-  stat_smooth(method = "glm", formula = y ~ x, se = TRUE, linewidth=2, alpha = 0.1) +
-  scale_color_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
-    labels=c("CORT-Cold (n=10)", "Control-Cold (n=7)", "CORT-Hot (n=11)", "Control-Hot (n=10)")
-  ) +
-  labs(y = "Increase in mass (mg)", x = "Ingestion rate (n items)", color="Treatment") +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 18, family = "sans"),  
-    axis.text = element_text(size = 10, family = "sans"),  
-    legend.title = element_text(size = 14, family = "sans"), 
-    legend.text = element_text(size = 12, family = "sans")  
-  )
-print(plot_guich)
-ggsave("./output/figures/fig_guich_Mass.png", plot=plot_guich, width = 18, height = 9, units = "cm", dpi = 3000)
-```
-
- ```{r, plotsFrozenbehaviour}
-#| label: plotsFrozenbehaviour
-#| echo: false
-#| warning: false
-
-# Plot time frozen L. delicata
-plot_deli_BEH <- ggplot(deli_stressor, aes(x = Day, y = log(lat_to_move+1), fill=interaction(cort,temp))) +  
-  geom_boxplot(outlier.shape = NA) +
-  ylim(0, 10) +
-  scale_fill_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
-    labels=c("CORT-Cold (n=12)", "Control-Cold (n=12)", "CORT-Hot (n=11)", "Control-Hot (n=12)")
-  ) +
-  labs(y = "Time frozen (log-transformed)", x = "Day", fill="Treatment") +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 18, family = "sans"),  
-    axis.text = element_text(size = 12, family = "sans"),  
-    legend.title = element_text(size = 14, family = "sans"), 
-    legend.text = element_text(size = 12, family = "sans")  
-  )
-print(plot_deli_BEH)
-ggsave("./output/figures/fig_deli_BEH.png", plot=plot_deli_BEH, width = 15, height = 12, units = "cm", dpi = 3000)
-
-# Plot time frozen L. guichenoti
-plot_guich_BEH <- ggplot(guich_stressor, aes(x = Day, y = log(lat_to_move+1), fill=interaction(cort,temp))) +  
-  geom_boxplot(outlier.shape = NA) +
-  ylim(0, 8) +
-  scale_fill_manual(values = c("CORT.Cold"="black", "Control.Cold"="grey", "CORT.Hot"="orange2", "Control.Hot"="moccasin"),
-    labels=c("CORT-Cold (n=10)", "Control-Cold (n=7)", "CORT-Hot (n=11)", "Control-Hot (n=10)")
-  ) +
-  labs(y = "Time frozen (s)", x = "Day", fill="Treatment") +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 18, family = "sans"),  
-    axis.text = element_text(size = 12, family = "sans"),  
-    legend.title = element_text(size = 14, family = "sans"), 
-    legend.text = element_text(size = 12, family = "sans")  
-  )
-print(plot_guich_BEH)
-ggsave("./output/figures/fig_guich_BEH.png", plot=plot_guich_BEH, width = 15, height = 12, units = "cm", dpi = 3000)
-
-```
-
-
-
-## Discussion
-
-
-## References
-
-## Supplementary material
-
 _Table **S1**. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
 
 ```{r, tablesummary_deli}
@@ -292,8 +427,8 @@ table_summ_deli <- flextable(deli_post) %>%
   bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
   bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
-  flextable::compose(i = c(2:5,7:10,12:15,17:20), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
-  flextable::hline(i = c(5,10,15), part = "body") %>% # Add horizontal lines
+  flextable::compose(i = c(2:8,10:16,18:24,26:32), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::hline(i = c(8,16,24), part = "body") %>% # Add horizontal lines
   autofit()
 #
 table_summ_deli
@@ -320,10 +455,15 @@ table_summ_guich <- flextable(guich_post) %>%
   bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
   bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
-  flextable::compose(i = c(2:5,7:10,12:15,17:20), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
-  flextable::hline(i = c(5,10,15), part = "body") %>% # Add horizontal lines
+  flextable::compose(i = c(2:8,10:16,18:24,26:32), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::hline(i = c(8,16,24), part = "body") %>% # Add horizontal lines
   autofit()
 #
 table_summ_guich
 ```
+
+```{r, results='asis', echo=FALSE}
+cat("\\newpage")
+```
+
 

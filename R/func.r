@@ -168,51 +168,112 @@ tidy_post <- function(df) {
     )
   return(summary_df)
 }
-
-
-
 ####################
 ####################
 # Function to get estimates to make the contrasts between treatments
 #' @title post_values
 #' @param df To select the df
-#' @param fac To indicate if there are other parameters to take into account
-post_values <- function(df, fac){
+#' @param var To indicate the kind of variable to use (beh or mass)
+post_values <- function(df, var){
   df <- as.data.frame(df)
-  #Getting the estimated values per each treatment
-  if(fac == "none"){
-    Control_Cold <- df$b_Intercept
-    Control_Hot <- df$b_Intercept + df$b_tempHot
-    CORT_Cold <- df$b_Intercept + df$b_cortCORT
-    CORT_Hot <- df$b_Intercept + df$b_cortCORT + df$b_tempHot + df$`b_cortCORT:tempHot`
-  } else if (fac == "sex"){
-    # Males
-    Control_Cold_males <- base::sample(df$b_Intercept, size = 12000, replace = FALSE)
-    Control_Hot_males <- base::sample(df$b_Intercept + df$b_tempHot, size = 12000, replace = FALSE)
-    CORT_Cold_males <- base::sample(df$b_Intercept + df$b_cortCORT, size = 12000, replace = FALSE)
-    CORT_Hot_males <- base::sample(df$b_Intercept + df$b_cortCORT + df$b_tempHot +
-                                      df$`b_cortCORT:tempHot`, size = 12000, replace = FALSE)
-    # Females
-    Control_Cold_fem <- base::sample(df$b_Intercept + df$b_sexFemale, size = 12000, replace = FALSE)
-    Control_Hot_fem <- base::sample(df$b_Intercept + df$b_tempHot + df$b_sexFemale, size = 12000, replace = FALSE)
-    CORT_Cold_fem <- base::sample(df$b_Intercept + df$b_cortCORT + df$b_sexFemale, size = 12000,
-                                    replace = FALSE)
-    CORT_Hot_fem <- base::sample(df$b_Intercept + df$b_cortCORT + df$b_tempHot +
-                                    df$`b_cortCORT:tempHot` + df$b_sexFemale, size = 12000, replace = FALSE)
-    # Pool
-    CORT_Cold <- c(CORT_Cold_males, CORT_Cold_fem)
-    CORT_Hot <- c(CORT_Hot_males, CORT_Hot_fem)
-    Control_Cold <- c(Control_Cold_males, Control_Cold_fem)
-    Control_Hot <- c(Control_Hot_males, Control_Hot_fem)
+  if(var == "beh"){
+    int_Control_Cold <- df$b_Intercept
+    int_CORT_Cold <- df$b_Intercept + df$b_trtCORTMCold
+    int_Control_Hot <- df$b_Intercept + df$b_trtControlMHot
+    int_CORT_Hot <- df$b_Intercept + df$b_trtCORTMHot
+    slope_Control_Cold <- df$b_day
+    slope_CORT_Cold <- df$b_day + df$`b_day:trtCORTMCold`
+    slope_Control_Hot <- df$b_day + df$`b_day:trtControlMHot`
+    slope_CORT_Hot <- df$b_day + df$`b_day:trtCORTMHot`
+  } else if (var == "mass") {
+    int_Control_Cold <- df$b_Intercept
+    int_CORT_Cold <- df$b_Intercept + df$b_trtCORTMCold
+    int_Control_Hot <- df$b_Intercept + df$b_trtControlMHot
+    int_CORT_Hot <- df$b_Intercept + df$b_trtCORTMHot
+    slope_Control_Cold <- df$b_food_ingested
+    slope_CORT_Cold <- df$b_food_ingested + df$`b_food_ingested:trtCORTMCold`
+    slope_Control_Hot <- df$b_food_ingested + df$`b_food_ingested:trtControlMHot`
+    slope_CORT_Hot <- df$b_food_ingested + df$`b_food_ingested:trtCORTMHot`
   }
+  # Create a data frame with the estimates
   data_values <- data.frame(
-    CORT_Cold = CORT_Cold,
-    CORT_Hot = CORT_Hot,
-    Control_Cold = Control_Cold,
-    Control_Hot = Control_Hot
+    int_Control_Cold = int_Control_Cold,
+    int_CORT_Cold = int_CORT_Cold,
+    int_Control_Hot = int_Control_Hot,
+    int_CORT_Hot = int_CORT_Hot,
+    slope_Control_Cold = slope_Control_Cold,
+    slope_CORT_Cold = slope_CORT_Cold,
+    slope_Control_Hot = slope_Control_Hot,
+    slope_CORT_Hot = slope_CORT_Hot
   )
   return(data_values)
 }
+####################
+####################
+# Function to get estimates to make the contrasts between treatments
+#' @title contrasts_func
+#' @param sp To select the species ("guich" or "deli")
+#' @param res To select the response variable ("move", "shelter", "emergence", "mass")
+contrasts_func <- function(sp, res){
+  data_table <- data.frame()
+  df <- get(paste0(sp, "_", res, "_posteriors"))
+  # Intercept contrasts
+  Temperature_int <- format_dec(mean(c(df$int_CORT_Hot, df$int_Control_Hot)) 
+                                - mean(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
+
+  pMCMC_temp_int <- format_p(pmcmc(c(df$int_CORT_Hot, df$int_Control_Hot) 
+                                  - c(df$int_CORT_Cold, df$int_Control_Cold)), 3, equal = FALSE)
+  #
+  CORT_int <- format_dec(mean(c(df$int_Control_Hot, df$int_Control_Cold)) 
+                        - mean(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
+
+  pMCMC_cort_int <- format_p(pmcmc(c(df$int_Control_Hot, df$int_Control_Cold) 
+                                  - c(df$int_CORT_Hot, df$int_CORT_Cold)), 3, equal = FALSE)
+  #
+  Interaction_int <- format_dec((mean(df$int_Control_Hot) - mean(df$int_CORT_Hot)) 
+                              - (mean(df$int_Control_Cold) - mean(df$int_CORT_Cold)), 3)
+
+  pMCMC_int_int <- format_p(pmcmc((df$int_Control_Hot - df$int_CORT_Hot) 
+                              - (df$int_Control_Cold - df$int_CORT_Cold)), 3, equal = FALSE)
+  # Slope contrasts
+  Temperature_slope <- format_dec(mean(c(df$slope_CORT_Hot, df$slope_Control_Hot)) 
+                                - mean(c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3)
+
+  pMCMC_temp_slope <- format_p(pmcmc(c(df$slope_CORT_Hot, df$slope_Control_Hot) 
+                                    - c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3, equal = FALSE)
+  #
+  CORT_slope <- format_dec(mean(c(df$slope_Control_Hot, df$slope_Control_Cold)) 
+                          - mean(c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3)
+
+  pMCMC_cort_slope <- format_p(pmcmc(c(df$slope_Control_Hot, df$slope_Control_Cold) 
+                                    - c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3, equal = FALSE)
+  #
+  Interaction_slope <- format_dec((mean(df$slope_Control_Hot) - mean(df$slope_CORT_Hot)) 
+                                - (mean(df$slope_Control_Cold) - mean(df$slope_CORT_Cold)), 3)
+
+  pMCMC_int_slope <- format_p(pmcmc((df$slope_Control_Hot - df$slope_CORT_Hot) 
+                                  - (df$slope_Control_Cold - df$slope_CORT_Cold)), 3, equal = FALSE)
+  ##   
+  data_temp <- data.frame(#Intercepts
+                          mean_Temperature_int = as.numeric(Temperature_int),
+                          pMCMC_Temperature_int = pMCMC_temp_int,
+                          mean_Hormone_int = as.numeric(CORT_int),
+                          pMCMC_Hormone_int = pMCMC_cort_int,
+                          mean_Interaction_int = as.numeric(Interaction_int),
+                          pMCMC_Interaction_int = pMCMC_int_int,
+                          #Slopes
+                          mean_Temperature_slope = as.numeric(Temperature_slope),
+                          pMCMC_Temperature_slope = pMCMC_temp_slope,
+                          mean_Hormone_slope = as.numeric(CORT_slope),
+                          pMCMC_Hormone_slope = pMCMC_cort_slope,
+                          mean_Interaction_slope = as.numeric(Interaction_slope),
+                          pMCMC_Interaction_slope = pMCMC_int_slope)
+  data_table <- dplyr::bind_rows(data_table, data_temp)
+}
+
+
+
+
 ####################
 ####################
 # Function to create the plots for mit variables
