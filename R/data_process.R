@@ -8,15 +8,13 @@ source(here("R", "func.R"))
 # A) Cleaning the general_data.csv for all individuals
 clean_ind <- read.csv(here("data", "general_data.csv")) %>%
   mutate(lizard_id = as.character(lizard_id)) %>%
-  mutate(temp = gsub("[AB]_", "", trt),
-         cort = gsub("_[2][38]", "", trt))  %>%
-  mutate(temp = factor(temp,
-                       levels = c("23", "28"),
-                       labels = c("23" = "Cold", "28" = "Hot"))) %>%
-  mutate(cort = factor(cort,
-                       levels = c("A", "B"),
-                       labels = c("A" = "Control", "B" = "CORT"))) %>%
-  dplyr::select(-notes, -trt) %>%
+  mutate(trt = factor(trt,
+                        levels = c("A_23", "B_23", "A_28", "B_28"),
+                        labels = c("A_23" = "Control-Cold",
+                                  "B_23" = "CORT-Cold",
+                                  "A_28" = "Control-Hot",
+                                  "B_28" = "CORT-Hot"))) %>%
+  dplyr::select(-notes) %>%
 data.frame()
 
 ####################################
@@ -34,6 +32,7 @@ write.csv(mass_clean, here("./output/data_clean/mass_clean.csv"))
 # C) Merging behaviour.csv with clean individual data (clean_ind)
 behav <- read.csv(here("data", "behaviour.csv"))%>%
   mutate(lizard_id = as.character(lizard_id))%>%
+  mutate(day = day - 1) %>% # Adjust day to start from 0
 data.frame() #Read in behaviour data and transform lizard_id to character
 behav_clean <- merge(clean_ind, behav, by = "lizard_id", all = TRUE) 
 

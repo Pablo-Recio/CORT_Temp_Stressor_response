@@ -36,18 +36,23 @@ source(here("R", "data_process.R"))
 # List with the sample sizes from the main database.
 source(here("R", "func.R"))
 #
-hormone <- c("CORT", "Control")
-temperature <- c("Cold", "Hot")
+species <- c("delicata", "guichenoti")
+trt <- c("Control-Cold", "CORT-Cold", "Control-Hot", "CORT-Hot")
 #
-n_list <- list()
-#
-for(k in 1:length(hormone)){
-  for(l in 1:length(temperature)){
-    list_name <- paste0(hormone[k], "_", temperature[l])
-    n_list[[list_name]] <- sample(df = mass_clean, corti = hormone[k], therm = temperature[l])
-  }
+# Loop over species
+for (s in species) {
+  n_list <- list() 
+  
+  data_n <- mass_clean %>% 
+    filter(species == s)
+
+  for (k in trt) {
+    list_name <- paste0(k)
+    group_data <- data_n %>% filter(trt == k)
+    n_list[[list_name]] <- nrow(group_data)
+    }
+  assign(paste0("n_list_", s), n_list)
 }
-#
 ```
 
 ```{r, countclutches}
@@ -71,27 +76,35 @@ Both temperature and CORT influence the development of proactive-reactive person
 
 ### Subjects
 
-We used two species of skinks, the common garden skink (*Lampropholis guichenoti*) and the rainbow skink or delicate skink (*L. delicata*). These are oviparous, generalist, small (∼35--55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia ([@chapple_know_2011]). Both species have similar breeding periods, but reproductive output in *L. delicata* is one clutch of 1 to 6 eggs per season, while *L. guichenoti* lays 1-5 eggs per clutch, and usually two clutches per season ([@chapple_know_2011]; [@chapple_biology_2014]). **This difference in reproductive output through the breeding season may involve different degree of sensitivity to maternal effects and its interaction with other aspects of early environment.**
+We used two species of skinks, the delicate skink (_Lampropholis delicata_) and the common garden skink (_L. guichenoti_). These are oviparous, generalist, small (∼35--55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia ([@chapple_know_2011]). Both species have similar breeding periods, but reproductive output in *L. delicata* is one clutch of 1 to 6 eggs per season, while *L. guichenoti* lays 1-5 eggs per clutch, and usually two clutches per season ([@chapple_know_2011]; [@chapple_biology_2014]). **This difference in reproductive output through the breeding season may involve different degree of sensitivity to maternal effects and its interaction with other aspects of early environment.**
 
 ### Subjects treatments, collection, and housing
 
-_Breeding colony_: The skinks used in our experiments came from a breeding colony established in the lab since 2019. The colony is compound by a total total of 270 adults of _L. delicata_ and 180 adults of _L. guichenoti_ that are housed in big containers (41.5 L x 30.5 W x 21 H cm) with six lizards (2 males and 4 females) per enclosure. These enclosures are provided with non-stick matting, shelter, and several small water dishes. Lizards are given water daily, and fed approx. 40 mid-size crickets (_Acheta domestica_) per enclosure three days a week. Crickets are dusted with calcium weekly and multivitamin and calcium biweekly. Room temperatures are set to 22-24 ºC, but to ensure a temperature gradient we employ a heat chord and a heat lamp following a 12 h light:12 h dark cycle. Heat lamp and heat cord keep the warm side of enclosures at 32 ºC.
+*Breeding colony* - Lizards came from a breeding colony established in the laboratory since 2019. This colony consisted of 270 adults of _L. delicata_ and 180 adults of _L. guichenoti_ housed in plastic containers (41.5 L x 30.5 W x 21 H cm) with two males and four females per enclosure. Enclosures were provided with shelter, nonstick matting, and several small water dishes. The lizards were given water daily and were fed approx. 40 mid-size crickets (_Acheta domestica_) per enclosure three days a week. The crickets were dusted with calcium weekly and multivitamin and calcium biweekly. Room temperature was set to 22-24 ºC, but we also provided the enclosures with a heat chord and a heat lamp following a 12 h light:12 h dark cycle keeping warm side of enclosures at 34 ºC.
 
-_Egg collection_: Eggs were collected between mid-October 2022 to the end of February 2023. We placed in the commonal enclosure small boxes (12.5 L x 8.3 W x 5 H cm) with moist vermiculite inside so females had a place to lay the eggs. Three times a week, we checked these boxes for the presence of eggs. Once a clutch was found, we measured eggs' length and width with a digital caliper to the nearest 0.1 mm and mass with a (OHAUS, Model spx123) digital scale ± 0.001g error. To test the effect of prenatal CORT and temperature, we manipulated CORT levels in eggs and then incubated them at one of two temperature regimes (see .... below).Then, eggs were placed in individual cups (80 mL) with moist vermiculite (12 parts water to 4 parts vermiculite) covered with cling wrap to retain moisture, and were left in LATWIT 2X5D-R1160 incubators at two different temperatures ('Cold' or 'Hot') until hatchling.
+*Eggs collection and incubation* - Eggs were collected between mid-October 2022 to the end of February 2023. We placed a small box (12.5 L x 8.3 W x 5 H cm) with moist vermiculite in one side of the communal enclosures to provide females with a place to lay the eggs. These boxes were checked three days a week. After egg collection, we measured length and width with a digital caliper to the nearest 0.1 mm and weighted the eggs with a (OHAUS, Model spx123) digital scale with an accuracy of ± 0.001 g error. Then eggs were treated with CORT or vehicle (see CORT and temperature manipulation below) and were placed in individual cups (80 mL) with moist vermiculite (12 parts water to 4 parts vermiculite). The cups were covered with cling wrap to retain moisture and left in two incubators at two different temperatures (see CORT and temperature manipulation below) until hatching.
 
-_Hatchlings_: The incubators were checked three times a week for hatchlings. When hatchligns were found, we recorded Snout-vent length (SVL) and tail length (TL) with a rule to the nearest mm while mass was measured with a (OHAUS, Model spx123) digital scale ± 0.001g error. Then, hatchlings were enclosed in individual tubs (18.7L x 13.2W x 6.3H cm) provided with non-stick matting and a small water dish. During this period, they were sprayed water every day and received 3-6 small *A. domestica* crickets three times a week. All care otherwise follows similar protocols to adults (see above). 
+*Hatchlings* - Incubators were checked three times a week for hatchlings. Lizards were measured and weighed immediately after hatching. Snout-vent length (SVL) and tail length (TL) were measured to the nearest millimeter, and weight was recorded using a (OHAUS, Model spx123) digital scale with an accuracy of ± 0.001 g. Hatchlings were then placed in individual enclosures (18.7L x 13.2W x 6.3H cm) with nonstick matting and a small water dish.  All care otherwise follows similar protocols to adults (see above).  
+ 
+#### CORT and Temperature manipulation
 
+To test the interactive effects of CORT and incubation temperature, we manipulated CORT concentrations in eggs and incubated them at cold (23 ± 3 ºC) or hot (28 ± 3 ºC) conditions (see @fig-Methods A). We used a partial split clutch design where eggs from a given clutch were distributed equally across the four treatments when clutch sizes were larger than four and randomly across treatments when less than four. Eggs were topically supplied with either 5 µL of crystalline corticosterone (Sigma, Cat. No. C2505) dissolved in 100% ethanol at a final 10 pg CORT/mL concentration (CORT treatment), or an equal volume of 100% Ethanol (Control treatment). We selected doses based on our previous study where CORT treatment increased mean yolk CORT levels by approximately 2 standard deviations above the mean natural concentration [@crino2024eggs]. Mean incubation temperatures represent the lower and upper limits of the natural range of nest temperatures in _L. delicata_ [mean nesting temperatures = 27.4 ºC; @cheetham2011embryonic]. Nonetheless, the higher temperature treatment (28 ºC) was above the thermal optima estimated for _L. delicata_ [T~opt~ = 25 ºC; @pettersen2023maternal] and reached more stressful temperatures daily as fluctuations occurred (i.e., 31 ºC).    
 
-### Experimental arena and design
-The experiments were done:
-The sample size was:
-The experimental arena was:
-The experimental design was:
-The lizards used in this experiment were subjected before to a personality test and two types of learning tasks. These experiments are not considered stresful, and, as such, we do not expect them to affect the results of the present study. However, we left three weeks between those experiments and the present one to control for possible effects of the previous tests.
-After 3 months, we measured again SVL, TL, and mass of the juveniles and then they were moved to the experimental arena (see below).
-The day before starting the experiment, lizards were measured again, and then moved to a new enclosure the same size and conditions before, but in the room where the CCTV system is held () experimental arena (Fig. 1c) for acclimatation. The arenas were individual medium size (41 L x 29.7 W x 22 H cm) plastic containers with a shelter (9 L x 6 W x 1.5 H cm) on one of the extremes and a water dish on the other. These new enclosures were placed in two rooms in 7 different racks associated to 7 different CCTV systems (device model DVR-HP210475) that allowed us to record their behaviour during the experiment (see details below). The number of lizards per species and treatment in each rack was counterbalanced to control for any effect of the room or the position of the lizard in the rack. During acclimatation and all the experiment, lizards were fed with only one cricket per day dusted with calcium and multivitamin (see protocol below), and water was supplied *ad libitum.* We provided a temperature gradient by means of a heat cord and heat lamps in a 12 h light: 12 h dark cycle. The rooms temperature was set to between 22-24 Celsius. 
+#### Response to acute and long-term stressors     
 
-FIG METHODS
+Three weeks before the start of the behavioural tests, we adapted the lizard enclosures to the experimental setup. The enclosures used for the stress response trials were the same as those where the lizards had previously been housed, but modified to include only a single shelter (9 × 6 × 1.5 cm) placed at one end and a water dish in the centre. All other shelter materials and the matting substrate were removed to allow continuous monitoring. The enclosures were then relocated to the experimental rooms, each containing six racks equipped with their own CCTV system (model DVR-HP210475). The number of lizards per treatment was counterbalanced across racks to control for potential effects of room or rack position. In these three weeks, lizards were fed one calcium- and multivitamin-dusted cricket per day, and water was provided _ad libitum_. A temperature gradient was maintained using heat cords and heat lamps on a 12:12 h light–dark cycle, with room temperatures kept between 22–24 °C.          
+
+To test the effects of prenatal conditions on the response to a stressor, we simulated a predatory attack once daily over multiple days [**insert relevant reference here**]. _The simulated attack involved chasing the lizard for 60 seconds using a soft paintbrush, after which its behaviour was recorded for one hour._ **DETAILS OF EACH TRIAL**. All videos were later analysed by **MATHEO**, who was blinded to the lizards’ treatment groups. From each video, we recorded three behavioural variables: i) latency to move — the time spent immobile (frozen) immediately after the simulated attack; ii) latency to shelter — the time it took the lizard to hide under the shelter after resuming movement; and iii) emergence — whether the lizard emerged from the shelter during the 40 minutes following hiding (1 = emerged, 0 = did not emerge). A lizard was considered to have resumed movement if it moved continuously for at least five seconds, and to be under shelter if no limbs were visible. This procedure was repeated daily for eight consecutive days to assess the effects of mid-term exposure to a stressor. All trials were conducted between 1000–1400 h, when lizards are most active.
+
+Lizard mass was measured to the nearest 0.001 g using a digital scale (OHAUS, model SPX123) both before and after the completion of the behavioural tests. Change in mass was calculated as the difference between final and initial mass and then rescaled by subtracting the smallest mass change observed in the dataset, to avoid negative values. This rescaled change in mass was used as a proxy for the physiological cost of repeated stress exposure. To control for hunger levels and potential effects of food ingestion on mass change, we also recorded the number of crickets ingested by each lizard during the acclimation period. To do so, we placed a known number of crickets in each enclosure after each of the trials, and counted the number of crickets remaining after 24 hours. The total number of crickets ingested during the eight days of tests was then used as a covariate in the analyses of mass change. The experimental design is summarised in @fig-Methods B.          
+  
+```{r, fig-Methods}
+#| label: fig-Methods
+#| fig.cap: ""
+
+knitr::include_graphics("./Others/Methods.png")
+
+```
 
 ### Statistical analyses
 
@@ -101,7 +114,7 @@ FIG METHODS
 #| label: models_behaviour
 source(here("R", "func.R"))
 #
-refit <- FALSE
+refit <- TRUE
 #
 # A) L. delicata
 deli_beh <- behav_clean %>% 
@@ -129,7 +142,7 @@ guich_emergence <- fit_m(df = guich_beh, fam = bernoulli(link = "logit"), type =
 #| label: models_mass
 source(here("R", "func.R"))
 #
-refit <- FALSE
+refit <- TRUE
 #
 # A) L. delicata
 deli_mass <- mass_clean %>%
@@ -279,8 +292,8 @@ table_summ_deli <- flextable(deli_post) %>%
   bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
   bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
-  flextable::compose(i = c(2:10,12:20,22:30,32:40), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
-  flextable::hline(i = c(10,20,30), part = "body") %>% # Add horizontal lines
+  flextable::compose(i = c(2:5,7:10,12:15,17:20), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::hline(i = c(5,10,15), part = "body") %>% # Add horizontal lines
   autofit()
 #
 table_summ_deli
@@ -307,8 +320,8 @@ table_summ_guich <- flextable(guich_post) %>%
   bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
   bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
-  flextable::compose(i = c(2:10,12:20,22:30,32:40), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
-  flextable::hline(i = c(10,20,30), part = "body") %>% # Add horizontal lines
+  flextable::compose(i = c(2:5,7:10,12:15,17:20), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::hline(i = c(5,10,15), part = "body") %>% # Add horizontal lines
   autofit()
 #
 table_summ_guich
