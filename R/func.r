@@ -270,7 +270,68 @@ contrasts_func <- function(sp, res){
                           pMCMC_Interaction_slope = pMCMC_int_slope)
   data_table <- dplyr::bind_rows(data_table, data_temp)
 }
+####################
+####################
+# Function to get estimates to make the contrasts between treatments
+#' @title slopes_func
+#' @param sp To select the species ("guich" or "deli")
+#' @param res To select the response variable ("move", "shelter", "emergence", "mass")
+slopes_func <- function(sp, res){
+  data_table <- data.frame()
+  df <- get(paste0(sp, "_", res, "_posteriors"))
+  # Intercept contrasts
+  Temperature_int <- format_dec(mean(c(df$int_CORT_Hot, df$int_Control_Hot)) 
+                                - mean(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
 
+  pMCMC_temp_int <- format_p(pmcmc(c(df$int_CORT_Hot, df$int_Control_Hot) 
+                                  - c(df$int_CORT_Cold, df$int_Control_Cold)), 3, equal = FALSE)
+  #
+  CORT_int <- format_dec(mean(c(df$int_Control_Hot, df$int_Control_Cold)) 
+                        - mean(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
+
+  pMCMC_cort_int <- format_p(pmcmc(c(df$int_Control_Hot, df$int_Control_Cold) 
+                                  - c(df$int_CORT_Hot, df$int_CORT_Cold)), 3, equal = FALSE)
+  #
+  Interaction_int <- format_dec((mean(df$int_Control_Hot) - mean(df$int_CORT_Hot)) 
+                              - (mean(df$int_Control_Cold) - mean(df$int_CORT_Cold)), 3)
+
+  pMCMC_int_int <- format_p(pmcmc((df$int_Control_Hot - df$int_CORT_Hot) 
+                              - (df$int_Control_Cold - df$int_CORT_Cold)), 3, equal = FALSE)
+  # Slope contrasts
+  Temperature_slope <- format_dec(mean(c(df$slope_CORT_Hot, df$slope_Control_Hot)) 
+                                - mean(c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3)
+
+  pMCMC_temp_slope <- format_p(pmcmc(c(df$slope_CORT_Hot, df$slope_Control_Hot) 
+                                    - c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3, equal = FALSE)
+  #
+  CORT_slope <- format_dec(mean(c(df$slope_Control_Hot, df$slope_Control_Cold)) 
+                          - mean(c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3)
+
+  pMCMC_cort_slope <- format_p(pmcmc(c(df$slope_Control_Hot, df$slope_Control_Cold) 
+                                    - c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3, equal = FALSE)
+  #
+  Interaction_slope <- format_dec((mean(df$slope_Control_Hot) - mean(df$slope_CORT_Hot)) 
+                                - (mean(df$slope_Control_Cold) - mean(df$slope_CORT_Cold)), 3)
+
+  pMCMC_int_slope <- format_p(pmcmc((df$slope_Control_Hot - df$slope_CORT_Hot) 
+                                  - (df$slope_Control_Cold - df$slope_CORT_Cold)), 3, equal = FALSE)
+  ##   
+  data_temp <- data.frame(#Intercepts
+                          mean_Temperature_int = as.numeric(Temperature_int),
+                          pMCMC_Temperature_int = pMCMC_temp_int,
+                          mean_Hormone_int = as.numeric(CORT_int),
+                          pMCMC_Hormone_int = pMCMC_cort_int,
+                          mean_Interaction_int = as.numeric(Interaction_int),
+                          pMCMC_Interaction_int = pMCMC_int_int,
+                          #Slopes
+                          mean_Temperature_slope = as.numeric(Temperature_slope),
+                          pMCMC_Temperature_slope = pMCMC_temp_slope,
+                          mean_Hormone_slope = as.numeric(CORT_slope),
+                          pMCMC_Hormone_slope = pMCMC_cort_slope,
+                          mean_Interaction_slope = as.numeric(Interaction_slope),
+                          pMCMC_Interaction_slope = pMCMC_int_slope)
+  data_table <- dplyr::bind_rows(data_table, data_temp)
+}
 
 
 

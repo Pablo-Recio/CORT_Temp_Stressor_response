@@ -73,9 +73,21 @@ clutches_guich <- mass_clean %>%
 
 ## Introduction
 
-Hypothesis PRESENTATION:
+Animals facing stressors/disruptors and examples.  
+Mechanisms involved in the response to stressors/disruptors: endocrinology.
+Consequences of stressors/disruptors on animals: short-term and long-term.   
 
-Both temperature and CORT influence the development of proactive-reactive personality types, associated at the same time with different HPA axis reactivity. In this sense, both increases in prenatal CORT and lower temperatures are related to more reactive individuals, which are more sensitive to stressors. As such, I predict individuals incubated at low temperature and/or treated with CORT to be more reactive, and thus to spent more time frozen after chasing them and not coming out from the shelter. At the same time I expect these individuals to have increased phisiological costs (mass lost) when submitted to a 'chronic' stressor.
+Predation as a stressor/disruptor.     
+
+Can early environment influence the response to stressors/disruptors: physiological AND behavioural effects of GC exposure. Effects on antipredatory behaviour.     
+
+Can early environment influence the response to stressors/disruptors: other aspects. Why is temperature important? How is related to antipredatory behaviour?  
+
+
+
+Hypothesis PRESENTATION:   
+
+Both temperature and CORT influence the development of proactive-reactive personality types, associated at the same time with different HPA axis reactivity. In this sense, both increases in prenatal CORT and lower temperatures are related to more reactive individuals [**REFs**], which are more sensitive to stressors. As such, I predict individuals incubated at low temperature and/or treated with CORT to be more reactive, and thus to spent more time frozen after chasing them and not coming out from the shelter. At the same time I expect these individuals to have increased phisiological costs (mass lost) when submitted to a 'chronic' stressor.
 
 
 ## Methods
@@ -211,10 +223,10 @@ guich_mass_contrasts <- contrasts_func(sp = "guich", res = "mass")
 
 #### Do prenatal conditions affect the behavioural response to an acute stressor?
 
-_Lampropholis delicata_: Incubation at cold temperatures decreased the latency to move after a simulated attack on the first day (Intercept (denoted hereafter as I)~Hot~ - I ~Cold~ = `r deli_move_contrasts$mean_Temperature_int`; pMCMC `r deli_move_contrasts$pMCMC_Temperature_int`), while neither CORT or the interaction have any effect on latency to move (see Table S1 in _Supplementary Material_). We did not find any effects of prenatal temperature, CORT or their interaction on latency to shelter or emergence probability after an acute stressor (see Table S1 in _Supplementary Material_).
+_Lampropholis delicata_: Incubation at cold temperatures decreased the latency to move after a simulated attack on the first day (Intercept (denoted hereafter as I)~Hot~ - I ~Cold~ = `r deli_move_contrasts$mean_Temperature_int`; pMCMC `r deli_move_contrasts$pMCMC_Temperature_int`), while neither CORT or the interaction have any effect on latency to shelter or emergence (see @fig-deli and Table S1 in _Supplementary Material_). We did not find any effects of prenatal temperature, CORT or their interaction on latency to shelter or emergence probability after an acute stressor (see @fig-deli and Table S1 in _Supplementary Material_).    
 
 
-_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had any effect on the behavioural response to an acute stressor on _L. guichenoti_ (see Table S2 in _Supplementary Material_).
+_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had any effect on the behavioural response to an acute stressor on _L. guichenoti_ (see @fig-guich and Table S2 in _Supplementary Material_).        
 
 
 ```{r, fig-results_beh_deli}
@@ -244,6 +256,13 @@ _Lampropholis guichenoti_:
 
 ```{r, fig-results_mass}
 ```
+
+#### Do both species differ in their behavioural response to an stressor?   
+
+- Acute stressor: differences between intercepts (put everything together or compare between incubation conditions?)   
+
+- Chronic stressor: differences between slopes   
+
 
 ## Discussion
 
