@@ -1,6 +1,5 @@
 ---
 title: "Effects of prenatal CORT and temperature on the response to a stressor"
-format:
 docx: 
 bibliography: "./bib/refs.bib"
 csl: "./bib/animal-behaviour.csl"
@@ -12,7 +11,7 @@ execute:
   warning: false
 link-citations: true
 crossref:  
-  fig-title: Fig    # (default is "Figure")
+  fig-title: Fig.    # (default is "Figure")
   title-delim: —     # (default is ":")
   fig-prefix: Fig.   # (default is "Figure")
   tbl-prefix: Table  # (default is "Table")
@@ -223,14 +222,70 @@ guich_mass_contrasts <- contrasts_func(sp = "guich", res = "mass")
 
 #### Do prenatal conditions affect the behavioural response to an acute stressor?
 
-_Lampropholis delicata_: Incubation at cold temperatures decreased the latency to move after a simulated attack on the first day (Intercept (denoted hereafter as I)~Hot~ - I ~Cold~ = `r deli_move_contrasts$mean_Temperature_int`; pMCMC `r deli_move_contrasts$pMCMC_Temperature_int`), while neither CORT or the interaction have any effect on latency to shelter or emergence (see @fig-deli and Table S1 in _Supplementary Material_). We did not find any effects of prenatal temperature, CORT or their interaction on latency to shelter or emergence probability after an acute stressor (see @fig-deli and Table S1 in _Supplementary Material_).    
+_Lampropholis delicata_: Incubation at cold temperatures decreased the latency to move after a simulated attack on the first day (Intercept (denoted hereafter as I)~Hot~ - I ~Cold~ = `r deli_move_contrasts$mean_Temperature_int`; pMCMC `r deli_move_contrasts$pMCMC_Temperature_int`), while neither CORT or the interaction have any effect on latency to shelter or emergence (see @fig-results_beh_deli and Table S1 in _Supplementary Material_). We did not find any effects of prenatal temperature, CORT or their interaction on latency to shelter or emergence probability after an acute stressor (see @fig-results_beh_deli and Table S1 in _Supplementary Material_).    
 
 
-_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had any effect on the behavioural response to an acute stressor on _L. guichenoti_ (see @fig-guich and Table S2 in _Supplementary Material_).        
+_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had any effect on the behavioural response to an acute stressor on _L. guichenoti_ (see @fig-results_beh_guich and Table S2 in _Supplementary Material_).        
 
 
 ```{r, fig-results_beh_deli}
+#| label: fig-results_beh_deli
+#| fig.cap: "Behavioural response of Lampropholis delicata to an stressor." 
 
+#### Panels A and D show the predicted probability of choosing the correct ramp in the first trial (Decision first trial). In panels B and E, the distribution of the estimates of slopes per each treatment. In all A, B, D, and E the x-axis represents the slope estimate, and in the y-axis are the density of the estimates. The different colors indicate the different treatments. Points and bars represent the mean and standard deviation of the mean of the estimates, respectively. Dashed lines indicate value 0.33 (the probability of choosing correctly by chance) in panels A, D, and 0 in panels B, E. Asterisks indicate significant results (p~mcmc~ < 0.05). Panels C and F show the predicted probability of choosing the correct ramp first over trials. The lines represent the mean predicted probability of choosing the correct ramp for each trial, and the shaded areas indicate the standard deviation of the mean; both were obtained using the slope and intercept estimates from the posterior distributions. The different colors indicate the different treatments.
+source(here("R", "func.R"))
+# First step, create the dfs for all variables
+## ACUTE STRESSORS
+deli_move_acute <- plotting(sp = "deli", res = "move", type = "int") 
+deli_move_chronic <- plotting(sp = "deli", res = "move", type = "slop") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")
+deli_move_trials <- plotting(sp = "deli", res = "move", type = "trials")
+#
+deli_shelter_acute <- plotting(sp = "deli", res = "shelter", type = "int")
+deli_shelter_chronic <- plotting(sp = "deli", res = "shelter", type = "slop") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")
+deli_shelter_trials <- plotting(sp = "deli", res = "shelter", type = "trials")
+#
+deli_emergence_acute <- plotting(sp = "deli", res = "emergence", type = "int")
+deli_emergence_chronic <- plotting(sp = "deli", res = "emergence", type = "slop") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")
+deli_emergence_trials <- plotting(sp = "deli", res = "emergence", type = "trials")
+#
+# Getting the legend
+legend_plot <- plotting(sp = "deli", res = "move", type = "int") + 
+  theme(legend.position = "bottom", legend.title = element_blank())
+gtable <- ggplotGrob(legend_plot)
+legend <- gtable$grobs[[which(sapply(gtable$grobs, function(x) x$name) == "guide-box")]]
+#
+# Merge the plots
+deli_beh <- plot_grid(deli_move_acute, deli_move_chronic, deli_move_trials,
+                      deli_shelter_acute, deli_shelter_chronic, deli_shelter_trials,
+                      deli_emergence_acute, deli_emergence_chronic, deli_emergence_trials,
+                      ncol = 3, nrow = 3,
+                      rel_widths = c(0.75, 0.75, 1))
+#
+fig_deli_beh <- ggdraw() +
+  # Make background white
+  theme(plot.background = element_rect(fill = "white", color = NA)) +
+  # Insert legend 
+  draw_grob(legend, x = 0.49, y = 0.015, width = 0.01, height = 0.01) +
+  # Add the final plot but with reduced size for the legend and "title"
+  draw_plot(deli_beh, x = 0, y = 0.04, width = 1, height = 0.91) +
+  # Insert title for each plot
+  annotate("text", x = 0.02, y = 0.948, label = "A", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.318, y = 0.948, label = "B", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.615, y = 0.948, label = "C", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.02, y = 0.645, label = "D", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.318, y = 0.645, label = "E", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.615, y = 0.645, label = "F", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.02, y = 0.341, label = "G", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.318, y = 0.341, label = "H", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.615, y = 0.341, label = "I", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  # Insert name species
+  annotate("text", x = 0.58, y = 0.99, label = "Lampropholis delicata", hjust = 1, vjust = 1, size = 6, fontface = "italic")
+#
+ggsave("./output/figures/main/fig_deli_beh.png", plot=fig_deli_beh, width = 21, height = 25, units = "cm", dpi = 600)
+knitr::include_graphics("./output/figures/main/fig_deli_beh.png")
 ```
 
 
@@ -241,8 +296,63 @@ _Lampropholis delicata_: **HOW WERE THE SLOPES OVER TIME??**. We did not find an
 
 _Lampropholis guichenoti_: **HOW WERE THE SLOPES OVER TIME??**. There were no significant differences in the behavioural response of _L. guichenoti_ to the repeated exposure to an stressor (see Table S2 in _Supplementary Material_).
 
-
 ```{r, fig-results_beh_guich}
+#| label: fig-results_beh_guich
+#| fig.cap: "Behavioural response of Lampropholis guichenoti to an stressor." 
+#
+source(here("R", "func.R"))
+# First step, create the dfs for all variables
+## ACUTE STRESSORS
+guich_move_acute <- plotting(sp = "guich", res = "move", type = "int") 
+guich_move_chronic <- plotting(sp = "guich", res = "move", type = "slop") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")
+guich_move_trials <- plotting(sp = "guich", res = "move", type = "trials")
+#
+guich_shelter_acute <- plotting(sp = "guich", res = "shelter", type = "int")
+guich_shelter_chronic <- plotting(sp = "guich", res = "shelter", type = "slop") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")
+guich_shelter_trials <- plotting(sp = "guich", res = "shelter", type = "trials")
+#
+guich_emergence_acute <- plotting(sp = "guich", res = "emergence", type = "int")
+guich_emergence_chronic <- plotting(sp = "guich", res = "emergence", type = "slop") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")
+guich_emergence_trials <- plotting(sp = "guich", res = "emergence", type = "trials")
+#
+# Getting the legend
+legend_plot <- plotting(sp = "guich", res = "move", type = "int") + 
+  theme(legend.position = "bottom", legend.title = element_blank())
+gtable <- ggplotGrob(legend_plot)
+legend <- gtable$grobs[[which(sapply(gtable$grobs, function(x) x$name) == "guide-box")]]
+#
+# Merge the plots
+guich_beh <- plot_grid(guich_move_acute, guich_move_chronic, guich_move_trials,
+                      guich_shelter_acute, guich_shelter_chronic, guich_shelter_trials,
+                      guich_emergence_acute, guich_emergence_chronic, guich_emergence_trials,
+                      ncol = 3, nrow = 3,
+                      rel_widths = c(0.75, 0.75, 1))
+#
+fig_guich_beh <- ggdraw() +
+  # Make background white
+  theme(plot.background = element_rect(fill = "white", color = NA)) +
+  # Insert legend 
+  draw_grob(legend, x = 0.49, y = 0.015, width = 0.01, height = 0.01) +
+  # Add the final plot but with reduced size for the legend and "title"
+  draw_plot(guich_beh, x = 0, y = 0.04, width = 1, height = 0.91) +
+  # Insert title for each plot
+  annotate("text", x = 0.02, y = 0.948, label = "A", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.318, y = 0.948, label = "B", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.615, y = 0.948, label = "C", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.02, y = 0.645, label = "D", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.318, y = 0.645, label = "E", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.615, y = 0.645, label = "F", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.02, y = 0.341, label = "G", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.318, y = 0.341, label = "H", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.615, y = 0.341, label = "I", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  # Insert name species
+  annotate("text", x = 0.58, y = 0.99, label = "Lampropholis guichenoti", hjust = 1, vjust = 1, size = 6, fontface = "italic")
+#
+ggsave("./output/figures/main/fig_guich_beh.png", plot=fig_guich_beh, width = 21, height = 25, units = "cm", dpi = 600)
+knitr::include_graphics("./output/figures/main/fig_guich_beh.png")
 ```
 
 #### Do prenatal conditions influence the costs of repeated stress exposure?
@@ -255,6 +365,56 @@ _Lampropholis guichenoti_:
 
 
 ```{r, fig-results_mass}
+#| label: fig-results_mass
+#| fig.cap: "Change in mass of Lampropholis delicata and Lampropholis guichenoti after eight days of repeated stress exposure." 
+#
+#
+source(here("R", "func.R"))
+#
+## L delicata
+deli_mass_plot <- plotting(sp = "deli", res = "mass", type = "int") +
+  theme(legend.position = "none",
+        legend.title = element_blank())
+# Getting the legend
+legend_plot_deli <- plotting(sp = "deli", res = "mass", type = "int") + 
+  theme(legend.position = "right", legend.title = element_blank())
+gtable_deli <- ggplotGrob(legend_plot_deli)
+legend_deli <- gtable_deli$grobs[[which(sapply(gtable_deli$grobs, function(x) x$name) == "guide-box")]]
+#
+## L guichenoti
+guich_mass_plot <- plotting(sp = "guich", res = "mass", type = "int") +
+  theme(legend.position = "none",
+        legend.title = element_blank())
+# Getting the legend
+legend_plot_guich <- plotting(sp = "guich", res = "mass", type = "int") + 
+  theme(legend.position = "right", legend.title = element_blank())
+gtable_guich <- ggplotGrob(legend_plot_guich)
+legend_guich <- gtable_guich$grobs[[which(sapply(gtable_guich$grobs, function(x) x$name) == "guide-box")]]
+#
+mass_grid <- plot_grid(deli_mass_plot, NULL, guich_mass_plot, NULL,
+                       ncol = 4, nrow = 1,
+                       rel_widths = c(0.5, 0.5, 0.5, 0.45))
+#
+fig_mass <- ggdraw() +
+  # Make background white
+  theme(plot.background = element_rect(fill = "white", color = NA)) +
+  # Add the final plot but with reduced size for the legend and "title"
+  draw_plot(mass_grid, x = 0, y = 0, width = 1, height = 0.92) +
+  # Insert species name
+  annotate("text", x = 0.36, y = 0.99, label = "Lampropholis delicata", hjust = 1, vjust = 1, size = 5, fontface = "italic") +
+  annotate("text", x = 0.9, y = 0.99, label = "Lampropholis guichenoti", hjust = 1, vjust = 1, size = 5, fontface = "italic") +
+  # Insert title for each plot
+  annotate("text", x = 0.023, y = 0.91, label = "A", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  annotate("text", x = 0.535, y = 0.91, label = "B", hjust = 1, vjust = 1, size = 6, fontface = "bold") +
+  # Insert picture species
+  draw_image(here("./Others/Deli.png"), x = 0.271, y = 0.65, width = 0.22, height = 0.22) +
+  draw_image(here("./Others/Guich.png"), x = 0.78, y = 0.65, width = 0.22, height = 0.22) +
+  # Insert legends
+  draw_grob(legend_deli, x = 0.375, y = 0.275, width = 0.01, height = 0.01) +
+  draw_grob(legend_guich, x = 0.88, y = 0.275, width = 0.01, height = 0.01)
+#
+ggsave("./output/figures/main/fig_mass.png", plot=fig_mass, width = 21, height = 8, units = "cm", dpi = 600)
+knitr::include_graphics("./output/figures/main/fig_mass.png")
 ```
 
 #### Do both species differ in their behavioural response to an stressor?   
@@ -409,7 +569,7 @@ cat("\\newpage")
 ```
 
 ```{r, clean_posteriors_tables}
-#| label: clean_posteriors
+#| label: clean_posteriors_tables
 source(here("R", "func.R"))
 #
 variables <- c("move", "shelter", "emergence", "mass")
@@ -429,7 +589,7 @@ deli_post <- dplyr::bind_rows(posterior_list$deli, .id = "variable")
 guich_post <- dplyr::bind_rows(posterior_list$guich, .id = "variable")
 ```
 
-_Table **S1**. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
+_Table S5. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
 
 ```{r, tablesummary_deli}
 #| label: tablesummary_deli
@@ -446,7 +606,7 @@ table_summ_deli <- flextable(deli_post) %>%
   bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
   bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
-  flextable::compose(i = c(2:8,10:16,18:24,26:32), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::compose(i = c(2:8,10:16,18:24,26:29), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
   flextable::hline(i = c(8,16,24), part = "body") %>% # Add horizontal lines
   autofit()
 #
@@ -457,7 +617,7 @@ table_summ_deli
 cat("\\newpage")
 ```
 
-_Table **S1**. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
+_Table S6. Estimates of each predictor for each variable modelled for L. delicata.  Lower and upper CI, and pMCMC values test the hypothesis that the estimate is different from 0. In bold, the values that are significant at pMCMC < 0.05._
 
 ```{r, tablesummary_guich}
 #| label: tablesummary_guich
@@ -474,7 +634,7 @@ table_summ_guich <- flextable(guich_post) %>%
   bold(~`pMCMC` < 0.05, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor"),
        bold = TRUE) %>%  # Bold when PMCMC is "<0.05"
   bold(~`pMCMC` <0.001, j = c("pMCMC", "CI_upper", "CI_lower", "Mean", "Predictor")) %>%  # Bold when PMCMC is "<0.001"
-  flextable::compose(i = c(2:8,10:16,18:24,26:32), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
+  flextable::compose(i = c(2:8,10:16,18:24,26:29), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
   flextable::hline(i = c(8,16,24), part = "body") %>% # Add horizontal lines
   autofit()
 #
