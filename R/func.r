@@ -1,6 +1,7 @@
 #################### 
 ####################
-pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest, broom, tidybayes, ggh4x)
+pacman::p_load(tidyverse, flextable, emmeans, DHARMa, brms, here, ggplot2, lme4, zoo, lmerTest,
+broom, tidybayes, ggh4x, HDInterval)
 #
 ####################
 ####################
@@ -160,10 +161,9 @@ tidy_post <- function(df) {
     pivot_longer(everything(), names_to = "Predictor", values_to = "Estimate") %>%
     group_by(Predictor) %>%
     summarise(
-      Mean = format_dec(mean(Estimate), 3),
-      CI_lower = format_dec(quantile(Estimate, 0.05, na.rm = TRUE), 3),
-      CI_upper = format_dec(quantile(Estimate, 0.95, na.rm = TRUE), 3),
-      pMCMC = format_dec(pmcmc(Estimate, null = 0, twotail = TRUE), 3),
+      Median = format_dec(median(Estimate), 3),
+      low_lim = format_dec(hdi(Estimate, credMass = 0.95)[1], 3),
+      up_lim = format_dec(hdi(Estimate, credMass = 0.95)[2], 3),
       .groups = "drop"
     ) %>%
   data.frame()
@@ -222,84 +222,112 @@ contrasts_func <- function(sp, res){
   df <- get(paste0(sp, "_", res, "_posteriors"))
   if(res == "mass"){
     # Contrasts
-    Temperature_int <- format_dec(mean(c(df$int_CORT_Hot, df$int_Control_Hot)) 
-                                  - mean(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
+    Temperature_int <- format_dec(median(c(df$int_CORT_Hot, df$int_Control_Hot)) 
+                                  - median(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
 
-    pMCMC_temp_int <- format_p(pmcmc(c(df$int_CORT_Hot, df$int_Control_Hot) 
-                                    - c(df$int_CORT_Cold, df$int_Control_Cold)), 3, equal = FALSE)
+    lowlim_temp_int <- format_dec(hdi(c(df$int_CORT_Hot, df$int_Control_Hot) 
+                                    - c(df$int_CORT_Cold, df$int_Control_Cold), credMass = 0.95)[1], 3)
+    uplim_temp_int <- format_dec(hdi(c(df$int_CORT_Hot, df$int_Control_Hot) 
+                                    - c(df$int_CORT_Cold, df$int_Control_Cold), credMass = 0.95)[2], 3)
     #
-    CORT_int <- format_dec(mean(c(df$int_Control_Hot, df$int_Control_Cold)) 
-                          - mean(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
+    CORT_int <- format_dec(median(c(df$int_Control_Hot, df$int_Control_Cold)) 
+                          - median(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
 
-    pMCMC_cort_int <- format_p(pmcmc(c(df$int_Control_Hot, df$int_Control_Cold) 
-                                    - c(df$int_CORT_Hot, df$int_CORT_Cold)), 3, equal = FALSE)
+    lowlim_cort_int <- format_dec(hdi(c(df$int_Control_Hot, df$int_Control_Cold) 
+                                    - c(df$int_CORT_Hot, df$int_CORT_Cold), credMass = 0.95)[1], 3)
+    uplim_cort_int <- format_dec(hdi(c(df$int_Control_Hot, df$int_Control_Cold) 
+                                    - c(df$int_CORT_Hot, df$int_CORT_Cold), credMass = 0.95)[2], 3)
     #
-    Interaction_int <- format_dec((mean(df$int_Control_Hot) - mean(df$int_CORT_Hot)) 
-                                - (mean(df$int_Control_Cold) - mean(df$int_CORT_Cold)), 3)
+    Interaction_int <- format_dec((median(df$int_Control_Hot) - median(df$int_CORT_Hot)) 
+                                - (median(df$int_Control_Cold) - median(df$int_CORT_Cold)), 3)
 
-    pMCMC_int_int <- format_p(pmcmc((df$int_Control_Hot - df$int_CORT_Hot) 
-                              - (df$int_Control_Cold - df$int_CORT_Cold)), 3, equal = FALSE)
+    lowlim_int_int <- format_dec(hdi((df$int_Control_Hot - df$int_CORT_Hot) 
+                              - (df$int_Control_Cold - df$int_CORT_Cold), credMass = 0.95)[1], 3)
+    uplim_int_int <- format_dec(hdi((df$int_Control_Hot - df$int_CORT_Hot) 
+                              - (df$int_Control_Cold - df$int_CORT_Cold), credMass = 0.95)[2], 3)
+
     data_temp <- data.frame(#Intercepts
-                          mean_Temperature_int = as.numeric(Temperature_int),
-                          pMCMC_Temperature_int = pMCMC_temp_int,
-                          mean_Hormone_int = as.numeric(CORT_int),
-                          pMCMC_Hormone_int = pMCMC_cort_int,
-                          mean_Interaction_int = as.numeric(Interaction_int),
-                          pMCMC_Interaction_int = pMCMC_int_int)
+                          median_Temperature = as.numeric(Temperature_int),
+                          `2.5 HDI_Temperature` = as.numeric(lowlim_temp_int),
+                          `97.5 HDI_Temperature` = as.numeric(uplim_temp_int),
+                          median_Hormone = as.numeric(CORT_int),
+                          `2.5 HDI_Hormone` = as.numeric(lowlim_cort_int),
+                          `97.5 HDI_Hormone` = as.numeric(uplim_cort_int),
+                          median_Interaction = as.numeric(Interaction_int),
+                          `2.5 HDI_Interaction` = as.numeric(lowlim_int_int),
+                          `97.5 HDI_Interaction` = as.numeric(uplim_int_int))
     data_table <- dplyr::bind_rows(data_table, data_temp)
   } else {
     # Intercept contrasts
-    Temperature_int <- format_dec(mean(c(df$int_CORT_Hot, df$int_Control_Hot)) 
-                                  - mean(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
+    Temperature_int <- format_dec(median(c(df$int_CORT_Hot, df$int_Control_Hot)) 
+                                  - median(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
 
-    pMCMC_temp_int <- format_p(pmcmc(c(df$int_CORT_Hot, df$int_Control_Hot) 
-                                    - c(df$int_CORT_Cold, df$int_Control_Cold)), 3, equal = FALSE)
+    lowlim_temp_int <- format_dec(hdi(c(df$int_CORT_Hot, df$int_Control_Hot) 
+                                    - c(df$int_CORT_Cold, df$int_Control_Cold), credMass = 0.95)[1], 3)
+    uplim_temp_int <- format_dec(hdi(c(df$int_CORT_Hot, df$int_Control_Hot) 
+                                    - c(df$int_CORT_Cold, df$int_Control_Cold), credMass = 0.95)[2], 3)
     #
-    CORT_int <- format_dec(mean(c(df$int_Control_Hot, df$int_Control_Cold)) 
-                          - mean(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
+    CORT_int <- format_dec(median(c(df$int_Control_Hot, df$int_Control_Cold)) 
+                          - median(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
 
-    pMCMC_cort_int <- format_p(pmcmc(c(df$int_Control_Hot, df$int_Control_Cold) 
-                                    - c(df$int_CORT_Hot, df$int_CORT_Cold)), 3, equal = FALSE)
+    lowlim_cort_int <- format_dec(hdi(c(df$int_Control_Hot, df$int_Control_Cold) 
+                                    - c(df$int_CORT_Hot, df$int_CORT_Cold), credMass = 0.95)[1], 3)
+    uplim_cort_int <- format_dec(hdi(c(df$int_Control_Hot, df$int_Control_Cold) 
+                                    - c(df$int_CORT_Hot, df$int_CORT_Cold), credMass = 0.95)[2], 3)
     #
-    Interaction_int <- format_dec((mean(df$int_Control_Hot) - mean(df$int_CORT_Hot)) 
-                                - (mean(df$int_Control_Cold) - mean(df$int_CORT_Cold)), 3)
+    Interaction_int <- format_dec((median(df$int_Control_Hot) - median(df$int_CORT_Hot)) 
+                                - (median(df$int_Control_Cold) - median(df$int_CORT_Cold)), 3)
 
-    pMCMC_int_int <- format_p(pmcmc((df$int_Control_Hot - df$int_CORT_Hot) 
-                              - (df$int_Control_Cold - df$int_CORT_Cold)), 3, equal = FALSE)
+    lowlim_int_int <- format_dec(hdi((df$int_Control_Hot - df$int_CORT_Hot) 
+                              - (df$int_Control_Cold - df$int_CORT_Cold), credMass = 0.95)[1], 3)
+    uplim_int_int <- format_dec(hdi((df$int_Control_Hot - df$int_CORT_Hot) 
+                              - (df$int_Control_Cold - df$int_CORT_Cold), credMass = 0.95)[2], 3)
 
     # Slope contrasts
-    Temperature_slope <- format_dec(mean(c(df$slope_CORT_Hot, df$slope_Control_Hot)) 
-                                  - mean(c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3)
+    Temperature_slope <- format_dec(median(c(df$slope_CORT_Hot, df$slope_Control_Hot)) 
+                                  - median(c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3)
 
-    pMCMC_temp_slope <- format_p(pmcmc(c(df$slope_CORT_Hot, df$slope_Control_Hot) 
-                                      - c(df$slope_CORT_Cold, df$slope_Control_Cold)), 3, equal = FALSE)
+    lowlim_temp_slope <- format_dec(hdi(c(df$slope_CORT_Hot, df$slope_Control_Hot) 
+                                      - c(df$slope_CORT_Cold, df$slope_Control_Cold), credMass = 0.95)[1], 3)
+    uplim_temp_slope <- format_dec(hdi(c(df$slope_CORT_Hot, df$slope_Control_Hot) 
+                                      - c(df$slope_CORT_Cold, df$slope_Control_Cold), credMass = 0.95)[2], 3)
     #
-    CORT_slope <- format_dec(mean(c(df$slope_Control_Hot, df$slope_Control_Cold)) 
-                            - mean(c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3)
+    CORT_slope <- format_dec(median(c(df$slope_Control_Hot, df$slope_Control_Cold)) 
+                            - median(c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3)
 
-    pMCMC_cort_slope <- format_p(pmcmc(c(df$slope_Control_Hot, df$slope_Control_Cold) 
-                                      - c(df$slope_CORT_Hot, df$slope_CORT_Cold)), 3, equal = FALSE)
+    lowlim_cort_slope <- format_dec(hdi(c(df$slope_Control_Hot, df$slope_Control_Cold) 
+                                      - c(df$slope_CORT_Hot, df$slope_CORT_Cold), credMass = 0.95)[1], 3)
+    uplim_cort_slope <- format_dec(hdi(c(df$slope_Control_Hot, df$slope_Control_Cold) 
+                                      - c(df$slope_CORT_Hot, df$slope_CORT_Cold), credMass = 0.95)[2], 3)
     #
-    Interaction_slope <- format_dec((mean(df$slope_Control_Hot) - mean(df$slope_CORT_Hot)) 
-                                  - (mean(df$slope_Control_Cold) - mean(df$slope_CORT_Cold)), 3)
+    Interaction_slope <- format_dec((median(df$slope_Control_Hot) - median(df$slope_CORT_Hot)) 
+                                  - (median(df$slope_Control_Cold) - median(df$slope_CORT_Cold)), 3)
 
-    pMCMC_int_slope <- format_p(pmcmc((df$slope_Control_Hot - df$slope_CORT_Hot) 
-                                    - (df$slope_Control_Cold - df$slope_CORT_Cold)), 3, equal = FALSE)
+    lowlim_int_slope <- format_dec(hdi((df$slope_Control_Hot - df$slope_CORT_Hot) 
+                                    - (df$slope_Control_Cold - df$slope_CORT_Cold), credMass = 0.95)[1], 3)
+    uplim_int_slope <- format_dec(hdi((df$slope_Control_Hot - df$slope_CORT_Hot) 
+                                    - (df$slope_Control_Cold - df$slope_CORT_Cold), credMass = 0.95)[2], 3)
     ##   
     data_temp <- data.frame(#Intercepts
-                            mean_Temperature_int = as.numeric(Temperature_int),
-                            pMCMC_Temperature_int = pMCMC_temp_int,
-                            mean_Hormone_int = as.numeric(CORT_int),
-                            pMCMC_Hormone_int = pMCMC_cort_int,
-                            mean_Interaction_int = as.numeric(Interaction_int),
-                            pMCMC_Interaction_int = pMCMC_int_int,
+                            median_Temperature_int = as.numeric(Temperature_int),
+                            `2.5 HDI_Temperature_int` = as.numeric(lowlim_temp_int),
+                            `97.5 HDI_Temperature_int` = as.numeric(uplim_temp_int),
+                            median_Hormone_int = as.numeric(CORT_int),
+                            `2.5 HDI_Hormone_int` = as.numeric(lowlim_cort_int),
+                            `97.5 HDI_Hormone_int` = as.numeric(uplim_cort_int),
+                            median_Interaction_int = as.numeric(Interaction_int),
+                            `2.5 HDI_Interaction_int` = as.numeric(lowlim_int_int),
+                            `97.5 HDI_Interaction_int` = as.numeric(uplim_int_int),
                             #Slopes
-                            mean_Temperature_slope = as.numeric(Temperature_slope),
-                            pMCMC_Temperature_slope = pMCMC_temp_slope,
-                            mean_Hormone_slope = as.numeric(CORT_slope),
-                            pMCMC_Hormone_slope = pMCMC_cort_slope,
-                            mean_Interaction_slope = as.numeric(Interaction_slope),
-                            pMCMC_Interaction_slope = pMCMC_int_slope)
+                            median_Temperature_slope = as.numeric(Temperature_slope),
+                            `2.5 HDI_Temperature_slope` = as.numeric(lowlim_temp_slope),
+                            `97.5 HDI_Temperature_slope` = as.numeric(uplim_temp_slope),
+                            median_Hormone_slope = as.numeric(CORT_slope),
+                            `2.5 HDI_Hormone_slope` = as.numeric(lowlim_cort_slope),
+                            `97.5 HDI_Hormone_slope` = as.numeric(uplim_cort_slope),
+                            median_Interaction_slope = as.numeric(Interaction_slope),
+                            `2.5 HDI_Interaction_slope` = as.numeric(lowlim_int_slope),
+                            `97.5 HDI_Interaction_slope` = as.numeric(uplim_int_slope))
     data_table <- dplyr::bind_rows(data_table, data_temp)
   }
   return(data_table)
@@ -325,7 +353,7 @@ plotting <- function(sp, res, type){
     } else if(res == "emergence"){
       label <- "Probability of emergence"
     } else if(res == "mass"){
-      label <- "Changes in mass"
+      label <- "Δmass (mg)"
     }
   }
 
@@ -403,25 +431,26 @@ plotting <- function(sp, res, type){
       mutate(Trial = as.numeric(Trial)) %>%
       group_by(Trial, Treatment) %>%
       summarize(
-        Mean = mean(Value),
-        SD = sd(Value)) %>%
+        Median = median(Value),
+        lowlim_trial = hdi(Value, credMass = 0.95)[1],
+        uplim_trial = hdi(Value, credMass = 0.95)[2]) %>%
       ungroup() %>%
-      dplyr::select(Treatment, Trial, Mean, SD)
+      dplyr::select(Treatment, Trial, Median, lowlim_trial, uplim_trial) %>%
     data.frame()
     # Getting the plot
-    plot <- ggplot(plot_df, aes(x = Trial, y = Mean, color = Treatment)) +
+    plot <- ggplot(plot_df, aes(x = Trial, y = Median, color = Treatment)) +
       geom_line(linewidth = 1) +
       scale_color_manual(values = fill_colors) +
-      geom_ribbon(aes(ymin = Mean - SD, ymax = Mean + SD, fill = Treatment), color = NA, alpha = 0.08) + 
+      geom_ribbon(aes(ymin = Median - lowlim_trial, ymax = Median + uplim_trial, fill = Treatment), color = NA, alpha = 0.08) + 
       scale_fill_manual(values = fill_colors) +
       theme_classic() +
       labs(y = label, x = "Trial") +
       xlim(min(plot_df$Trial), max(plot_df$Trial)) +
       scale_y_continuous(limits = c(0, NA)) +
       theme(plot.margin = margin(0.5, 0.5, 1, 0.5, "mm"),
-      axis.title = element_text(size = 12, family = "Times"),
-      axis.text = element_text(size = 10, family = "Times"),
-      legend.position = "none")
+        axis.title = element_text(size = 12, family = "Times"),
+        axis.text = element_text(size = 10, family = "Times"),
+        legend.position = "none")
 
   } else { # Plots for the intercepts and slopes for the behaviours
     if(type == "int"){
@@ -438,6 +467,10 @@ plotting <- function(sp, res, type){
       if(res == "emergence"){
         viol_df <- viol_df %>%
           mutate(values = plogis(values))  # Convert log-odds to probabilities
+      } else if(res == "mass"){
+        viol_df <- viol_df %>%
+          mutate(values = exp(values) + min(mass_clean$delta_mass, na.rm = TRUE) - 1)
+          # Convert log-transformed rescaled values back to original non-scaled values
       } else {
         viol_df <- viol_df %>%
           mutate(values = exp(values))  # Convert log-transformed values back to original scale
@@ -458,9 +491,9 @@ plotting <- function(sp, res, type){
     segment_df <- viol_df %>%
       group_by(treatment) %>%
       summarize(
-        Mean = mean(values),
-        quant_min = quantile(values, 0.025, na.rm = TRUE),
-        quant_max = quantile(values, 0.975, na.rm = TRUE),
+        Median = median(values),
+        lowlim_seg = hdi(values, credMass = 0.95)[1],
+        uplim_seg = hdi(values, credMass = 0.95)[2],
         .groups = "drop") %>%
       ungroup() %>%
     data.frame()
@@ -469,8 +502,8 @@ plotting <- function(sp, res, type){
     plot <- ggplot(viol_df, aes(x = treatment, y = values, fill = treatment)) +
       geom_flat_violin(alpha = 0.5) +
       scale_fill_manual(values = fill_colors) +
-      geom_segment(data = segment_df, aes(y = quant_min, yend = quant_max, x = treatment, xend = treatment), size = 1.5, color = "black") +
-      geom_point(data = segment_df, aes(y = Mean, x = treatment), color = "black", fill = "black", size = 3) +
+      geom_segment(data = segment_df, aes(y = lowlim_seg, yend = uplim_seg, x = treatment, xend = treatment), size = 1.5, color = "black") +
+      geom_point(data = segment_df, aes(y = Median, x = treatment), color = "black", fill = "black", size = 3) +
       ylim(min(viol_df$values) - 0.1*mean(viol_df$values), max(viol_df$values)) +
       coord_flip() +
       guides(fill = guide_legend(reverse = TRUE)) +
