@@ -219,7 +219,18 @@ post_values <- function(df, var){
 #' @param res To select the response variable ("move", "shelter", "emergence", "mass")
 contrasts_func <- function(sp, res){
   data_table <- data.frame()
-  df <- get(paste0(sp, "_", res, "_posteriors"))
+  # Getting the df using real data (depending on the distribution of the response variable)
+  if(res == "emergence"){
+    df <- get(paste0(sp, "_", res, "_posteriors")) %>%
+          mutate(across(starts_with("int_"), ~ plogis(.x))) # Convert log-odds to probabilities
+      } else if(res == "mass"){
+    df <- get(paste0(sp, "_", res, "_posteriors"))  %>%
+          mutate(across(everything(), ~ exp(.x) + min(mass_clean$delta_mass, na.rm = TRUE) - 1))
+          # Convert log-transformed rescaled values back to original non-scaled values
+      } else {
+    df <- get(paste0(sp, "_", res, "_posteriors"))  %>%
+          mutate(across(starts_with("int_"), ~ exp(.x)))  # Convert log-transformed values back to original scale
+      }
   if(res == "mass"){
     # Contrasts
     Temperature_int <- format_dec(median(c(df$int_CORT_Hot, df$int_Control_Hot)) 
