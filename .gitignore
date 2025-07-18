@@ -55,3 +55,6 @@ rsconnect/
 models/
 figures/
 checking/
+.DS_Store
+output/.DS_Store
+output/figures/.DS_Store
