@@ -18,23 +18,13 @@ clean_ind <- read.csv(here("data", "general_data.csv")) %>%
 data.frame()
 
 ####################################
-# B) Merging mass.csv with clean individual data (clean_ind)
-mass <- read.csv(here("data", "mass.csv")) %>%
-  mutate(lizard_id = as.character(lizard_id))%>%
-data.frame() #Read in mass data and transform lizard_id to character
-mass_clean <- merge(clean_ind, mass, by = "lizard_id", all = TRUE) %>%
-  mutate(delta_mass_rescaled = (delta_mass - min(delta_mass, na.rm = TRUE) + 1)) %>%
-  mutate(food_ingested = food_ingested - mean(food_ingested, na.rm = TRUE))
-data.frame() #Merge mass data with clean_ind data and rescale delta_mass
-
-write.csv(mass_clean, here("./output/data_clean/mass_clean.csv")) 
-
-####################################
-# C) Merging behaviour.csv with clean individual data (clean_ind)
+# B) Merging behaviour.csv with clean individual data (clean_ind)
 behav <- read.csv(here("data", "behaviour.csv"))%>%
   mutate(lizard_id = as.character(lizard_id))%>%
   mutate(day = day - 1) %>% # Adjust day to start from 0
 data.frame() #Read in behaviour data and transform lizard_id to character
-behav_clean <- merge(clean_ind, behav, by = "lizard_id", all = TRUE) 
 
+behav_clean <- merge(clean_ind, behav, by = "lizard_id", all = TRUE) %>%
+  mutate(svl = scale(as.numeric(svl), center = TRUE, scale =FALSE)) %>%
+data.frame()
 write.csv(behav_clean, here("./output/data_clean/behav_clean.csv"))

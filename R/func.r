@@ -68,18 +68,12 @@ sample <- function(df, corti, therm){
 #' @param fam To specify the family of the model
 #' @param sp To specify the species
 #' @param var To specify the response variable
-#' @param type To specify which type of model/formula
 #' @return Raw posteriors of fitted brm model for each treatment, species, and group (df)
-fit_m <- function(df, fam, sp, type, var) {
+fit_m <- function(df, fam, sp, var) {
   #Fit the model only if it has not been fit yet (if refit=TRUE)
   if(refit){
-    if(type == "beh"){
-      formula <- as.formula(paste(var, 
-                            "~ day*trt + (1|lizard_id) + (1|clutch)"))
-    } else if(type == "mass"){
-      formula <- as.formula(paste(var, 
-                            "~ trt + food_ingested + (1|clutch)"))
-    }
+    formula <- as.formula(paste(var, 
+                            "~ day*trt + svl + (1|lizard_id) + (1|clutch)"))
     # Fit the model
     model <- brm(formula = formula,
                 data = df,
