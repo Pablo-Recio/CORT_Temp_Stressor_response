@@ -168,41 +168,30 @@ tidy_post <- function(df) {
 # Function to get estimates to make the contrasts between treatments
 #' @title post_values
 #' @param df To select the df
-#' @param var To indicate the kind of variable to use (beh or mass)
-post_values <- function(df, var){
+post_values <- function(df){
   df <- as.data.frame(df)
-  if(var == "beh"){
-    int_Control_Cold <- df$b_Intercept
-    int_CORT_Cold <- df$b_Intercept + df$b_trtCORTMCold
-    int_Control_Hot <- df$b_Intercept + df$b_trtControlMHot
-    int_CORT_Hot <- df$b_Intercept + df$b_trtCORTMHot
-    slope_Control_Cold <- df$b_day
-    slope_CORT_Cold <- df$b_day + df$`b_day:trtCORTMCold`
-    slope_Control_Hot <- df$b_day + df$`b_day:trtControlMHot`
-    slope_CORT_Hot <- df$b_day + df$`b_day:trtCORTMHot`    
-    # Create a data frame with the estimates
-    data_values <- data.frame(
-      int_Control_Cold = int_Control_Cold,
-      int_CORT_Cold = int_CORT_Cold,
-      int_Control_Hot = int_Control_Hot,
-      int_CORT_Hot = int_CORT_Hot,
-      slope_Control_Cold = slope_Control_Cold,
-      slope_CORT_Cold = slope_CORT_Cold,
-      slope_Control_Hot = slope_Control_Hot,
-      slope_CORT_Hot = slope_CORT_Hot)
+
+  int_Control_Cold <- df$b_Intercept
+  int_CORT_Cold <- df$b_Intercept + df$b_trtCORTMCold
+  int_Control_Hot <- df$b_Intercept + df$b_trtControlMHot
+  int_CORT_Hot <- df$b_Intercept + df$b_trtCORTMHot
   
-  } else if (var == "mass") {
-    int_Control_Cold <- df$b_Intercept
-    int_CORT_Cold <- df$b_Intercept + df$b_trtCORTMCold
-    int_Control_Hot <- df$b_Intercept + df$b_trtControlMHot
-    int_CORT_Hot <- df$b_Intercept + df$b_trtCORTMHot
-    # Create a data frame with the estimates
-    data_values <- data.frame(
-      int_Control_Cold = int_Control_Cold,
-      int_CORT_Cold = int_CORT_Cold,
-      int_Control_Hot = int_Control_Hot,
-      int_CORT_Hot = int_CORT_Hot)
-  }
+  slope_Control_Cold <- df$b_day
+  slope_CORT_Cold <- df$b_day + df$`b_day:trtCORTMCold`
+  slope_Control_Hot <- df$b_day + df$`b_day:trtControlMHot`
+  slope_CORT_Hot <- df$b_day + df$`b_day:trtCORTMHot`    
+  # Create a data frame with the estimates
+  data_values <- data.frame(
+    int_Control_Cold = int_Control_Cold,
+    int_CORT_Cold = int_CORT_Cold,
+    int_Control_Hot = int_Control_Hot,
+    int_CORT_Hot = int_CORT_Hot,
+  
+    slope_Control_Cold = slope_Control_Cold,
+    slope_CORT_Cold = slope_CORT_Cold,
+    slope_Control_Hot = slope_Control_Hot,
+    slope_CORT_Hot = slope_CORT_Hot)
+  
   return(data_values)
 }
 ####################
@@ -210,59 +199,18 @@ post_values <- function(df, var){
 # Function to get estimates to make the contrasts between treatments
 #' @title contrasts_func
 #' @param sp To select the species ("guich" or "deli")
-#' @param res To select the response variable ("move", "shelter", "emergence", "mass")
+#' @param res To select the response variable ("move", "shelter", "emergence")
 contrasts_func <- function(sp, res){
   data_table <- data.frame()
   # Getting the df using real data (depending on the distribution of the response variable)
   if(res == "emergence"){
     df <- get(paste0(sp, "_", res, "_posteriors")) %>%
           mutate(across(starts_with("int_"), ~ plogis(.x))) # Convert log-odds to probabilities
-      } else if(res == "mass"){
-    df <- get(paste0(sp, "_", res, "_posteriors"))  %>%
-          mutate(across(everything(), ~ exp(.x) + min(mass_clean$delta_mass, na.rm = TRUE) - 1))
-          # Convert log-transformed rescaled values back to original non-scaled values
       } else {
     df <- get(paste0(sp, "_", res, "_posteriors"))  %>%
           mutate(across(starts_with("int_"), ~ exp(.x)))  # Convert log-transformed values back to original scale
       }
-  if(res == "mass"){
-    # Contrasts
-    Temperature_int <- format_dec(median(c(df$int_CORT_Hot, df$int_Control_Hot)) 
-                                  - median(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
-
-    lowlim_temp_int <- format_dec(hdi(c(df$int_CORT_Hot, df$int_Control_Hot) 
-                                    - c(df$int_CORT_Cold, df$int_Control_Cold), credMass = 0.95)[1], 3)
-    uplim_temp_int <- format_dec(hdi(c(df$int_CORT_Hot, df$int_Control_Hot) 
-                                    - c(df$int_CORT_Cold, df$int_Control_Cold), credMass = 0.95)[2], 3)
-    #
-    CORT_int <- format_dec(median(c(df$int_Control_Hot, df$int_Control_Cold)) 
-                          - median(c(df$int_CORT_Hot, df$int_CORT_Cold)), 3)
-
-    lowlim_cort_int <- format_dec(hdi(c(df$int_Control_Hot, df$int_Control_Cold) 
-                                    - c(df$int_CORT_Hot, df$int_CORT_Cold), credMass = 0.95)[1], 3)
-    uplim_cort_int <- format_dec(hdi(c(df$int_Control_Hot, df$int_Control_Cold) 
-                                    - c(df$int_CORT_Hot, df$int_CORT_Cold), credMass = 0.95)[2], 3)
-    #
-    Interaction_int <- format_dec((median(df$int_Control_Hot) - median(df$int_CORT_Hot)) 
-                                - (median(df$int_Control_Cold) - median(df$int_CORT_Cold)), 3)
-
-    lowlim_int_int <- format_dec(hdi((df$int_Control_Hot - df$int_CORT_Hot) 
-                              - (df$int_Control_Cold - df$int_CORT_Cold), credMass = 0.95)[1], 3)
-    uplim_int_int <- format_dec(hdi((df$int_Control_Hot - df$int_CORT_Hot) 
-                              - (df$int_Control_Cold - df$int_CORT_Cold), credMass = 0.95)[2], 3)
-
-    data_temp <- data.frame(#Intercepts
-                          median_Temperature = as.numeric(Temperature_int),
-                          `2.5 HDI_Temperature` = as.numeric(lowlim_temp_int),
-                          `97.5 HDI_Temperature` = as.numeric(uplim_temp_int),
-                          median_Hormone = as.numeric(CORT_int),
-                          `2.5 HDI_Hormone` = as.numeric(lowlim_cort_int),
-                          `97.5 HDI_Hormone` = as.numeric(uplim_cort_int),
-                          median_Interaction = as.numeric(Interaction_int),
-                          `2.5 HDI_Interaction` = as.numeric(lowlim_int_int),
-                          `97.5 HDI_Interaction` = as.numeric(uplim_int_int))
-    data_table <- dplyr::bind_rows(data_table, data_temp)
-  } else {
+  # Getting the contrasts
     # Intercept contrasts
     Temperature_int <- format_dec(median(c(df$int_CORT_Hot, df$int_Control_Hot)) 
                                   - median(c(df$int_CORT_Cold, df$int_Control_Cold)), 3)
@@ -334,7 +282,7 @@ contrasts_func <- function(sp, res){
                             `2.5 HDI_Interaction_slope` = as.numeric(lowlim_int_slope),
                             `97.5 HDI_Interaction_slope` = as.numeric(uplim_int_slope))
     data_table <- dplyr::bind_rows(data_table, data_temp)
-  }
+
   return(data_table)
 }
 ####################
@@ -342,7 +290,7 @@ contrasts_func <- function(sp, res){
 # Function to create the plots for the behaviours
 #' @title plotting_beh
 #' @param sp To select the species ("guich" or "deli")
-#' @param res To select the response variable ("move", "shelter", "emergence", "mass")
+#' @param res To select the response variable ("move", "shelter", "emergence")
 #' @param type To select whether the type of the plot is for the intercept ("int"),
 # the slope ("slop"), or the change over trials ("trials")
 plotting <- function(sp, res, type){
@@ -357,8 +305,6 @@ plotting <- function(sp, res, type){
       label <- "Latency to shelter (s)"
     } else if(res == "emergence"){
       label <- "Probability of emergence"
-    } else if(res == "mass"){
-      label <- "Δmass (mg)"
     }
   }
 
@@ -472,10 +418,6 @@ plotting <- function(sp, res, type){
       if(res == "emergence"){
         viol_df <- viol_df %>%
           mutate(values = plogis(values))  # Convert log-odds to probabilities
-      } else if(res == "mass"){
-        viol_df <- viol_df %>%
-          mutate(values = exp(values) + min(mass_clean$delta_mass, na.rm = TRUE) - 1)
-          # Convert log-transformed rescaled values back to original non-scaled values
       } else {
         viol_df <- viol_df %>%
           mutate(values = exp(values))  # Convert log-transformed values back to original scale
