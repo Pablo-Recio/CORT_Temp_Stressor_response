@@ -297,7 +297,7 @@ plotting <- function(sp, res, type){
 
     # Labels for the y-axis
   if(type == "slop"){
-    label <- "Estimated slopes"
+    label <- "Flexibility (slope)"
   } else {   
     if(res == "move"){
       label <- "Latency to move (s)"

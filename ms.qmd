@@ -1,5 +1,5 @@
 ---
-title: "Effects of prenatal CORT and temperature on the antipredatory behaviour in a lizard"
+title: "Antipredatory strategies are robust to prenatal CORT and temperature in two skink species"
 format:
   docx: 
     reference-doc: "./bib/tmpl.docx"
@@ -101,21 +101,21 @@ cat("\\newpage")
 
 ## Introduction
 
-Animals constantly face events that can disrupt their homeostasis. These disruptions can be acute, such as a sudden predator attack, or long-term, like prolonged droughts or habitat degradation [@sapolsky_how_2000; @mcewen_concept_2003]. Regardless of the nature of the challenge, organisms must adjust to allostasis to maintain their physiological and behavioural integrity [@wingfield2002endocrine]. In vertebrates, the ability to cope with disruptions in homeostasis is carried out by the hypothalamic-pituitary-adrenal/interrenal (HPA/HPI) axis [@sapolsky_how_2000]. This system elicits a physiological response, also known as the stress response, mediated by glucocorticoids (GCs) - a group of hormones that facilitates the reallocation of energetic resources to restore homeostasis [@sapolsky_how_2000; @mcewen_concept_2003]. For example, when an animal faces a predatory attack, GCs mobilise energy to support increased locomotor activity, vigilance, or attention to avoid the threat [@trompeter2011invader]. In the short term, GCs help organisms cope with acute challenges. However, long-term exposure to GCs can carry significant metabolic costs, leading to immune suppression, impaired growth, or permanent neural alterations [@picard_mitochondria_2014; @mcewen2017neurobiological]. Furthermore, reacting to stressors can reduce the time and energy available for essential activities such as foraging, thermoregulation, or social interactions [@belliure2004behavioral; @martin2024blind]. As such, animals are predicted to evolve mechanisms to appropriately respond to acute stressors while avoiding the costs in the long term. For example, by regulating their responses to homotypic (repeated and similar) stressors, particularly those that are predictable and non-lethal [@grissom2009habituation]. Habituation - the reduction of physiological responses elicited by exposure to a homotypic stressor [@pfister1979glucocorticosterone] - can be crucial to avoid the long-term costs of chronic stress without compromising the response to acute stressors.   
+Predation risk is a prominent ecological pressure that can shape the behavior, physiology, and life histories of prey species [@lima1990behavioral; @brown1999ecology]. To reduce the likelihood of being detected, attacked or captured, prey animals have developed a suite of antipredatory strategies, including morphological defences, behavioral tactics, and physiological adjustments [@stankowich2005fear]. However, these strategies are usually costly, leading to trade-offs between antipredatory avoidance and other fitness-related traits [@lima1990behavioral; @stankowich2005fear]. To optimize benefits over costs, animals must carefully evaluate predation risks and respond accurately to them, adjusting their responses to changing risk levels [@lima1990behavioral; @chen2025zebra]. This plasticity allows animals to balance the costs and benefits of avoiding predation in dynamic environments [@amo2005flexibility; @chen2025zebra].       
 
-Importantly, the process of physiological habituation shares key functional characteristics with the cognitive process of habituation - a form of non-associative learning where individuals reduce their responsiveness to a repeated stimulus [@thompson1966habituation]. In both cases, organisms are repeatedly exposed to a stimulus/homotypic stressor and progressively decrease their response toward it [@grissom2009habituation]. In fact, both behavioural and physiological habituation often co-occur. For example, rhesus macaques (_Macaca mulatta_) showed a decline in blood cortisol concentrations across consecutive days of restraint, accompanied by decreased vocalizations and behavioral agitation [@ruys2004behavioral]. However, physiological habituation alone is insufficient to explain the behavioural patterns observed when animals are repeatedly exposed to a processive stressors - those involving primarily psychological qualities, such as restraint or simulated predation  [@jaferi2006corticosterone; @grissom2009habituation]. For example, adrenalectomised rats - incapable of physiological habituation - still exhibit cognitive habituation [@jaferi2006corticosterone], suggesting a degree of independence between the two processes. While the HPA/HPI axis is paramount for physiological habituation, cognitive habituation also involves neural mechanisms related to sensory processing, learning, and behavioural control, such as the limbic system, the superior colliculus, or the optic tectum [@grissom2009habituation; @dutta2014saliency]. Habituation to processive stressors is therefore likely to involve complex interactions between physiological and cognitive processes.    
+However, there is considerable variation in how animals cope with predation risk [@stankowich2005fear; @thaker2009alternative; @horvath2020ain]. Some individuals exhibit strong antipredatory responses or adjust more accurately their strategies under changing risk levels than others [@stankowich2005fear; @thaker2009alternative]. Cognition and the stress response system can be key factors predicting individual differences in the antipredatory response [@griffin2001learning; @kelley2003learned; @shier2007effects; @thaker2009acute; @thaker2010stress]. First, cognitive proceeses like predator detection and accurate decision-making are essential for avoiding predation, while behaving flexibly is fundamental to optimize antipredatory responses under different circumstances [@griffin2001learning; @kelley2003learned]. Second, the stress response system - mediated by the hypothalamic-pituitary-adrenal (HPA) or hypothalamic-pituitary-interrenal (HPI) axis - plays a crucial role in mediating behavioral and physiological responses to predation [@thaker2009acute; @thaker2010stress]. Under threat, the HPA/HPI axis triggers the release of glucocorticoids (GCs), which help mobilize resources to cope with imminent risk [@sapolsky_how_2000]. Therefore, cognitive processes and the stress response system likely interact to determine how animals can cope with predation risk. As such, investigating the factors that influence cognitive development and HPA/HPI function is fundamental to understanding individual differences in antipredatory responses and their plasticity.         
 
-However, the effectiveness of either system depends on how well the underlying neural structures develop and integrate. Many of these brain regions mature concurrently and can be highly plastic during early stages of development [@coomber_independent_1997; @zhu_prenatal_2004; @amiel_effects_2017]. Early-life conditions can shape the structure and function of both neural systems, with long-term consequences for how individuals respond to acute and chronic stressors [@vargas2016early; @van2017modulation; @zito2017early; @crino_under_2020; @crino2024eggs]. One of the key mediators of early-life effects is GC exposure. Elevations in GCs during development exert potent effects on HPA/HPI axis function, altering the response to stressors later in life [@costantini2011meta; @vargas2016early; @zito2017early; @crino2024eggs]. For example, zebra finches (_Taeniopygia guttata_) nutritionally stressed during early-life had higher levels of CORT than controls at post-hatching day 25, while periodic maternal separation increased basal corticosterone levels in rats (_Rattus norvegicus_) [@vargas2016early; @zito2017early]. In parallel, developmental GC exposure can impact brain regions involved in learning, memory, and behavioural flexibility, affecting neural processes relevant to cognitive habituation [@lemaire_prenatal_2000; @zhu_prenatal_2004; @costantini2011meta]. Therefore, early-life exposure to GCs can have long-lasting effects on the response to both acute and chronic stressors, potentially leading to maladaptive responses in adulthood.   
+Early-life environment is critical for the development of both cognitive function and the HPA/HPI axis [@lemaire_prenatal_2000; @jafari2017prenatal; @abayarathna_effects_2020; @crino2024eggs]. Stressful conditions during development can lead to long-lasting alterations in cognitive abilities and GCs regulation [@lemaire_prenatal_2000; @zhu_prenatal_2004; @jafari2017prenatal; @crino2024eggs]. Prenatal stress or GC exposure can impact neural processes relevant to perception or behavioral flexibility [@lemaire_prenatal_2000; @zhu_prenatal_2004; @costantini2011meta; @meunier2020olfactory], or alter the HPA/HPI axis function leading to changes in stress responsiveness and coping strategies [@koolhaas1999coping; @jafari2017prenatal]. Although evidence is mixed, most studies suggest that prenatal GC elevations produce individuals that are more reactive to threats and less behaviorally flexible [@koolhaas1999coping; but see @recio2025early].     
 
-Other environmental factors may also shape stress-related phenotypes, either independently or in combination with GCs. In ectotherms, early thermal conditions play a critical role in cognitive development [@amiel_effects_2017; @abayarathna_effects_2020]. Incubation temperature affects cognitive abilities such as learning, memory, or perception, likely through changes in brain function and structure [@amiel_smart_2011; @amiel_hotter_2012; @amiel_effects_2017; @dayananda_incubation_2017; @abayarathna_effects_2020]. In addition, early thermal environment can also affect the development of the HPA/HPI axis [@crino_under_2020; @crino2024eggs]. For example, in the delicata skink (_Lampropholis delicata_), individuals incubated at cooler temperatures showed increased baseline CORT concentration in the blood [@crino2024eggs]. Although these differences are believed to be driven by size rather than direct endocrine effects [@crino2024eggs], they can still have important long-term consequences for how individuals respond to acute and chronic stressors. Importantly, incubation temperature and prenatal CORT may not act independently [see @wingfield_comparative_2008; @Crino_2023], and their interaction could produce complex, trait-specific outcomes that shape both physiological and behavioural responses to stress. 
+However, other aspects of the early-life environment can also influence cognitive processes or modulate the effects of GC exposure [@amiel_smart_2011; @dayananda_incubation_2017; @abayarathna_effects_2020]. Factors that, as prenatal GC exposure, can alter metabolic function during development, typically have significant long-lasting effects on brain function and cognition [@amiel_effects_2017]. In this regard, temperature is a prominent environmental factor influencing metabolic rates in ectotherms [@schulte2015effects; @noble_developmental_2018]. As such, prenatal thermal environment shapes multiple traits in ectotherms, including cognitive processes [@amiel_smart_2011; @dayananda_incubation_2017; @noble_developmental_2018; @vila_pouca_incubation_2018; @vila_pouca_quantity_2019; @abayarathna_effects_2020]. For example, incubation at higher temperatures in several species of lizards is associated with improved cognition and more dense neural structures [@amiel_smart_2011; @amiel_hotter_2012; @amiel_effects_2017]. Therefore, prenatal thermal environment can influence antipredatory behavior and its flexibility through effects on cognitive processes [see @burger_antipredator_1998].    
 
-Because of the functional similarities between physiological and cognitive habituation, behavioural responses can offer insight into an animal’s ability to regulate stress over time, even in the absence of physiological measures. This is particularly relevant when investigating early-life programming, which can shape both HPA/I development and brain regions involved in behavioural inhibition and learning [@lemaire_prenatal_2000; @zhu_prenatal_2004; @costantini2011meta; @amiel_hotter_2012]. In this study, we investigated how prenatal CORT and incubation temperature shape the response to a stressor in two species of skinks: the delicate skink (_Lampropholis delicata_) and the common garden skink (_L. guichenoti_). We focused on the effects of these early-life conditions on the behavioural responses to a processive stressor. Specifically, we examined how these factors influence the acute (i.e., the first exposure) and the chronic (i.e., repeated exposures over time) responses by measuring freezing behaviour, shelter seeking, and shelter emergence after a simulated predatory attack. Finally, we assessed body mass change across the stress period as a potential indirect cost, while controlling for food intake. We predicted that prenatal CORT exposure would heighten acute stress reactivity and slow habituation, while warmer incubation temperatures would reduce acute responses and enhance habituation. Furthermore, we predicted higher temperatures would buffer the effects of prenatal CORT on stress responses, potentially leading to more flexible behavioural adjustment. Finally, we expected that less flexible stress responses would lead to higher decreases in mass.    
+Since both temperature and GC exposure can influence the antipredatory response through similar mechanisms, we could expect prenatal GCs and temperature have interactive effects on antipredatory strategies. Importantly, this interaction is likely ecologically relevant, as extreme environmental temperatures experienced by mothers can increase GCs transmitted to offspring [@racic_effects_2020; @Crino_2023]. However, the combined effects of prenatal GC exposure and incubation temperature on antipredatory strategies remain poorly understood.      
+
+The aim of the present study is to examine how prenatal conditions - particularly prenatal GCs exposure and thermal environment - can shape the antipredatory response and its flexibility in ectotherms. We investigated the combined effects of prenatal corticosterone (CORT) - the primary GC in reptiles - and incubation temperature on the antipredatory behavior and the antipredatory behavioral flexibility in two closely related skink species, the delicate skink (_Lampropholis delicata_) and the common garden skink (_L. guichenoti_). We experimentally manipulated CORT levels in eggs and incubated them at either cold or hot temperatures. After hatching, we assessed the lizards' antipredatory response and their ability to adjust this behavior over repeated exposures to a simulated predator attack. Given the known effects of prenatal GCs and temperature on brain development and HPA/HPI function [@jafari2017prenatal; @lemaire_prenatal_2000; @abayarathna_effects_2020; @crino2024eggs], we hypothesized that prenatal CORT exposure would enhance antipredatory response. However, it may reduce antipredatory behavioral flexibility. Additionally, we predicted that hot incubation temperatures would improve behavioral adjustments and buffer the effects of prenatal CORT on antipredatory behavior [@amiel_smart_2011; @amiel_hotter_2012; @amiel_effects_2017].     
+
+Finally, we explored potential species differences in the effects of prenatal conditions on antipredatory strategies. In this sense, although both species share similar life-histories, habitats, and distributions [@chapple_know_2011; @chapple_biology_2014], only _L. delicata_ has been reported as a successful coloniser outside their natural range [@chapple_know_2011; @chapple_biology_2014]. These differences in the ability to colonise new environments are not related to cognitive abilities [@chapple_know_2011; @recio2025cognitive; @recio2025early], but could be associated with differences in personality [@chapple_know_2011], which may be linked to different antipredatory strategies [@amo2005flexibility; @horvath2020ain].                    
 
 ## Methods
-
-#### Subjects
-
-We used two species of closely skinks, the delicate skink (_Lampropholis delicata_) and the common garden skink (_L. guichenoti_). Both species are oviparous, generalist, small (∼35-55 mm snout-vent length (SVL)) lizards that are sympatric in suburban areas throughout south-eastern Australia [@chapple_know_2011; @chapple_biology_2014]. However, while _L. delicata_ has been reported as a successful invader in New Zealand and Hawaii, there are no such reports for _L. guichenoti_ [@chapple_know_2011; @chapple_biology_2014]. Differences in the ability to colonise new environments are not related to cognitive abilities [@bezzina2014does; @recio2025cognitive; @recio2025early], but could be associated with differences in personality [@chapple_know_2011], which may be linked to different responses to  predatory stimuli [**REFS**].      
 
 #### Collection and housing
 
@@ -131,13 +131,13 @@ To test the interactive effects of CORT and incubation temperature, we manipulat
 
 #### Antipredatory response     
 
-Three weeks before the start of the behavioural tests, we adapted the lizard enclosures to the experimental setup. The enclosures used for the antipredatory response trials were the same as those where the lizards had previously been housed, but modified to include only a single shelter (9 × 6 × 1.5 cm) placed at one end and a water dish in the centre. All other shelter materials and the matting substrate were removed to allow continuous monitoring. The enclosures were then relocated to the experimental rooms, each containing six racks equipped with their own CCTV system (model DVR-HP210475). The number of lizards per treatment was counterbalanced across racks to control for potential effects of room or rack position. In these three weeks, lizards were fed one calcium- and multivitamin-dusted cricket per day, and water was provided _ad libitum_. A temperature gradient was maintained using heat cords and heat lamps on a 12:12 h light–dark cycle, with room temperatures kept between 22–24 °C.          
+Three weeks before the start of the behavioral tests, we adapted the lizard enclosures to the experimental setup. The enclosures used for the antipredatory response trials were the same as those where the lizards had previously been housed, but modified to include only a single shelter (9 × 6 × 1.5 cm) placed at one end and a water dish in the centre. All other shelter materials and the matting substrate were removed to allow continuous monitoring. The enclosures were then relocated to the experimental rooms, each containing six racks equipped with their own CCTV system (model DVR-HP210475). The number of lizards per treatment was counterbalanced across racks to control for potential effects of room or rack position. In these three weeks, lizards were fed one calcium- and multivitamin-dusted cricket per day, and water was provided _ad libitum_. A temperature gradient was maintained using heat cords and heat lamps on a 12:12 h light–dark cycle, with room temperatures kept between 22–24 °C.          
 
-To test the effects of prenatal conditions on the short- and long-term antipredatory response, we simulated a predatory attack once daily over multiple days. Each trial began with one of the researchers (PR) removing the water dish from the enclosure, followed by the removal of the shelter. The lizard was then chased for 60 seconds using a soft paintbrush, simulating the predatory attack. Immediately after the chase, the shelter — but not the water dish — was returned to its original position, marking the start of the behavioural observation period. The lizard’s behaviour was then recorded for one hour. All videos were later analysed by MD, who was blinded to the lizards’ treatment. From each video, we recorded three behavioural variables: i) latency to move — the time spent immobile immediately after the simulated attack; ii) latency to shelter — the time it took the lizard to hide under the shelter after resuming movement; and iii) probability to emerge — whether or not the lizard emerged from the shelter during the 40 minutes following hiding (1 = emerged, 0 = did not emerge). A lizard was considered to have resumed movement if it moved continuously for at least five seconds, and to be under shelter if no limbs were visible. All trials were conducted between 1000–1400 h, when lizards were most active.       
+To test the effects of prenatal conditions on the short- and long-term antipredatory response, we simulated a predatory attack once daily over multiple days. Each trial began with one of the researchers (PR) removing the water dish from the enclosure, followed by the removal of the shelter. The lizard was then chased for 60 seconds using a soft paintbrush, simulating the predatory attack. Immediately after the chase, the shelter — but not the water dish — was returned to its original position, marking the start of the behavioral observation period. The lizard’s behavior was then recorded for one hour. All videos were later analyzed by MD, who was blinded to the lizards’ treatment. From each video, we recorded three behavioral variables: i) latency to move — the time spent immobile immediately after the simulated attack; ii) latency to shelter — the time it took the lizard to hide under the shelter after resuming movement; and iii) probability to emerge — whether or not the lizard emerged from the shelter during the 40 minutes following hiding (1 = emerged, 0 = did not emerge). A lizard was considered to have resumed movement if it moved continuously for at least five seconds, and to be under shelter if no limbs were visible. All trials were conducted between 1000–1400 h, when lizards were most active.       
             
 ```{r, fig-Methods}
 #| label: fig-Methods
-#| fig.cap: "Scheme of our experimental design. In panel A, the early environment manipulations leading to four experimental conditions. In panel B, the postnatal antpredatory response assay, for 8 days, lizards were subjected daily to a simulated predator attack (chased with a soft paintbrush for 1 minute), followed by a 1-hour behavioural recording. During this recording, we measured the latency to move, the latency to shelter, and the probability of emergening from the shelter in 40 minutes after the stressor."
+#| fig.cap: "Scheme of our experimental design. In panel A, the early environment manipulations leading to four experimental conditions. In panel B, the postnatal antpredatory response assay, for 8 days, lizards were subjected daily to a simulated predator attack (chased with a soft paintbrush for 1 minute), followed by a 1-hour behavioral recording. During this recording, we measured the latency to move, the latency to shelter, and the probability of emergening from the shelter in 40 minutes after the stressor."
 
 knitr::include_graphics("./Others/Methods.png")
 
@@ -147,22 +147,22 @@ knitr::include_graphics("./Others/Methods.png")
 
 We performed the analyses for each species separately. We fitted a total of six models using the _brm_ package [@burkner2017brms], which fits Bayesian multilevel models with _Stan_ [@stan] with R version 4.5.1 [@R]. We ran four parallel MCMC chains of 10000 iterations for each model, with a warmup period of 4000 iterations. 
 
-We used as the response variables the latency to move, the latency to shelter, and the probability to emerge, modelled separately. We included the prenatal condition (Control-Cold, CORT-Cold, Control-Hot, CORT-Hot), the day of the trial, and their interaction as fixed effects. To facilitate interpretation of the model intercepts, trial day was transformed so that day 1 in the experiment corresponds to day 0 in the model (i.e., the intercept reflects lizard behaviour in response to the first exposure to the stressor). We also included snout-vent length - measured one day before the beginning of the trials - to control for potential effects of size on the antipredatory behaviour [**REFs**]. SVL was centered to the mean to facilitate interpretation of the intercepts.    
+We used as the response variables the latency to move, the latency to shelter, and the probability to emerge, modelled separately. We included the prenatal condition (Control-Cold, CORT-Cold, Control-Hot, CORT-Hot), the day of the trial, and their interaction as fixed effects. To facilitate interpretation of the model intercepts, trial day was transformed so that day 1 in the experiment corresponds to day 0 in the model. We also included snout-vent length - measured one day before the beginning of the trials - to control for potential effects of size on the antipredatory behavior [@stankowich2005fear]. SVL was centered to the mean to facilitate interpretation of the intercepts.    
 
 We included lizard identity and clutch identity as a random factors. The former was included to account for individual performance over time, while clutch identity was included to control for parental conditions. In this sense, _L. delicata_ lays one clutch per year, while _L. guichenoti_ lays two [@chapple_know_2011; @chapple2015deliinvLHI]. Since eggs were collected during half of the breeding season, each clutch likely comes from a different mother. Additionally, previous research has shown that clutches are generally sired by a single male [@kar2023heritability]. Although sperm storage can occur in these species [@kar2023heritability], given our partial split-clutch design and the fact that maternal effects are expected to be stronger than paternal effects in these species, including the clutch as a random factor should account for the effects of parental identity.     
  
-We used the posterior distributions of model parameters to test for differences between prenatal conditions. Differences in the model intercepts between conditions were interpreted as differences in the immediate antipredatory behaviour, while differences in the slopes were interpreted as differences in antipredatory adjustments. We used the 95% Highest Posterior Density Intervals (95% HPDI) using the hdi function in bayestestR [@bayestestR] to test if the contrasts between treatments or the slopes for each treatment were different from zero.       
+We used the posterior distributions of model parameters to test for differences between prenatal conditions. Differences in the model intercepts between conditions were interpreted as differences in the immediate antipredatory behavior, while differences in the slopes were interpreted as differences in antipredatory flexibility. We used the 95% Highest Posterior Density Intervals (95% HPDI) using the hdi function in bayestestR [@bayestestR] to test if the contrasts between treatments or the slopes for each treatment were different from zero.       
 
 Differences between species were tested by comparing the posterior distributions of the intercepts and slopes of the different treatments. 95% HPDI were used to test the hypothesis that the contrasts differed from zero.     
 
-All the estimated parameters in the results were transformed back to original units employing appropriate formulas depending on the distribution employed in the models. The error structure for latency to move and latency to shelter followed a lognormal distribution [family = lognormal()], while the probability of emerging from the shelter was modelled using a Bernoulli distribution with a logit link function [family = Bernoulli(link = 'logit')].          
+All the estimated parameters in the results were transformed back to original units unless otherwise indicated. To back-transformed the results, we employed appropriate formulas depending on the distribution used in the models. The error structure for latency to move and latency to shelter followed a lognormal distribution [family = lognormal()], while the probability of emerging from the shelter was modelled using a Bernoulli distribution with a logit link function [family = Bernoulli(link = 'logit')].          
 
 ## Results
 
 We started with 96 lizards, 48 per species and 12 per treatment per species. However, our final sample size was 85 due to natural mortality (n = 9). The final sample sizes per treatment and species are listed in @fig-results_beh_deli and @fig-results_beh_guich. These animals came from a total of `r clutches_deli` clutches in _L. delicata_ and `r clutches_guich` in _L. guichenoti_.      
 
-```{r, models_behaviour}
-#| label: models_behaviour
+```{r, models_behavior}
+#| label: models_behavior
 source(here("R", "func.R"))
 #
 refit <- FALSE
@@ -221,15 +221,15 @@ guich_emergence_contrasts <- contrasts_func(sp = "guich", res = "emergence")
 
 #### Do prenatal conditions affect the immediate antipredatory response?
 
-_Lampropholis delicata_: Incubation at cold temperatures decreased the latency to move after a simulated attack on the first day (Intercept (denoted hereafter as I)~Hot~ - I~Cold~ = `r deli_move_contrasts$median_Temperature_int`; 95% Highest Posterior Density Intervals (95% HPDI) = [`r deli_move_contrasts$X2.5.HDI_Temperature_int`, `r deli_move_contrasts$X97.5.HDI_Temperature_int`]), while neither CORT or the interaction have any effect on latency to shelter or emergence (see @fig-results_beh_deli A, D, G and Table S1 in _Supplementary Material_). We did not find any effects of prenatal temperature, CORT or their interaction on latency to shelter or emergence probability on the first day of the assay (see @fig-results_beh_deli A, D, G and Table S1 in _Supplementary Material_). SVL had no significant effect on any of the behavioural responses (see Table S4 in _Supplementary Material_).         
+_Lampropholis delicata_: Neither prenatal CORT, temperature, nor their interaction had a significant effect on the antipredatory response on the antipredatory behavior of _L. delicata_ (see @fig-results_beh_deli A, D, G and Table S1 in _Supplementary Material_). SVL had no significant effect on any of the behavioral responses (see Table S4 in _Supplementary Material_).         
 
 
-_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had a significant effect on the immediate antipredatory response on _L. guichenoti_ (see @fig-results_beh_guich A, D, G and Table S2 in _Supplementary Material_). We did not see any significant effects of SVL on any of the behavioural responses (see Table S5 in _Supplementary Material_).       
+_Lampropholis guichenoti_: Neither prenatal CORT, temperature, nor their interaction had a significant effect on the antipredatory response on _L. guichenoti_ (see @fig-results_beh_guich A, D, G and Table S2 in _Supplementary Material_). We did not see any significant effects of SVL on any of the behavioral responses (see Table S5 in _Supplementary Material_).       
 
 
 ```{r, fig-results_beh_deli}
 #| label: fig-results_beh_deli
-#| fig.cap: "Behavioural response of _Lampropholis delicata_ to a stressor. Panels A, D, and G show the distribution of the estimates for all the behavioural responses after the first simulated attack per each treatment (i.e., response to acute stressor). In panels B, E, and H the distribution of the estimates of slopes per each treatment (i.e., response to chronic stressor). In all A, B, D, E, G and H the x-axis represents the estimated values, and in the y-axis the density of the estimates. The different colors indicate the different treatments. Points and bars represent the median and 95% Highest Posterior Density Intervals (95% HPDI), respectively. Dashed lines in panels B, E, and H indicate values equal 0 (i.e. no response to chronic stress). Panels C, F, and I show the behavioural estimated values over trials. The lines represent the median estimated value for each trial, and the shaded areas indicate the 95% HPDI; both were obtained using the slope and intercept estimates from the posterior distributions. The different colors indicate the different treatments."
+#| fig.cap: "behavioral response of _Lampropholis delicata_ to a stressor. Panels A, D, and G show the distribution of the estimates for all the behavioral responses after the first simulated attack per each treatment (i.e., response to acute stressor). In panels B, E, and H the distribution of the estimates of slopes per each treatment (i.e., response to chronic stressor). In all A, B, D, E, G and H the x-axis represents the estimated values, and in the y-axis the density of the estimates. The different colors indicate the different treatments. Points and bars represent the median and 95% Highest Posterior Density Intervals (95% HPDI), respectively. Dashed lines in panels B, E, and H indicate values equal 0 (i.e. no response to chronic stress). Panels C, F, and I show the behavioral estimated values over trials. The lines represent the median estimated value for each trial, and the shaded areas indicate the 95% HPDI; both were obtained using the slope and intercept estimates from the posterior distributions. The different colors indicate the different treatments."
 #  
 source(here("R", "func.R"))
 # First step, create the dfs for all variables
@@ -288,16 +288,16 @@ knitr::include_graphics("./output/figures/main/fig_deli_beh.png")
 ```
 
 
-#### Do prenatal conditions affect the long-term antipredatory response?
+#### Do prenatal conditions affect the antipredatory flexibility?
 
 _Lampropholis delicata_: CORT-treated lizards incubated at cold temperatures increased their latency to move over time (Slope (denoted hereafter as β) = `r format_dec(median(deli_move_posteriors$slope_CORT_Cold), 3)`; 95% HPDI = [`r format_dec(hdi(deli_move_posteriors$slope_CORT_Cold, credMass = 0.95)[1], 3)`, `r format_dec(hdi(deli_move_posteriors$slope_CORT_Cold, credMass = 0.95)[2], 3)`]), while the slopes were not different from zero in the rest of the treatments (see @fig-results_beh_deli B, C and Table S3 in _Supplementary Material_). However, constrasts between between treatments showed no effect of prenatal conditions on the latency to move througout the experiments (see Table S1 in _Supplementary Material_). Lizards from all treatments increased the probability of emerging from the shelter throughout the experiment (β > 0 in all cases, see @fig-results_beh_deli H, I and Table S3 in _Supplementary Material_), with no differences between treatments (see Table S1 in _Supplementary Material_). In contrast, the latency to shelter did not change over time (β = 0 in all cases, see @fig-results_beh_deli E, F and Table S3 in _Supplementary Material_). The contrasts between treatments showed no differences in the slopes (see Table S1 in _Supplementary Material_).     
 
 
-_Lampropholis guichenoti_: Behavioral responses towards a stressor did not change over time in _L. guichenoti_ (see @fig-results_beh_guich B, C, E, F, H, I and Table S3 in _Supplementary Material_). There were no significant differences in the behavioural response of _L. guichenoti_ to the repeated exposure to a stressor (see @fig-results_beh_guich B, C, E, F, H, I and Table S2 in _Supplementary Material_).      
+_Lampropholis guichenoti_: We did not see any antipredatory flexibility in _L. guichenoti_, reflected by slopes being no different from 0 (see @fig-results_beh_guich B, C, E, F, H, I and Table S3 in _Supplementary Material_).       
 
 ```{r, fig-results_beh_guich}
 #| label: fig-results_beh_guich
-#| fig.cap: "Behavioural response of _Lampropholis guichenoti_ to a stressor. Panels A, D, and G show the distribution of the estimates for all the behavioural responses after the first simulated attack per each treatment (i.e., response to acute stressor). In panels B, E, and H the distribution of the estimates of slopes per each treatment (i.e., response to chronic stressor). In all A, B, D, E, G and H the x-axis represents the estimated values, and in the y-axis the density of the estimates. The different colors indicate the different treatments. Points and bars represent the median and 95% Highest Posterior Density Intervals (95% HPDI), respectively. Dashed lines in panels B, E, and H indicate values equal 0 (i.e. no response to chronic stress). Panels C, F, and I show the behavioural estimated values over trials. The lines represent the median estimated value for each trial, and the shaded areas indicate the 95% HPDI; both were obtained using the slope and intercept estimates from the posterior distributions. The different colors indicate the different treatments." 
+#| fig.cap: "behavioral response of _Lampropholis guichenoti_ to a stressor. Panels A, D, and G show the distribution of the estimates for all the behavioral responses after the first simulated attack per each treatment (i.e., response to acute stressor). In panels B, E, and H the distribution of the estimates of slopes per each treatment (i.e., response to chronic stressor). In all A, B, D, E, G and H the x-axis represents the estimated values, and in the y-axis the density of the estimates. The different colors indicate the different treatments. Points and bars represent the median and 95% Highest Posterior Density Intervals (95% HPDI), respectively. Dashed lines in panels B, E, and H indicate values equal 0 (i.e. no response to chronic stress). Panels C, F, and I show the behavioral estimated values over trials. The lines represent the median estimated value for each trial, and the shaded areas indicate the 95% HPDI; both were obtained using the slope and intercept estimates from the posterior distributions. The different colors indicate the different treatments." 
 #
 source(here("R", "func.R"))
 # First step, create the dfs for all variables
@@ -355,41 +355,111 @@ ggsave("./BEHPROC/submitted_material/fig_guich_beh.pdf", plot=fig_guich_beh, wid
 knitr::include_graphics("./output/figures/main/fig_guich_beh.png")
 ```
 
+#### Do species differ in their antipredatory response and flexibility?
+
+Neither the immediate antipredatory response nor the antipredatory flexibility differed between species for any of the treatments and behavioral responses analyzed (see @table-species-contrasts).
+
+_Table 1. Contrasts between species for the intercepts (Response) and slopes (Flexibility) of all the behavioral responses analyzed. Values represent the median (Contrast) and 95% Highest Posterior Density Intervals (95% HPDI) of the posterior distributions of the contrasts. For all contrasts, we calculated the differences betwee Lampropholis delicata - Lampropholis guichenoti. We did not transform the values back to original units. Significant differences are indicated in bold._
+```{r, table-species-contrasts}
+#| label: table-species-contrasts
+#| tbl-cap: "Contrasts between species for the intercepts (Response) and slopes (Flexibility) of all the behavioral responses analyzed. Values represent the median (Contrast) and 95% Highest Posterior Density Intervals (95% HPDI) of the posterior distributions of the contrasts. For all contrasts, we calculated Lampropholis delicata - Lampropholis guichenoti. We did not transform the values back to original units. Significant differences are indicated in bold."
+source(here("R", "func.R"))
+#
+# Getting the contrasts between species (all contrasts are L. delicata - L. guichenoti)
+var <- c("move", "shelter", "emergence")
+type <- c("int", "slope")
+
+species_contrasts_df <- data.frame()
+
+for(v in var){
+  for(t in type){
+
+    value_c1 <- c(
+      get(paste0("deli_", v, "_posteriors"))[[paste0(t, "_Control_Cold")]],
+      get(paste0("deli_", v, "_posteriors"))[[paste0(t, "_CORT_Cold")]],
+      get(paste0("deli_", v, "_posteriors"))[[paste0(t, "_Control_Hot")]],
+      get(paste0("deli_", v, "_posteriors"))[[paste0(t, "_CORT_Hot")]]
+    )
+
+    value_c2 <- c(
+      get(paste0("guich_", v, "_posteriors"))[[paste0(t, "_Control_Cold")]],
+      get(paste0("guich_", v, "_posteriors"))[[paste0(t, "_CORT_Cold")]],
+      get(paste0("guich_", v, "_posteriors"))[[paste0(t, "_Control_Hot")]],
+      get(paste0("guich_", v, "_posteriors"))[[paste0(t, "_CORT_Hot")]]
+    )
+    
+    contrast_values <- value_c1 - value_c2
+    median_contrast <- format_dec(median(contrast_values), 3)
+    hdi_low <- format_dec(hdi(contrast_values, credMass = 0.95)[1], 3)
+    hdi_high <- format_dec(hdi(contrast_values, credMass = 0.95)[2], 3)
+    
+    temp_df <- data.frame(
+      Behavior = v,
+      Type = t,
+      Median = median_contrast,
+      HPDI_Lower = hdi_low,
+      HPDI_Upper = hdi_high
+    )
+
+    species_contrasts_df <- rbind(species_contrasts_df, temp_df)
+  }
+} 
+#
+# Improving database
+species_contrasts_clean <- species_contrasts_df %>%
+  mutate(
+    Behavior = case_when(
+      Behavior == "move" ~ "Latency to move",
+      Behavior == "shelter" ~ "Latency to shelter",
+      Behavior == "emergence" ~ "Probability to emerge"),
+    Type = case_when(
+      Type == "int" ~ "Response",
+      Type == "slope" ~ "Flexibility"),
+    `95% HPDI` = paste0(" [", HPDI_Lower, ", ", HPDI_Upper, "]")) %>%
+  dplyr::select(Type, Behavior, Median, `95% HPDI`) %>%
+  arrange(factor(Type, levels = c("Response", "Flexibility")),
+          factor(Behavior, levels = c("Latency to move", "Latency to shelter", "Probability to emerge"))) %>%
+data.frame()
+# # Set defaults for the table
+set_flextable_defaults(
+  font.family = "Times New Roman",
+  font.size = 10)
+#
+# Make Table
+sp_contrasts_table <-  flextable(species_contrasts_clean) %>%
+  flextable::compose(i = 1, j = 3, value = as_paragraph("Contrast"), part = "header") %>% # Change the first column header
+  flextable::compose(i = 1, j = 4, value = as_paragraph("95% HPDI"), part = "header") %>% # Change the second column header
+  flextable::compose(i = c(2,3,5,6), j = 1, value = as_paragraph(""), part = "body") %>% # Make some blanks
+  flextable::hline(i = 3, part = "body") %>% # Add horizontal line
+  align(align = "center", j = c(3,4), part = "body") %>%
+  align(align = "center", part = "header") %>%
+autofit()
+#
+sp_contrasts_table
+```
 
 ## Discussion    
-We predicted that elevated CORT levels in eggs or incubating them at colder temperatures would increase lizards reactivity to a stressor both in the first encounter or during repeated exposure. Higher reactivity would imply larger latencies to move after the simulated attack, lower times until sheltering, and lower probabilities of emerging from the shelter.   
+We predicted that elevating CORT levels in eggs or incubating them at colder temperatures would increase lizards antipredatory response and decrease antipredatory flexibility. Higher antipredatory response would imply larger latencies to move after the simulated attack, lower times until sheltering, and lower probabilities of emerging from the shelter. And lower antipredatory flexibility would be reflected in a lack of changes in these behaviors over repeated exposures to the simulated attack. Additionally, we predicted between species differences in both the the antipredatory behavior and flexibility, and how early conditions would impact their behavior. However, our results did not support our predictions. Neither prenatal CORT exposure nor incubation temperature influenced the antipredatory response or flexibility in either species. Moreover, we did not find significant differences between species in any of the behavioral responses analyzed.    
 
-Our study shows that early-life conditions can influence how skinks respond to a processive stressor, but the effects differ between species, the nature of the stressor, and the behaviour evaluated. _Lampropholis delicata_ incubated at warmer temperatures were less reactive to a simulated predator attack in the first trial, suggesting that early thermal conditions can shape the behavioural response to an acute stressor. In contrast, _L. guichenoti_ showed no treatment effects. Habituation patterns also differed. _Lampropholis delicata_ increased the probability of emerging from the shelter, suggesting some habituation to the stressor. However, none of the treatments showed habituation in latency to move or go to shelter. No behavioural change was detected in _L. guichenoti_ either. Finally, we found no evidence of physiological costs: individuals generally maintained or gained body mass, regardless of treatment. Together, these findings suggest that incubation temperature and prenatal hormone exposure shape stress-related behaviour in a species-specific manner, potentially reflecting differences in flexibility or stress physiology.        
+#### Antipredatory response is robust to prenatal conditions      
+We hypothesized that elevated prenatal CORT and cold incubation temperatures would increase latency to move while decreasing the latency to shelter and the probabilities of emerging from the shelter after a simulated attack. However, neither prenatal CORT exposure or incubation temperature influenced the antipredatory response in either species.             
 
-#### Cold incubation temperature increases the response to an acute stressor in _L. delicata_ but not in _L. guichenoti_    
-We found that the early-life conditions can impact lizards' response to an acute stressor, but this effects were species- and behaviour-dependent. Our results demonstrate that incubation temperature can modulate the behavioural response to an acute stressor in _L. delicata_ but not in _L. guichenoti_. Hot-incubated _L. delicata_ spent less time immobile following a simulated predatory attack, suggesting a faster recovery from acute stress. This result is consistent with the idea that shorter immobility duration (i.e., shorter freezing time) reflects a less reactive behavioural response, often associated to lower HPA/HPI activity [@koolhaas1999coping]. In _L. delicata_, individuals incubated at 23 ºC exhibit elevated baseline CORT [@crino2024eggs], potentially enhancing sensitivity to stress. Therefore, the heightened acute response in cold-incubated individuals may be explained by elevated endogenous CORT. Alternatively, the higher latency times to move may reflect impaired neural development caused by cold incubation. Colder incubation temperatures can disrupt the formation and connectivity of brain regions involved in sensory processing and behavioural control [@coomber_independent_1997; @sakata_neural_2000; @amiel_effects_2017], ultimately leading to slower perception and action planning during freezing [@roelofs2022freezing].     
+Given the significant effects of prenatal GCs on the development of the HPA/HPI axis reported in other species [@costantini2011meta; @vargas2016early; @jafari2017prenatal; @zito2017early; @crino2024eggs], we predicted prenatal CORT elevations to increase lizards’ reactivity to a predatory attempt. However, we found no effects of prenatal CORT elevations on any of the behaviors analyzed, and these results were consistent across species. These findings suggest that the antipredatory response is robust to CORT elevations in _L. delicata_ and _L. guichenoti_. Alternatively, our CORT manipulation may have failed to elicit significant effects. Glucocorticoids are known to have hormetic effects on different traits [@mcewen_concept_2003]. While our CORT treatment was efficient in elevating yolk CORT concentrations, they did not result in increased baseline CORT in juveniles [@crino2024eggs]. In contrast, doses at lower concentration did [@crino2024eggs]. Previous reports show that enhanced responsiveness to predatory attempts are usually accompanied by higher baseline GC levels [@koolhaas1999coping; @ruys2004behavioral; @thaker2009acute]. Therefore, the absence of CORT effects on the antipredatory response may reflect the lack of endocrine differences between treatment groups in _L. delicata_. However, this mechanism remains speculative for _L. guichenoti_, as comparable endocrine data are currently lacking. Further experiments would benefit from studying how exposing eggs to lower CORT concentrations influence antipredatory behaviors and stress-related physiology in both species.
 
-In contrast, incubation temperature had no effect on _L. guichenoti_'s response to an acute stressor, suggesting that stress reactivity in this species is more robust to early thermal environment. Our findings align with previous studies showing that incubation temperature impacts the antipredatory behaviour of _L. delicata_ but not _L. guichenoti_ [@iglesias2024maternal]. Between-species differences on the effect of incubation temperature could reflect differences in history-traits such as egg size. Smaller eggs in _L. delicata_ may make this species more sensitive to environmental alterations during development, with consequences for their physiology and behaviour later in life [@crino2024eggs; @iglesias2024maternal]. Although heightened plasticity may enable _L. delicata_ to fine-tune its phenotype to local conditions, it could also increase vulnerability to suboptimal environments. In contrast, the apparent robustness of _L. guichenoti_ might buffer against certain environmental inputs but limit flexibility [@fox2019beyond]. Future studies should explore how these differing developmental strategies influence fitness across different environments.    
+Incubation temperature impacts antipredatory behavior in other reptiles [@burger_antipredator_1998; @iglesias2024maternal]. For example, pine snakes (_Pituophis melanoleucus_) incubated at low temperatures were less responsive to a predator - less hissing or striking - than hot incubated ones [@burger_antipredator_1998]. In contrast, we did not see any effects of the prenatal thermal environment on the antipredatory response in either _L. delicata_ or _L. guichenoti_. Similarly, incubation temperature alone did not affect antipredatory behavior in _L. delicata_ or _L. guichenoti_ in previous studies [@iglesias2024maternal]. However, when cold incubation temperature was combined with low maternal investment - simulated by extracting 12.5% of the egg yolk - lizards showed increased antipredatory responses [@iglesias2024maternal]. These results suggest that incubation temperature alone may not be sufficient to alter antipredatory behavior in these species, but it could interact with other early-life conditions to shape antipredatory strategies. Future research should explore how incubation temperature interacts with other prenatal factors to influence antipredatory behavior in these skinks.     
 
-#### Prenatal CORT did not influence behavioural response to an acute stressor     
-Given the significant effects of prenatal GCs on the development of the HPA/HPI axis reported in other species [@costantini2011meta; @vargas2016early; @zito2017early; @crino2024eggs], we predicted prenatal CORT elevations to increase lizards' reactivity to acute stressors. However, we found no effects of prenatal CORT elevations on any of the behaviours analysed, and these results were consistent across species. These findings suggest that the response to acute stressors is robust to CORT elevations.       
+#### Antipredatory flexibility is robust to prenatal conditions
+We did not find significant effects of prenatal CORT exposure or incubation temperature on antipredatory flexibility. Either in _L. delicata_, where there was some evidence of flexibility, or in _L. guichenoti_, where no flexibility was observed, prenatal conditions had no significant effects on how lizards modified their antipredatory behavior over repeated exposures to the simulated attack.    
 
-Alternatively, our CORT manipulation may have failed to elicit significant effects. Glucocorticoids are known to have hormetic effects on different traits [@mcewen_concept_2003]. While our CORT treatment was efficient in elevating yolk CORT concentrations, they did not result in increased baseline CORT in juveniles[@crino2024eggs]. In contrast, doses at lower concentration did [@crino2024eggs]. Previous reports show that enhanced responsiveness to acute stressors are usually accompanied by higher baseline GC levels [@koolhaas1999coping; @ruys2004behavioral; @thaker2009acute]. Therefore, the absence of CORT effects on the acute response may reflect the lack of endocrine differences between treatment groups in _L. delicata_. However, this mechanism remains speculative for _L. guichenoti_, as comparable endocrine data are currently lacking. Further experiments would benefit from studying how exposing eggs to lower CORT concentrations influence stress-related physiology and behaviours in both species.          
+Both prenatal CORT exposure and cold incubation temperatures have been shown to impair cognitive abilities in other species [@lemaire_prenatal_2000; @zhu_prenatal_2004; @amiel_hotter_2012; @costantini2011meta]. Given that complex cognitive processes like behavioral flexibility can be involved in adjusting antipredatory behavior to changing risk levels [@amo2005flexibility], we expected our prenatal conditions to influence antipredatory flexibility. Instead, our study aligns with previous research showing that reversal learning - a standardized proxy of behavioral flexibility - was also unaffected by prenatal CORT and incubation temperature in both species [@recio2025early]. Our findings suggest that some cognitive process may be robust to prenatal CORT exposure and incubation temperature in these species. However, the effects of prenatal GCs and thermal environment on brain development are region-dependent, with some brain nuclei being more impacted than others [@coomber_independent_1997; @lemaire_prenatal_2000]. Hence, different cognitive processes, encoded in different brain regions, may be more sensitive to the effects of early conditions. Future research should explore the combined effects of prenatal CORT and temperature on brain function and other cognitive domains.      
 
-#### The effects of prenatal conditions on the response to a repeated stressor are species-dependent   
-We predicted that, over time, lizards would decrease the latency to move while increasing both the latency to shelter and the probability of emerging from the shelter. These patterns would reflect a more relaxed response to a processive stressor, indicative of cognitive habituation [@koolhaas1999coping; @grissom2009habituation]. We also expected that prenatal CORT exposure or cold incubation would impair habituation, given their known effects on the HPI axis and cognitive development [@lemaire_prenatal_2000; @zhu_prenatal_2004; @costantini2011meta; @amiel_hotter_2012; @vargas2016early; @zito2017early; @crino2024eggs]. Nonetheless, our results show complex patterns were habituation differs across species, treatments, and behavioural measures.     
+#### Antipredatory response and flexibility do not differ between species
+Both _L. delicata_ and _L. guichenoti_ have similar life-histories and ecological niches [@chapple_know_2011; @chapple_biology_2014]. However, while _L. delicata_ is a successful invader in several parts of the world, _L. guichenoti_ has not established populations outside its native range [@chapple2015deliinvLHI]. These differences in invasion success are likely related to differences in behavioral traits, with _L. delicata_ being more exploratory than _L. guichenoti_ [@chapple_know_2011]. Given these differences, we expected _L. delicata_ to show lower antipredatory responses and higher antipredatory flexibility than _L. guichenoti_. However, we did not find any indication of species differences in their antipredatory strategies. Although _L. delicata_ showed some degree of antipredatory flexibility - reflected by a positive slope in the probability of emerging from shelter - the between-species differences were not significant. Our findings suggest that antipredatory strategies do not seem to be a good predictor of the differences in invasion success between these species.            
 
-Only _L. delicata_ showed evidence that early-life conditions influenced the response to a chronic stressor. Although slope contrasts did no reveal significant differences between treatments, the CORT-Cold group was the only one where the latency to move changed significantly over time. However, instead of the predicted reduction, we found an increase in the time spent frozen after the simulated attack, suggesting sensititazion to the stressor rather than habituation. This result may reflect a cumulative effect of prenatal CORT and cold incubation temperatures, even in the absence of a statistically significant interaction. In _L. delicata_, cold incubation alone increases baseline CORT levels in juveniles [@crino2024eggs]. Although the high CORT dose used in our experiment did not significantly elevate baseline CORT on its own, it produced intermediate values between controls and a lower dose — the latter of which did significantly elevate baseline levels [@crino2024eggs]. Therefore, it is possible that the combination of cold incubation and the intermediate endocrine effect of the high CORT dose could together increase HPI axis activity enough to enlarge behavioural reactivity over time [@koolhaas1999coping].          
-
-Alternatively, the combination of CORT and cold temperatures could be impairing habituation trough effects on neural development [see @lemaire_prenatal_2000; @zhu_prenatal_2004; @amiel_hotter_2012; @amiel_effects_2017]. Although previous studies found no influence of prenatal CORT or temperature on associative and reversal learning [@recio2025cognitive; @recio2025early], the effect of prenatal conditions can vary by brain region [@coomber_independent_1997; @sakata_neural_2000]. Possibly, neural structure of regions involved cognitive habituation are more sensitive to early-life conditions than those related to other cognitive domains. Further work is needed to test this possibility and identify the specific neural mechanisms linking developmental conditions to stress-related behavioural flexibility.
-
-#### _L. delicata_, but not _L. guichenoti_, shows habituation to a processive stressor    
-We found that _L. delicata_ increased the probability of emergence from the shelter, which suggest that risk perception decreased over time. In contrast, _L. guichenoti_ showed no sign of habituation. Although the slopes did not significantly differ between species for most of the treatments (see @table_contrasts_species), contrasts show that change over time was overall larger in _L. delicata_. Futhermore, only in _L. delicata_ slopes were different from zero, suggesting that there are differences between species in the habituation to a processive stressor. Differences in habituation may contribute to _L. delicata_'s success as an invasive species, as greater flexiblility in responding to processive stressors could facilitate adaptation to new environments [@chapple_biology_2014; @chapple2015deliinvLHI]. For instance, learning to reassess risk based on previous exposure can reduce the costs of the antipredatory response [@lima1990behavioral]. Moreover, cognitive habituation may reflect and individual's capacity to cope with the physiological toll of chronic stress [@grissom2009habituation], a potentially advantageous trait when colonising new habitats [@wingfield2013comparative; @surkova2024flexible].     
-
-Nevertheless, the relative contribution of cognitive versus physiological mechanisms to habituate remains unclear. Previous studies found no differences in associative learning or behavioural flexibility between _L. delicata_ and _L. guichenoti_ [@bezzina2014does; @recio2025cognitive; @recio2025early], suggesting that cognitive processes alone may not explain the between-species differences observed here. Likewise, baseline CORT levels do not fully account for the patterns either: hot-incubated _L. delicata_, which exhibit lower baseline CORT [@crino2024eggs], did not habituate faster than cold-incubated lizards. Instead, our results point to a complex interaction between cognitive and physiological habituation. Future studies that measure behavioural traits and CORT dynamics concurrently should be performed to disentangle the cognitive and physiological components of habituation.     
-
-#### Physiological costs of the stressor were low and did not differ between treatments or species      
-Given the metabolic toll that enhanced GC levels impose on animals [@sapolsky_how_2000; @picard_mitochondria_2014], we predicted that repeated exposure to a stressor would influence body mass. Furthermore, we expected those costs to be related to alterarions in stress reactivity shaped by prenatal conditions. In contrast, we found treatment effects in mass change, and most of the lizards gained rather than lost mass. Notably, mass change did not differ between species despite differences in their flexibility to respond to a chronic stressor - a trait oftenly associated with more effective coping [@grissom2009habituation]. These findings suggest that repeated exposure to a processive stressor imposes minimal metabolic costs on _L. delicata_ and _L. guichenoti_.    
-
-Nevertheless, we cannot exclude the possibility that other, subtler physiological costs occurred but were not captured by overall changes in mass. Other studies report impairments in immune suppression, impaired growth, or permanent neural alterations following repeated exposure to systemic and processive stressors  [@picard_mitochondria_2014; @mcewen2017neurobiological]. Future research should investigate how chronic stress impacts other physiological traits, and whether developmental conditions modulate the associated costs.    
+In addition, both species responded similarly to early-life conditions, with neither prenatal CORT or incubation temperature affecting their antipredatory response or flexibility. Some studies show that invasive species are more plastic and responsive to environmental conditions than non-invasive species [@cordeschi2022plastic; @iglesias2024maternal]. However, we did not find any differences in plasticity between _L. delicata_ and _L. guichenoti_, at least on their antipredatory strategies [see also @recio2025cognitive; @recio2025early]. Future research should explore other behavioral traits that could explain the differences in invasion success between these species and how this traits can be shaped by developmental conditions.    
 
 #### Conclusion
-Our study demonstrates that incubation temperature and prenatal CORT can shape behavioural responses to stress in a species- and context-dependent manner. _Lampropholis delicata_ showed greater plasticity in response to both acute and repeated exposure to a processive stressor, while _L. guichenoti_ appeared robust to prenatal conditions. These species differences may reflect divergent developmental strategies, with potential implications for ecological resilience and invasion success. Despite measurable behavioural differences, we found no evidence of metabolic costs - measured as changes in mass - associated with stress exposure under our experimental conditions. Together, our findings highlight the value of behavioural measures as accessible indicators of stress response and developmental plasticity. Future research integrating hormonal and neural data will be key to understanding the mechanisms underlying behavioural flexibility and its fitness consequences across environments.    
+Our study shows that early-life conditions did not influence how skinks respond to a simulated attack. The antipredatory behavior and antipredatory flexibility in both _Lampropholis delicata_ and _L. guichenoti_ were not affected by prenatal CORT and incubation temperature. We also found that only _Lampropholis delicata_ showed some flexibility in their antipredatory strategies, reflected by the increased the probability of emerging from the shelter over time. However, when both species were compared, the differences were not significant. Together, these findings suggest that antipredatory response and antipredatory flexibility in both species are robust to incubation temperature and prenatal GC exposure, and that both species follow similar antipredatory strategies. Future studies should evaluate whether more complex developmental environments can shape antipredatory phenotypes. Besides, it is fundamental to integrate behavioral assays with neurological measures to understand the mechanisms underlying antipredatory response and flexibility. Finally, including other reptile species in this type of studies will help determine whether the robustness of antipredatory behavior to prenatal conditions is unique to _Lampropholis_ or represents a broader pattern.         
 
 ## References
 <div id="refs"></div>
@@ -400,7 +470,7 @@ cat("\\newpage")
 
 ## Supplementary material
 
-_Table S1. Contrasts of the posterior distributions of the predictors for each behavioural variable modelled for L. delicata. The contrasts are between the intercepts and slopes of the different treatments. 95% Highest Posterior Density Intervals (95% HPDI) test the hypothesis that the contrasts are different from zero._     
+_Table S1. Contrasts of the posterior distributions of the predictors for each behavioral variable modelled for L. delicata. The contrasts are between the intercepts (Response) and slopes (Flexibility) of the different treatments. 95% Highest Posterior Density Intervals (95% HPDI) test the hypothesis that the contrasts are different from zero._     
 
 ```{r, table_contrasts_deli}
 #| label: table_contrasts_deli
@@ -439,12 +509,12 @@ set_flextable_defaults(
   font.size = 10)
 #
 # Make Table
-table_deli_behaviour <- flextable(contrast_deli_beh) %>%
+table_deli_behavior <- flextable(contrast_deli_beh) %>%
   flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
   flextable::compose(i = 1, j = 2, value = as_paragraph("Predictor"), part = "header") %>% # Change the second column header
   flextable::compose(i = 1, j = c(3,5), value = as_paragraph("Contrast"), part = "header") %>% # Change the third column header
   flextable::compose(i = 1, j = c(4,6), value = as_paragraph("95% HPDI"), part = "header") %>% # Change the fourth column header
-  flextable::add_header_row(values = c("", "Acute (Intercept)", "Chronic (Slope)"), colwidths = c(2, 2, 2)) %>% # Add a header row
+  flextable::add_header_row(values = c("", "Response", "Flexibility"), colwidths = c(2, 2, 2)) %>% # Add a header row
   flextable::compose(i = c(2,3,5,6,8,9), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
   flextable::compose(i = 1, j = 1, value = as_paragraph("Latency to move"), part = "body") %>% # Change the first row of the first column
   flextable::compose(i = 4, j = 1, value = as_paragraph("Latency to shelter"), part = "body") %>% # Change the fourth row of the first column
@@ -456,7 +526,7 @@ table_deli_behaviour <- flextable(contrast_deli_beh) %>%
   flextable::bold(i = 1, j = c(3,4), bold = TRUE, part = "body") %>% 
 autofit()
 #
-table_deli_behaviour
+table_deli_behavior
 ```
 
 Contrasts were done by:  
@@ -469,7 +539,7 @@ Contrasts were done by:
 cat("\\newpage")
 ```
 
-_Table S2. Contrasts of the posterior distributions of the predictors for each behavioural variable modelled for L. guichenoti. The contrasts are between the intercepts and slopes of the different treatments. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the contrasts are different from zero._    
+_Table S2. Contrasts of the posterior distributions of the predictors for each behavioral variable modelled for L. guichenoti. The contrasts are between the intercepts (Response) and slopes (Flexibility) of the different treatments. 95% Highest Posterior Density Intervals (95% HPDI) test the hypothesis that the contrasts are different from zero._    
 
 ```{r, table_contrasts_guich}
 #| label: table_contrasts_guich
@@ -508,12 +578,12 @@ set_flextable_defaults(
   font.size = 10)
 #
 # Make Table
-table_guich_behaviour <- flextable(contrast_guich_beh) %>%
+table_guich_behavior <- flextable(contrast_guich_beh) %>%
   flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
   flextable::compose(i = 1, j = 2, value = as_paragraph("Predictor"), part = "header") %>% # Change the second column header
   flextable::compose(i = 1, j = c(3,5), value = as_paragraph("Contrast"), part = "header") %>% # Change the third column header
   flextable::compose(i = 1, j = c(4,6), value = as_paragraph("95% HPDI"), part = "header") %>% # Change the fourth column header
-  flextable::add_header_row(values = c("", "Acute (Intercept)", "Chronic (Slope)"), colwidths = c(2, 2, 2)) %>% # Add a header row
+  flextable::add_header_row(values = c("", "Response", "Flexibility"), colwidths = c(2, 2, 2)) %>% # Add a header row
   flextable::compose(i = c(2,3,5,6,8,9), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
   flextable::compose(i = 1, j = 1, value = as_paragraph("Latency to move"), part = "body") %>% # Change the first row of the first column
   flextable::compose(i = 4, j = 1, value = as_paragraph("Latency to shelter"), part = "body") %>% # Change the fourth row of the first column
@@ -524,7 +594,7 @@ table_guich_behaviour <- flextable(contrast_guich_beh) %>%
   align(align = "center", i = c(1,2), j = c(1:6), part = "header") %>% 
 autofit()
 #
-table_guich_behaviour
+table_guich_behavior
 ```
 
 Contrasts were done by:  
@@ -538,7 +608,7 @@ Contrasts were done by:
 cat("\\newpage") 
 ```
 
-_Table S3. Values of the slopes for the different treatments for each behavioural variable modelled for both species. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the slopes are different from zero._
+_Table S3. Values of the slopes (indicator of Flexibility) for the different treatments for each behavioral variable modelled for both species. Median shows the median values of the posterior distribution. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the slopes are different from zero._
 
 ```{r, table_slopes}
 #| label: table_slopes
@@ -640,7 +710,7 @@ guich_post <- dplyr::bind_rows(posterior_list$guich, .id = "variable") %>%
 data.frame()
 ```
 
-_Table S4. Estimates of each predictor for each variable modelled for L. delicata. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the estimates are different from zero._
+_Table S4. Estimates of each predictor for each variable modelled for L. delicata. Median indicates the median of the posterior distribution for each estimate. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the estimates are different from zero._     
 
 ```{r, tablesummary_deli}
 #| label: tablesummary_deli
@@ -652,6 +722,7 @@ set_flextable_defaults(
 # Make Table
 table_summ_deli <- flextable(deli_post) %>%
   flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
+  flextable::compose(i = 1, j = 4, value = as_paragraph("95% HPDI"), part = "header") %>% # Change the last column header
   align(align = "center", j = c(3,4), part = "body") %>%
   align(align = "center", j = c(1:4), part = "header") %>%
   flextable::compose(i = c(2:9,11:18,20:27), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
@@ -666,7 +737,7 @@ table_summ_deli
 cat("\\newpage")
 ```
 
-_Table S5. Estimates of each predictor for each variable modelled for L. guichenoti. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the estimates are different from zero._
+_Table S5. Estimates of each predictor for each variable modelled for L. guichenoti. Median indicates the median of the posterior distribution for each estimate. 95% Highest Density Intervals (95% HPDI) test the hypothesis that the estimates are different from zero._
 
 ```{r, tablesummary_guich}
 #| label: tablesummary_guich
@@ -678,6 +749,7 @@ set_flextable_defaults(
 # Make Table
 table_summ_guich <- flextable(guich_post) %>%
   flextable::compose(i = 1, j = 1, value = as_paragraph("Variable"), part = "header") %>% # Change the first column header
+  flextable::compose(i = 1, j = 4, value = as_paragraph("95% HPDI"), part = "header") %>% # Change the last column header
   align(align = "center", j = c(3,4), part = "body") %>%
   align(align = "center", j = c(1:4), part = "header") %>% 
   flextable::compose(i = c(2:9,11:18,20:27), j = 1, value = as_paragraph(""), part = "body") %>% # To remove some of the values in the first column
@@ -687,9 +759,3 @@ table_summ_guich <- flextable(guich_post) %>%
 #
 table_summ_guich
 ```
-
-```{r, results='asis', echo=FALSE}
-cat("\\newpage")
-```
-
-
